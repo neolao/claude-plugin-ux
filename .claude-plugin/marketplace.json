@@ -1,0 +1,14 @@
+{
+  "name": "ux",
+  "description": "Personal marketplace hosting the ux plugin — UI/UX design and implementation workflow for Claude Code.",
+  "owner": {
+    "name": "Eric Heunthep"
+  },
+  "plugins": [
+    {
+      "name": "ux",
+      "source": "./",
+      "description": "UI/UX design and implementation workflow: understand the application, audit its interface, propose a UX adapted to each need, prototype it, implement it, and review the result."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "ux",
+  "version": "0.1.0",
+  "description": "UI/UX design and implementation workflow: understand the application, audit its interface, propose a UX adapted to each need, prototype it, implement it in the codebase, and review the result — with specialized expert and review agents.",
+  "author": {
+    "name": "Eric Heunthep"
+  },
+  "keywords": ["ui", "ux", "design", "accessibility", "prototype", "review", "workflow"]
+}
