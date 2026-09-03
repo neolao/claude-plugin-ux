@@ -4,6 +4,8 @@ A Claude Code plugin for **designing and implementing the UI/UX of an applicatio
 
 Works on any stack: web (React, Vue, Svelte…), desktop (Electron, Tauri, native), mobile, game-engine tools (Unity, Godot, Unreal), terminal UIs. Everything it learns and decides is written into a `.ux/` folder in *your* project, committed alongside the code.
 
+**Website:** [neolao.github.io/claude-plugin-ux](https://neolao.github.io/claude-plugin-ux/) — animated terminal demos of the workflow.
+
 ## What it does
 
 - **Never assumes silently.** `/ux:clarify` interviews you in rounds over a design tree — every question whose prerequisites are settled, numbered, each with a recommended answer grounded in the product facts; facts are looked up in the code and `.ux/`, only decisions come to you. It runs on its own ("grill me on this") and automatically at the framing step of `/ux:discover`, `/ux:design`, `/ux:style` and `/ux:implement`.
@@ -19,14 +21,14 @@ Works on any stack: web (React, Vue, Svelte…), desktop (Electron, Tauri, nativ
 From within Claude Code:
 
 ```
-/plugin marketplace add ericheunthep/claude-plugin-ui-ux
+/plugin marketplace add neolao/claude-plugin-ux
 /plugin install ux
 ```
 
 Or, for local development, point the marketplace at the checkout:
 
 ```
-/plugin marketplace add /path/to/claude-plugin-ui-ux
+/plugin marketplace add /path/to/claude-plugin-ux
 /plugin install ux
 ```
 
@@ -100,3 +102,7 @@ Experts answer in a fixed shape (`REQUIREMENTS` / `RISKS` / `SCENARIOS`) so thei
 ## Credits
 
 Structure inspired by [neolao/claude-plugin-vibe](https://github.com/neolao/claude-plugin-vibe) (skills as step-by-step workflows, consulting experts vs. review agents). `/ux:clarify` adapts [mattpocock/skills — grilling](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) (design tree, rounds, frontier, recommended answers) with UX seeding and `.ux/` grounding.
+
+## License
+
+[MIT](LICENSE)

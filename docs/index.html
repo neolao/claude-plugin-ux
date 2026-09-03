@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ux — a Claude Code plugin for UI/UX design and implementation</title>
+<meta name="description" content="Understand the app, propose a UX adapted to the need, prototype it, implement it with your own components, and review the result — a Claude Code plugin with specialized expert and review agents.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b12'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='%238b7cf6' font-family='monospace'%3E%E2%97%86%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --mono: "JetBrains Mono", "IBM Plex Mono", "Cascadia Code", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Georgia, Cambria, serif;
+
+    --bg: #0b0b12;
+    --bg-raise: #131226;
+    --ink: #d9d7e6;
+    --ink-strong: #f5f4fb;
+    --muted: #8783a0;
+    --line: #211f36;
+
+    --violet: #8b7cf6;
+    --violet-dim: #5b4fc4;
+    --coral: #f2836d;
+    --ok: #3ddc84;
+    --warn: #f0b45b;
+    --err: #f26d6d;
+    --info: #6ec6ea;
+
+    --term-bg: #0e0c1a;
+    --term-chrome: #171429;
+    --term-ink: #d3d0e6;
+    --term-muted: #726f8c;
+    --term-line: #251f42;
+
+    --glow: rgba(139, 124, 246, .5);
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg: #f7f5f2;
+      --bg-raise: #efece3;
+      --ink: #302d40;
+      --ink-strong: #17151f;
+      --muted: #67637c;
+      --line: #ddd7c8;
+      --violet: #5b3fd1;
+      --violet-dim: #7c65e0;
+      --coral: #c05a35;
+      --ok: #1f8a52;
+      --warn: #a96f14;
+      --err: #c04545;
+      --info: #1f7ea6;
+      --glow: rgba(91, 63, 209, .22);
+      color-scheme: light;
+    }
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; overflow-x: hidden; }
+  @supports (overflow: clip){ html, body{ overflow-x: clip; } }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    position: relative;
+  }
+  /* faint scanlines + grain */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      repeating-linear-gradient(to bottom, transparent 0 3px, rgba(140,135,175,.035) 3px 4px);
+  }
+  body::after{
+    content:""; position:fixed; inset:-50%; pointer-events:none; z-index:0; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  main, header.top, footer{ position:relative; z-index:1; }
+
+  a{ color: var(--violet); text-decoration: none; }
+  a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+  .wrap{ max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- top bar ---------- */
+  header.top{
+    display:flex; justify-content:space-between; align-items:center;
+    max-width:1060px; margin:0 auto; padding:22px 24px;
+    font-family: var(--mono); font-size: 14px;
+  }
+  .brand{ color: var(--ink-strong); font-weight: 700; letter-spacing:.02em; }
+  .brand .glyph{ color: var(--violet); }
+  header.top nav{ display:flex; gap:22px; }
+  header.top nav a{ color: var(--muted); }
+  header.top nav a:hover{ color: var(--violet); text-decoration:none; }
+
+  /* ---------- hero ---------- */
+  .hero{ padding: 72px 0 40px; position:relative; }
+  .hero::before{
+    content:""; position:absolute; left:50%; top:-120px; width:min(900px, 130vw); height:560px;
+    transform:translateX(-50%); pointer-events:none;
+    background: radial-gradient(closest-side, var(--glow), transparent 70%);
+    opacity:.22; filter: blur(10px);
+  }
+  .kicker{
+    font-family: var(--mono); font-size: 13px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--violet);
+  }
+  h1{
+    font-family: var(--mono);
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    line-height: 1.05; letter-spacing: -.02em;
+    color: var(--ink-strong); margin: 18px 0 8px;
+    text-wrap: balance;
+  }
+  h1 .dim{ color: var(--muted); font-weight: 400; }
+  h1 .hl{
+    color: var(--violet);
+    text-shadow: 0 0 24px var(--glow);
+  }
+  .hero p.lede{
+    max-width: 580px; font-size: 1.22rem; line-height: 1.55;
+    color: var(--ink); margin: 20px 0 34px;
+  }
+  .hero p.lede em{ font-style: italic; color: var(--ink-strong); }
+
+  .install{
+    display:inline-flex; align-items:center; gap:14px; flex-wrap:wrap;
+    background: var(--term-bg); border:1px solid var(--term-line);
+    border-radius: 10px; padding: 14px 18px;
+    font-family: var(--mono); font-size: 14.5px; color: var(--term-ink);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.2), 0 18px 40px -18px rgba(0,0,0,.6);
+  }
+  .install-lines{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+  .install .prompt{ color: var(--term-muted); }
+  .install code{ font-family: inherit; }
+  .copy-btn{
+    font-family: var(--mono); font-size: 12px; letter-spacing:.06em;
+    background: rgba(139,124,246,.1); color: var(--violet);
+    border:1px solid rgba(139,124,246,.4); border-radius:6px;
+    padding: 6px 12px; cursor: pointer; transition: background .15s ease;
+  }
+  .copy-btn:hover{ background: rgba(139,124,246,.2); }
+  .hero-links{ margin-top:18px; font-family:var(--mono); font-size:14px; display:flex; gap:24px; }
+  .hero-links a{ color: var(--muted); }
+  .hero-links a:hover{ color: var(--violet); }
+
+  /* ---------- sections ---------- */
+  section{ padding: 72px 0 8px; }
+  .sec-label{
+    font-family: var(--mono); font-size: 13px; letter-spacing:.22em;
+    text-transform: uppercase; color: var(--violet);
+    display:flex; align-items:center; gap:14px;
+  }
+  .sec-label::after{ content:""; height:1px; flex:1; background: var(--line); }
+  h2{
+    font-family: var(--mono); font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+    letter-spacing:-.01em; color: var(--ink-strong); margin: 14px 0 10px;
+    text-wrap: balance;
+  }
+  .sec-intro{ max-width: 660px; color: var(--muted); margin-bottom: 40px; font-size:1.05rem; }
+  .sec-intro code, td code, .flow code, .benefit code, footer code{
+    font-family: var(--mono); font-size: .86em;
+    background: var(--bg-raise); border:1px solid var(--line);
+    border-radius: 5px; padding: 1px 6px; color: var(--ink-strong);
+    white-space: nowrap;
+  }
+
+  /* ---------- benefits ---------- */
+  .benefits{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
+    gap: 18px;
+  }
+  .benefit{
+    border:1px solid var(--line); border-radius: 12px;
+    background: linear-gradient(160deg, var(--bg-raise), transparent 65%);
+    padding: 24px 22px 22px; position:relative; overflow:hidden;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .benefit:hover{ border-color: var(--violet-dim); transform: translateY(-2px); }
+  .benefit.wide{ grid-column: 1 / -1; }
+  .benefit .num{
+    font-family: var(--mono); font-size: 12px; color: var(--violet);
+    letter-spacing:.15em;
+  }
+  .benefit h3{
+    font-family: var(--mono); font-size: 1.02rem; color: var(--ink-strong);
+    margin: 10px 0 8px; letter-spacing:-.01em;
+  }
+  .benefit p{ font-size: .96rem; color: var(--muted); line-height:1.6; }
+
+  /* ---------- terminals ---------- */
+  .demos{ display:grid; gap: 44px; }
+  .demo{ display:grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 34px; align-items:start; }
+  .demo:nth-child(even){ direction: rtl; }
+  .demo:nth-child(even) > *{ direction: ltr; }
+  @media (max-width: 860px){
+    .demo, .demo:nth-child(even){ grid-template-columns: 1fr; direction:ltr; gap:18px; }
+  }
+  .demo-copy h3{
+    font-family: var(--mono); font-size: 1.15rem; color: var(--ink-strong);
+    margin-bottom: 10px;
+  }
+  .demo-copy h3 .cmd-name{ color: var(--violet); }
+  .demo-copy p{ color: var(--muted); font-size: 1rem; max-width: 46ch; }
+  .demo-copy p b{ color: var(--ink); font-weight:600; }
+
+  .term{
+    background: var(--term-bg); border:1px solid var(--term-line);
+    border-radius: 12px; overflow:hidden;
+    box-shadow: 0 1px 0 rgba(255,255,255,.03) inset, 0 24px 60px -24px rgba(0,0,0,.7);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    background: var(--term-chrome); border-bottom:1px solid var(--term-line);
+    padding: 10px 14px;
+  }
+  .term-bar .dot{ width:11px; height:11px; border-radius:50%; }
+  .dot.r{ background:#f26d6d; } .dot.y{ background:#f0b45b; } .dot.g{ background:#8b7cf6; }
+  .term-bar .title{
+    margin-left:auto; margin-right:auto;
+    font-family: var(--mono); font-size: 12px; color: var(--term-muted);
+    transform: translateX(-24px);
+  }
+  .term-body{
+    padding: 16px 18px 18px;
+    font-family: var(--mono); font-size: 13.2px; line-height: 1.75;
+    color: var(--term-ink);
+    overflow-x: auto; white-space: pre;
+  }
+  .term-body .line{ min-height: 1.75em; }
+  .t-p{ color: var(--term-muted); }        /* prompt ❯ */
+  .t-cmd{ color: #6ec6ea; }                 /* typed command */
+  .t-ok{ color: #3ddc84; }
+  .t-err{ color: #f26d6d; }
+  .t-warn{ color: #f0b45b; }
+  .t-dim{ color: #726f8c; }
+  .t-bold{ color: #f5f4fb; font-weight: 700; }
+  .spin{ color: #f0b45b; display:inline-block; width:1ch; }
+  .cursor{
+    display:inline-block; width: .62em; height: 1.15em;
+    background: #8b7cf6; vertical-align: text-bottom;
+    box-shadow: 0 0 8px rgba(139,124,246,.8);
+    animation: blink 1.05s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+  @media (prefers-reduced-motion: reduce){ .cursor{ animation:none; } }
+
+  /* ---------- tables (commands + agents) ---------- */
+  .cmd-table{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+  table{ width:100%; border-collapse: collapse; font-size: .95rem; }
+  th, td{ text-align:left; padding: 12px 18px; border-bottom:1px solid var(--line); }
+  tr:last-child td{ border-bottom:none; }
+  th{
+    font-family: var(--mono); font-size: 12px; letter-spacing:.14em;
+    text-transform:uppercase; color: var(--muted); font-weight: 600;
+    background: var(--bg-raise);
+  }
+  td:first-child{ white-space: nowrap; }
+  td:first-child code{ color: var(--violet); background:transparent; border:none; padding:0; font-size:.92em; }
+  td:last-child{ color: var(--muted); }
+
+  /* ---------- agent pills (paired experts/reviewers) ---------- */
+  .agent-table td:first-child{ white-space: normal; color: var(--ink); font-family: var(--mono); font-size: .92em; }
+  .agent-table td:first-child code{ color: var(--ink); }
+  .pill{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family: var(--mono); font-size: .88em;
+    border:1px solid var(--line); border-radius: 999px;
+    padding: 5px 13px; background: var(--bg-raise); white-space:nowrap;
+  }
+  .pill .h{ font-size: .95em; }
+  .pill.expert{ color: var(--violet); }
+  .pill.expert .h{ color: var(--violet); }
+  .pill.reviewer{ color: var(--coral); }
+  .pill.reviewer .h{ color: var(--coral); }
+  .dash{ color: var(--muted); }
+
+  /* ---------- .ux/ anatomy ---------- */
+  .tree{
+    font-family: var(--mono); font-size: .92rem; line-height: 1.8;
+    color: var(--ink-strong); background: var(--bg-raise);
+    border:1px solid var(--line); border-radius: 12px;
+    padding: 22px 24px; overflow-x: auto; white-space: pre;
+  }
+
+  /* ---------- flow ---------- */
+  .flow{ list-style:none; counter-reset: step; max-width: 700px; }
+  .flow li{
+    counter-increment: step; position: relative;
+    padding: 0 0 30px 58px;
+  }
+  .flow li::before{
+    content: "0" counter(step);
+    position:absolute; left:0; top:-2px;
+    font-family: var(--mono); font-size: 13px; color: var(--violet);
+    border:1px solid var(--violet-dim); border-radius: 8px;
+    width: 40px; height: 30px; display:flex; align-items:center; justify-content:center;
+    background: var(--bg-raise);
+  }
+  .flow li::after{
+    content:""; position:absolute; left:20px; top: 34px; bottom: 4px;
+    width:1px; background: var(--line);
+  }
+  .flow li:last-child::after{ display:none; }
+  .flow li b{ font-family: var(--mono); font-size:.95em; color: var(--ink-strong); font-weight:600; }
+  .flow li span{ color: var(--muted); }
+  .flow-note{ max-width: 660px; color: var(--muted); font-size: .96rem; margin-top: 6px; }
+
+  /* ---------- footer ---------- */
+  footer{
+    margin-top: 90px; border-top:1px solid var(--line);
+    padding: 36px 0 48px;
+  }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+    font-family: var(--mono); font-size: 13.5px; color: var(--muted);
+  }
+  footer .wrap.credits{ margin-top: 12px; font-size: 12px; opacity: .85; }
+  footer a{ color: var(--muted); }
+  footer a:hover{ color: var(--violet); }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 640px){
+    section{ padding: 52px 0 8px; }
+    header.top{ flex-wrap:wrap; gap:10px 18px; }
+    header.top nav{ gap:16px; }
+    .term-bar .title{ transform:none; }
+    .hero{ padding: 48px 0 32px; }
+    .hero p.lede{ font-size: 1.1rem; }
+
+    .install{
+      display:flex; width:100%; align-items:flex-start;
+      justify-content:space-between; gap:12px;
+    }
+    .install-lines code{ overflow-wrap: anywhere; }
+    .copy-btn{ flex-shrink:0; }
+    .hero-links{ flex-direction:column; gap:10px; }
+
+    .term-body{ font-size: 12.2px; padding: 13px 14px 15px; }
+    .tree{ font-size: .82rem; padding: 16px 16px; }
+
+    /* tables → stacked cards */
+    .cmd-table{ border:none; border-radius:0; overflow:visible; }
+    .cmd-table table, .cmd-table tbody, .cmd-table tr, .cmd-table td{ display:block; width:100%; }
+    .cmd-table thead{ display:none; }
+    .cmd-table tr{
+      border:1px solid var(--line); border-radius:10px;
+      background: var(--bg-raise); margin-bottom:10px;
+    }
+    .cmd-table td{ border:none; padding: 4px 16px 12px; white-space: normal; }
+    .cmd-table td:first-child{ padding: 12px 16px 0; }
+    .cmd-table td:first-child code{ font-size: .98em; }
+
+    .flow li{ padding-left: 52px; }
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{ opacity:0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .benefit:hover{ transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="glyph">◆</span> ux</div>
+  <nav>
+    <a href="#skills">skills</a>
+    <a href="#commands">commands</a>
+    <a href="#agents">agents</a>
+    <a href="#flow">flow</a>
+    <a href="https://github.com/neolao/claude-plugin-ux">github</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="kicker">a claude code plugin</p>
+    <h1>You describe the need.<br><span class="hl">ux designs it.</span><br><span class="dim">Then builds it.</span></h1>
+    <p class="lede">It first understands your application — who uses it, on which platform, with which existing components — then proposes a UX adapted to the need, previews it as a clickable prototype, implements it with your own building blocks, and reviews the result. Everything it learns and decides is written to a <code>.ux/</code> folder, committed alongside the code.</p>
+    <div class="install">
+      <div class="install-lines">
+        <div><span class="prompt">❯</span> <code id="install-cmd-1">/plugin marketplace add neolao/claude-plugin-ux</code></div>
+        <div><span class="prompt">❯</span> <code id="install-cmd-2">/plugin install ux</code></div>
+      </div>
+      <button class="copy-btn" id="copy" type="button" aria-label="Copy install commands">copy</button>
+    </div>
+    <div class="hero-links">
+      <a href="https://github.com/neolao/claude-plugin-ux">→ source on GitHub</a>
+      <a href="#anatomy">→ the .ux/ folder</a>
+    </div>
+  </div>
+
+  <section id="why">
+    <div class="wrap">
+      <p class="sec-label reveal">why ux</p>
+      <h2 class="reveal">A UX process, not a paint job</h2>
+      <p class="sec-intro reveal">Every step a careful design process takes by discipline, the plugin takes by workflow — grounded in your product, your users, and your own components.</p>
+      <div class="benefits">
+        <div class="benefit reveal"><span class="num">01</span><h3>Never assumes silently</h3><p><code>/ux:clarify</code> interviews you in rounds — every question whose prerequisites are settled, numbered, each with a recommended answer grounded in the product facts. Facts are looked up in the code and <code>.ux/</code>; only decisions come to you.</p></div>
+        <div class="benefit reveal"><span class="num">02</span><h3>Understands before designing</h3><p><code>/ux:discover</code> detects the UI stack, inventories screens, components and tokens, captures the running app, and interviews you about users, jobs and constraints — the result grounds every later decision.</p></div>
+        <div class="benefit reveal"><span class="num">03</span><h3>Proposes a UX adapted to the need</h3><p><code>/ux:design</code> frames the need against the product context, consults specialized expert agents in parallel, and presents 2–3 options that differ in <em>interaction model</em> — each justified by product facts — before writing the flow, its screens with every state, and a decision record.</p></div>
+        <div class="benefit reveal"><span class="num">04</span><h3>Decides the look and feel once</h3><p><code>/ux:style</code> documents the intent of an existing design system, or proposes 2–3 visual directions — palette, typography, density, shape, motion — each previewed as a style tile; the chosen one becomes the source every screen draws its tokens from.</p></div>
+        <div class="benefit reveal"><span class="num">05</span><h3>Validates cheaply</h3><p><code>/ux:prototype</code> builds a single-file clickable HTML prototype from the spec, styled with the project's own tokens, every state reachable, published for review before a line of production code exists.</p></div>
+        <div class="benefit reveal"><span class="num">06</span><h3>Implements with your own building blocks</h3><p><code>/ux:implement</code> maps the spec to existing components — reuse, extend, create, in that order — builds state by state, localized and accessible, then verifies it in the running app.</p></div>
+        <div class="benefit wide reveal"><span class="num">07</span><h3>Reviews the user-facing result</h3><p><code>/ux:review</code> runs six read-only review agents in parallel and returns a numbered findings list; <code>/ux:audit</code> applies the same agents plus a heuristic pass to the existing UI and produces a prioritized report, ready to feed back into <code>/ux:design F&lt;n&gt;</code>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <p class="sec-label reveal">skills in action</p>
+      <h2 class="reveal">Watch a session, not a promise</h2>
+      <p class="sec-intro reveal">Each demo below replays a scripted <code>/ux:*</code> session, exactly as the workflow behaves.</p>
+
+      <div class="demos">
+
+        <div class="demo reveal">
+          <div class="demo-copy">
+            <h3><span class="cmd-name">/ux:discover</span> — the app, understood</h3>
+            <p>Detects the stack, inventories screens and tokens, and asks only what the code can't answer. The result — <b>product.md</b> and <b>inventory.md</b> — grounds every decision that follows.</p>
+          </div>
+          <div class="term" data-demo="discover">
+            <div class="term-bar" aria-hidden="true"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">claude — /ux:discover</span></div>
+            <div class="term-body" role="img" aria-label="Terminal demo of /ux:discover: the stack is detected, screens and components are inventoried, the running app is captured, one open question is clarified with a recommended answer, then product.md and inventory.md are written."></div>
+          </div>
+        </div>
+
+        <div class="demo reveal">
+          <div class="demo-copy">
+            <h3><span class="cmd-name">/ux:style</span> — the look, decided once</h3>
+            <p>With no design system in place, three visual directions are proposed, each previewed as a tile. Pick one and it becomes the single source every prototype and screen draws its tokens from.</p>
+          </div>
+          <div class="term" data-demo="style">
+            <div class="term-bar" aria-hidden="true"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">claude — /ux:style</span></div>
+            <div class="term-body" role="img" aria-label="Terminal demo of /ux:style: three visual directions are proposed and previewed as tiles, one is chosen based on the users and platform, then style.md is written."></div>
+          </div>
+        </div>
+
+        <div class="demo reveal">
+          <div class="demo-copy">
+            <h3><span class="cmd-name">/ux:design</span> — options, not a guess</h3>
+            <p>Specialized experts weigh in — flows, states, accessibility — before 2–3 options are laid out, each a genuinely different interaction model, justified by who uses the screen and how often.</p>
+          </div>
+          <div class="term" data-demo="design">
+            <div class="term-bar" aria-hidden="true"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">claude — /ux:design</span></div>
+            <div class="term-body" role="img" aria-label="Terminal demo of /ux:design: a need is clarified, three expert agents are consulted in parallel, two options are presented that differ in interaction model, one is chosen, then the flow, screens and decision are written."></div>
+          </div>
+        </div>
+
+        <div class="demo reveal">
+          <div class="demo-copy">
+            <h3><span class="cmd-name">/ux:prototype</span> — clickable before it's code</h3>
+            <p>A single-file HTML prototype, styled with the project's real tokens, every state reachable. Nothing is built for real until this is validated.</p>
+          </div>
+          <div class="term" data-demo="prototype">
+            <div class="term-bar" aria-hidden="true"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">claude — /ux:prototype</span></div>
+            <div class="term-body" role="img" aria-label="Terminal demo of /ux:prototype: a single-file HTML prototype is built from the spec with the project's tokens, every state is wired, it is published, feedback is applied, then the flow is marked validated."></div>
+          </div>
+        </div>
+
+        <div class="demo reveal">
+          <div class="demo-copy">
+            <h3><span class="cmd-name">/ux:implement</span> — built from what already exists</h3>
+            <p>Each screen maps to components in this order: reuse, extend, create. State by state, then verified in the running app — the review runs automatically on the way out.</p>
+          </div>
+          <div class="term" data-demo="implement">
+            <div class="term-bar" aria-hidden="true"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">claude — /ux:implement</span></div>
+            <div class="term-body" role="img" aria-label="Terminal demo of /ux:implement: components are mapped as reuse, extend or create, every state is built, the change is verified in the running app with keyboard only, /ux:review runs automatically and a finding is fixed, then the flow is marked implemented."></div>
+          </div>
+        </div>
+
+        <div class="demo reveal">
+          <div class="demo-copy">
+            <h3><span class="cmd-name">/ux:review</span> — six angles, read only</h3>
+            <p>States, accessibility, content, consistency, visual and conformance run in parallel, each on a single dimension. <code>--fix</code> applies the High and Medium findings, never the Low ones.</p>
+          </div>
+          <div class="term" data-demo="review">
+            <div class="term-bar" aria-hidden="true"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">claude — /ux:review --fix</span></div>
+            <div class="term-body" role="img" aria-label="Terminal demo of /ux:review --fix: six read-only review agents run in parallel, two findings are reported, then the High and Medium findings are fixed automatically."></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="commands">
+    <div class="wrap">
+      <p class="sec-label reveal">the toolbox</p>
+      <h2 class="reveal">Eight commands, one workflow</h2>
+      <div class="cmd-table reveal">
+        <table>
+          <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>/ux:discover [description]</code></td><td>Understand the application: stack, tokens, screens, components, captures, user interview → <code>.ux/product.md</code>, <code>.ux/inventory.md</code></td></tr>
+            <tr><td><code>/ux:clarify &lt;topic&gt;</code></td><td>Grill the user in rounds about a need, a product, a visual direction or a plan until nothing is silently assumed — standalone, or run automatically by discover / design / style / implement</td></tr>
+            <tr><td><code>/ux:style [--redesign] [hints]</code></td><td>Define the look and feel once per product: document the existing design system's intent, or propose 2–3 visual directions with style-tile previews → <code>.ux/style.md</code></td></tr>
+            <tr><td><code>/ux:audit [path|screen]</code></td><td>Heuristic audit of the existing UI with the review agents → prioritized <code>.ux/audit/YYYY-MM-DD.md</code></td></tr>
+            <tr><td><code>/ux:design &lt;need&gt; | F&lt;n&gt; | NNN</code></td><td>Propose 2–3 adapted UX options, write the chosen flow + screen specs + decision</td></tr>
+            <tr><td><code>/ux:prototype NNN | &lt;slug&gt;</code></td><td>Build and publish a clickable HTML prototype; iterate; mark the flow <code>validated</code></td></tr>
+            <tr><td><code>/ux:implement NNN | &lt;slug&gt;</code></td><td>Implement the spec in the codebase, verify in the running app, review, mark <code>implemented</code></td></tr>
+            <tr><td><code>/ux:review [path|diff] [--fix]</code></td><td>UI/UX review of a change or path; <code>--fix</code> applies High/Medium fixes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="agents">
+    <div class="wrap">
+      <p class="sec-label reveal">the agents</p>
+      <h2 class="reveal">Two families, one axis each</h2>
+      <p class="sec-intro reveal">An <span class="pill expert" style="padding:1px 8px;"><span class="h">◆</span>expert</span> prescribes before the code exists — consulted by <code>/ux:design</code> and <code>/ux:implement</code>. A <span class="pill reviewer" style="padding:1px 8px;"><span class="h">▲</span>reviewer</span> critiques after — run by <code>/ux:review</code> and <code>/ux:audit</code>. Experts answer in a fixed shape (<code>REQUIREMENTS</code> / <code>RISKS</code> / <code>SCENARIOS</code>); reviewers are read-only and report only findings with a <code>file:line</code> or a capture as evidence.</p>
+      <div class="cmd-table agent-table reveal">
+        <table>
+          <thead><tr><th>Axis</th><th>Expert — before</th><th>Reviewer — after</th></tr></thead>
+          <tbody>
+            <tr><td>Flows &amp; navigation</td><td><span class="pill expert"><span class="h">◆</span>expert-flows</span></td><td><span class="dash">—</span></td></tr>
+            <tr><td>Interface states &amp; feedback</td><td><span class="pill expert"><span class="h">◆</span>expert-states</span></td><td><span class="pill reviewer"><span class="h">▲</span>review-states</span></td></tr>
+            <tr><td>Accessibility</td><td><span class="pill expert"><span class="h">◆</span>expert-accessibility</span></td><td><span class="pill reviewer"><span class="h">▲</span>review-accessibility</span></td></tr>
+            <tr><td>Content &amp; localization</td><td><span class="pill expert"><span class="h">◆</span>expert-content</span></td><td><span class="pill reviewer"><span class="h">▲</span>review-content</span></td></tr>
+            <tr><td>Visual design</td><td><span class="pill expert"><span class="h">◆</span>expert-visual</span></td><td><span class="pill reviewer"><span class="h">▲</span>review-visual</span></td></tr>
+            <tr><td>Platform conventions</td><td><span class="pill expert"><span class="h">◆</span>expert-platform</span></td><td><span class="dash">—</span></td></tr>
+            <tr><td>Design-system reuse</td><td><span class="dash">—</span></td><td><span class="pill reviewer"><span class="h">▲</span>review-consistency</span></td></tr>
+            <tr><td>Spec conformance</td><td><span class="dash">—</span></td><td><span class="pill reviewer"><span class="h">▲</span>review-conformance</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="anatomy">
+    <div class="wrap">
+      <p class="sec-label reveal">the record</p>
+      <h2 class="reveal">Everything it decides, next to your code</h2>
+      <p class="sec-intro reveal">Created by <code>/ux:discover</code>, meant to be committed — every session and every teammate reads it before touching the UI.</p>
+      <pre class="tree reveal">.ux/
+├── product.md          <span class="t-dim"># who, what, platform, constraints, vocabulary</span>
+├── inventory.md        <span class="t-dim"># the UI as it is: stack, tokens, screens, components, patterns, gaps</span>
+├── style.md            <span class="t-dim"># look and feel: intent, palette, typography, density, shape, motion</span>
+├── flows/NNN-slug.md   <span class="t-dim"># one flow per need — status: designed → validated → implemented</span>
+├── screens/&lt;slug&gt;.md   <span class="t-dim"># one spec per screen, all five states covered</span>
+├── decisions/NNN.md    <span class="t-dim"># UX decisions with rejected options (append-only)</span>
+├── prototypes/*.html   <span class="t-dim"># single-file clickable prototypes</span>
+├── captures/            <span class="t-dim"># screenshots of the real app (baseline, audits, after implementation)</span>
+└── audit/YYYY-MM-DD.md <span class="t-dim"># prioritized findings</span></pre>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <p class="sec-label reveal">typical flow</p>
+      <h2 class="reveal">From empty repo to a shipped screen</h2>
+      <ol class="flow reveal">
+        <li><b>/ux:discover</b> <span>— once per project (re-run when the product or UI changes a lot).</span></li>
+        <li><b>/ux:style</b> <span>— or <code>--redesign</code> to evolve an existing system; the look and feel is decided once, then reused everywhere.</span></li>
+        <li><b>/ux:audit</b> <span>— to see where the existing UI hurts users most.</span></li>
+        <li><b>/ux:design "Let operators duplicate a fixture with its children"</b> <span>— or <code>/ux:design F2</code> to fix an audit finding.</span></li>
+        <li><b>/ux:prototype 001</b> <span>— to validate with the product owner before any code.</span></li>
+        <li><b>/ux:implement 001</b> <span>— builds it; the review runs automatically at the end.</span></li>
+        <li><b>/ux:review</b> <span>— on any UI change made outside this workflow.</span></li>
+      </ol>
+      <p class="flow-note reveal">Steps 1, 2, 4 and 6 open with a <code>/ux:clarify</code> session: it looks up what the code and <code>.ux/</code> already say, then grills you only on what remains open, round by round, before anything is written.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><span style="color:var(--violet)">◆</span> ux — understands your app, designs the fix, then builds it with your own components.</span>
+    <span><a href="https://github.com/neolao/claude-plugin-ux">GitHub</a> · <a href="https://github.com/neolao/claude-plugin-ux/blob/main/LICENSE">MIT license</a></span>
+  </div>
+  <div class="wrap credits">
+    <span>Structure inspired by <a href="https://github.com/neolao/claude-plugin-vibe">neolao/claude-plugin-vibe</a>. <code>/ux:clarify</code> adapts <a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md">mattpocock/skills — grilling</a>.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- copy button ---------- */
+  var copyBtn = document.getElementById("copy");
+  copyBtn.addEventListener("click", function(){
+    var l1 = document.getElementById("install-cmd-1").textContent;
+    var l2 = document.getElementById("install-cmd-2").textContent;
+    var text = l1 + "\n" + l2;
+    function done(){ copyBtn.textContent = "copied ✓"; setTimeout(function(){ copyBtn.textContent = "copy"; }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, done);
+    } else { done(); }
+  });
+
+  /* ---------- scroll reveal ---------- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if (reduced || !("IntersectionObserver" in window)) {
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add("in"); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ ro.observe(el); });
+  }
+
+  /* ---------- spinner ticker ---------- */
+  var SPIN = ["⠋","⠙","⠹","⠸","⠼","⠴","⠦","⠧","⠇","⠏"];
+  var spinIdx = 0;
+  setInterval(function(){
+    spinIdx = (spinIdx + 1) % SPIN.length;
+    var els = document.querySelectorAll(".spin");
+    for (var i = 0; i < els.length; i++) els[i].textContent = SPIN[spinIdx];
+  }, 80);
+
+  /* ---------- demo scripts ----------
+     line types:
+       cmd  — typed char by char after a prompt
+       out  — printed as a whole line (html allowed); optional d = delay before it
+       run  — printed with a spinner, swaps to `done` html after `after` ms
+       gap  — blank line
+  */
+  var P = '<span class="t-p">❯</span> ';
+  var DEMOS = {
+    discover: [
+      { t:"cmd", text:"/ux:discover" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> stack detected — <span class="t-bold">React + Tailwind</span>, tokens found in <span class="t-dim">tokens.css</span>' },
+      { t:"run", d:400, html:'<span class="t-dim">●</span> inventorying screens &amp; components…', after:1800, done:'<span class="t-dim">●</span> inventorying screens &amp; components… <span class="t-ok">14 screens · 38 components</span>' },
+      { t:"out", d:2200, html:'<span class="t-dim">●</span> capturing the running app…' },
+      { t:"out", d:700, html:'  <span class="t-ok">✓</span> 6 captures saved to <span class="t-dim">.ux/captures/</span>' },
+      { t:"gap" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> one thing the code can’t answer:' },
+      { t:"out", d:600, html:'  <span class="t-bold">1.</span> Who are the primary users? <span class="t-dim">— recommended: operators on a shop-floor tablet</span>' },
+      { t:"out", d:900, html:'  <span class="t-cmd">↳ accepted</span>' },
+      { t:"gap" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> writing <span class="t-bold">product.md</span>, <span class="t-bold">inventory.md</span>' },
+      { t:"out", d:400, html:'<span class="t-ok">✔ discovered</span> <span class="t-dim">— grounding is in place, ready for</span> /ux:style' }
+    ],
+    style: [
+      { t:"cmd", text:"/ux:style" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> no design system found — proposing <span class="t-bold">3 directions</span>' },
+      { t:"run", d:400, html:'  <span class="t-dim">A</span> Calm Utility <span class="t-dim">— building a preview tile…</span>', after:1600, done:'  <span class="t-dim">A</span> Calm Utility <span class="t-ok">tile ready</span>' },
+      { t:"run", d:200, html:'  <span class="t-dim">B</span> Editorial <span class="t-dim">— building a preview tile…</span>', after:2000, done:'  <span class="t-dim">B</span> Editorial <span class="t-ok">tile ready</span>' },
+      { t:"run", d:200, html:'  <span class="t-dim">C</span> Bold Signal <span class="t-dim">— building a preview tile…</span>', after:2400, done:'  <span class="t-dim">C</span> Bold Signal <span class="t-ok">tile ready</span>' },
+      { t:"out", d:2800, html:'<span class="t-dim">●</span> operators read this on a tablet, in bright light — needs contrast, not decoration' },
+      { t:"out", d:700, html:'<span class="t-bold">chosen</span> <span class="t-dim">— A, Calm Utility</span>' },
+      { t:"gap" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> writing <span class="t-bold">style.md</span> — palette, type, density, shape, motion' },
+      { t:"out", d:400, html:'<span class="t-ok">✔ styled</span> <span class="t-dim">— every prototype and screen now draws from it</span>' }
+    ],
+    design: [
+      { t:"cmd", text:'/ux:design "Let operators duplicate a fixture with its children"' },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> framing against <span class="t-dim">product.md</span> — clarifying 1 open point…' },
+      { t:"out", d:900, html:'  <span class="t-bold">1.</span> Should duplicates keep the original’s calibration? <span class="t-dim">— recommended: no, flagged for review</span>' },
+      { t:"out", d:700, html:'  <span class="t-cmd">↳ accepted</span>' },
+      { t:"gap" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> consulting experts in parallel…' },
+      { t:"run", d:300, html:'  <span class="t-bold">flows</span>         <span class="t-dim">entry points &amp; undo</span>', after:2000, done:'  <span class="t-ok">✓</span> <span class="t-bold">flows</span>         <span class="t-dim">3 requirements</span>' },
+      { t:"run", d:150, html:'  <span class="t-bold">states</span>        <span class="t-dim">partial &amp; error cases</span>', after:2500, done:'  <span class="t-ok">✓</span> <span class="t-bold">states</span>        <span class="t-dim">2 requirements</span>' },
+      { t:"run", d:150, html:'  <span class="t-bold">accessibility</span> <span class="t-dim">keyboard path</span>', after:2100, done:'  <span class="t-ok">✓</span> <span class="t-bold">accessibility</span> <span class="t-dim">1 requirement</span>' },
+      { t:"out", d:2900, html:'<span class="t-dim">●</span> <span class="t-bold">2 options</span> differ by interaction model:' },
+      { t:"out", d:600, html:'  <span class="t-dim">A</span> inline duplicate button <span class="t-dim">on each row</span>' },
+      { t:"out", d:400, html:'  <span class="t-dim">B</span> bulk-select then duplicate <span class="t-dim">from a toolbar</span>' },
+      { t:"out", d:700, html:'<span class="t-bold">chosen</span> <span class="t-dim">— A, matches how operators already work row by row</span>' },
+      { t:"gap" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> writing flow, screens <span class="t-dim">(every state)</span>, decision' },
+      { t:"out", d:400, html:'<span class="t-ok">✔ designed</span> <span class="t-dim">— flow 012, ready for</span> /ux:prototype' }
+    ],
+    prototype: [
+      { t:"cmd", text:"/ux:prototype 012" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> reading flow 012 &amp; screen specs…' },
+      { t:"out", d:700, html:'<span class="t-dim">●</span> pulling tokens from <span class="t-dim">.ux/style.md</span>' },
+      { t:"run", d:400, html:'<span class="t-dim">●</span> building a single-file HTML prototype…', after:2200, done:'<span class="t-dim">●</span> building a single-file HTML prototype… <span class="t-ok">ok</span>' },
+      { t:"out", d:2600, html:'<span class="t-dim">●</span> states wired: <span class="t-ok">success</span> <span class="t-dim">·</span> <span class="t-ok">empty</span> <span class="t-dim">·</span> <span class="t-ok">loading</span> <span class="t-dim">·</span> <span class="t-ok">error</span>' },
+      { t:"out", d:700, html:'<span class="t-dim">●</span> published <span class="t-dim">→</span> <span class="t-bold">.ux/prototypes/012-duplicate-fixture.html</span>' },
+      { t:"gap" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> feedback: <span class="t-dim">“the confirm step feels redundant”</span>' },
+      { t:"out", d:600, html:'  <span class="t-ok">✓</span> confirm step removed <span class="t-dim">— duplicate is undoable instead</span>' },
+      { t:"gap" },
+      { t:"out", d:400, html:'<span class="t-ok">✔ validated</span> <span class="t-dim">— flow 012 ready for</span> /ux:implement' }
+    ],
+    implement: [
+      { t:"cmd", text:"/ux:implement 012" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> mapping screens to components…' },
+      { t:"out", d:700, html:'  <span class="t-ok">reuse</span>  <span class="t-dim">FixtureRow, IconButton</span>' },
+      { t:"out", d:400, html:'  <span class="t-warn">extend</span> <span class="t-dim">RowActions — add a duplicate affordance</span>' },
+      { t:"out", d:400, html:'  <span class="t-err">create</span> <span class="t-dim">UndoToast</span>' },
+      { t:"gap" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> building, state by state…' },
+      { t:"out", d:700, html:'  <span class="t-ok">✓</span> success <span class="t-dim">·</span> <span class="t-ok">✓</span> empty <span class="t-dim">·</span> <span class="t-ok">✓</span> loading <span class="t-dim">·</span> <span class="t-ok">✓</span> error' },
+      { t:"run", d:400, html:'<span class="t-dim">●</span> verifying in the running app — keyboard only…', after:2000, done:'<span class="t-dim">●</span> verifying in the running app — keyboard only… <span class="t-ok">ok</span>' },
+      { t:"out", d:2400, html:'<span class="t-dim">●</span> running <span class="t-bold">/ux:review</span> automatically…' },
+      { t:"out", d:900, html:'  <span class="t-ok">✓</span> 1 finding, fixed <span class="t-dim">— missing focus ring on the undo toast</span>' },
+      { t:"gap" },
+      { t:"out", d:500, html:'<span class="t-ok">✔ implemented</span> <span class="t-dim">— flow 012 shipped, .ux/ and CHANGELOG.md updated</span>' }
+    ],
+    review: [
+      { t:"cmd", text:"/ux:review --fix" },
+      { t:"out", d:500, html:'<span class="t-dim">●</span> fanning out <span class="t-bold">6 review agents</span> in parallel…' },
+      { t:"run", d:300, html:'  <span class="t-bold">states</span>        <span class="t-dim">empty · loading · partial · error</span>', after:2000, done:'  <span class="t-ok">✓</span> <span class="t-bold">states</span>        <span class="t-ok">clean</span>' },
+      { t:"run", d:150, html:'  <span class="t-bold">accessibility</span>  <span class="t-dim">keyboard, focus, contrast</span>', after:2500, done:'  <span class="t-ok">✓</span> <span class="t-bold">accessibility</span>  <span class="t-warn">1 finding</span>' },
+      { t:"run", d:150, html:'  <span class="t-bold">content</span>       <span class="t-dim">labels, errors, terminology</span>', after:2200, done:'  <span class="t-ok">✓</span> <span class="t-bold">content</span>       <span class="t-ok">clean</span>' },
+      { t:"run", d:150, html:'  <span class="t-bold">consistency</span>   <span class="t-dim">tokens &amp; components reused</span>', after:2900, done:'  <span class="t-ok">✓</span> <span class="t-bold">consistency</span>   <span class="t-ok">clean</span>' },
+      { t:"run", d:150, html:'  <span class="t-bold">visual</span>        <span class="t-dim">hierarchy, spacing, states</span>', after:2600, done:'  <span class="t-ok">✓</span> <span class="t-bold">visual</span>        <span class="t-warn">1 finding</span>' },
+      { t:"run", d:150, html:'  <span class="t-bold">conformance</span>   <span class="t-dim">matches the .ux/ spec</span>', after:1900, done:'  <span class="t-ok">✓</span> <span class="t-bold">conformance</span>   <span class="t-ok">clean</span>' },
+      { t:"out", d:3300, html:'<span class="t-dim">●</span> applying High/Medium fixes…' },
+      { t:"out", d:700, html:'  <span class="t-ok">✓</span> focus ring restored on the duplicate button' },
+      { t:"out", d:500, html:'  <span class="t-ok">✓</span> row spacing aligned to the 8px scale' },
+      { t:"gap" },
+      { t:"out", d:400, html:'<span class="t-ok">✔ review complete</span> <span class="t-dim">— 2 findings, 2 fixed</span>' }
+    ]
+  };
+
+  var TYPE_MS = 34;      // per character
+  var LOOP_PAUSE = 4200; // pause before replay
+
+  function renderStatic(body, script){
+    body.textContent = "";
+    script.forEach(function(step){
+      var line = document.createElement("div");
+      line.className = "line";
+      if (step.t === "cmd") {
+        line.innerHTML = P + '<span class="t-cmd"></span>';
+        line.querySelector(".t-cmd").textContent = step.text;
+      }
+      else if (step.t === "run") line.innerHTML = step.done;
+      else if (step.t === "out") line.innerHTML = step.html;
+      else line.innerHTML = "&nbsp;";
+      body.appendChild(line);
+    });
+  }
+
+  function Player(body, script){
+    this.body = body;
+    this.script = script;
+    this.gen = 0;
+    this.timers = [];
+    this.running = false;
+  }
+  Player.prototype.clearTimers = function(){
+    this.timers.forEach(clearTimeout);
+    this.timers = [];
+  };
+  Player.prototype.stop = function(){
+    this.gen++;
+    this.clearTimers();
+    this.running = false;
+  };
+  Player.prototype.wait = function(ms, gen, fn){
+    var self = this;
+    var id = setTimeout(function(){
+      if (self.gen === gen) fn();
+    }, ms);
+    this.timers.push(id);
+  };
+  Player.prototype.start = function(){
+    if (this.running) return;
+    this.running = true;
+    this.gen++;
+    this.playFrom(0, this.gen);
+  };
+  Player.prototype.playFrom = function(idx, gen){
+    var self = this;
+    if (gen !== this.gen) return;
+    if (idx === 0) this.body.textContent = "";
+
+    if (idx >= this.script.length) {
+      this.wait(LOOP_PAUSE, gen, function(){ self.playFrom(0, gen); });
+      return;
+    }
+    var step = this.script[idx];
+    var delay = step.d || 0;
+
+    this.wait(delay, gen, function(){
+      var line = document.createElement("div");
+      line.className = "line";
+
+      if (step.t === "gap") {
+        line.innerHTML = "&nbsp;";
+        self.body.appendChild(line);
+        self.playFrom(idx + 1, gen);
+
+      } else if (step.t === "cmd") {
+        line.innerHTML = P + '<span class="t-cmd"></span><span class="cursor" aria-hidden="true"></span>';
+        self.body.appendChild(line);
+        var target = line.querySelector(".t-cmd");
+        var i = 0;
+        (function typeChar(){
+          if (gen !== self.gen) return;
+          if (i < step.text.length) {
+            target.textContent += step.text.charAt(i++);
+            self.wait(TYPE_MS, gen, typeChar);
+          } else {
+            self.wait(320, gen, function(){
+              var c = line.querySelector(".cursor");
+              if (c) c.remove();
+              self.playFrom(idx + 1, gen);
+            });
+          }
+        })();
+
+      } else if (step.t === "run") {
+        // the spinner takes the place of a leading "● " bullet, or prefixes the line
+        var m = step.html.match(/^(\s*)([\s\S]*)$/);
+        var rest = m[2].replace(/^<span class="t-dim">●<\/span> /, "");
+        line.innerHTML = m[1] + '<span class="spin">⠋</span> ' + rest;
+        self.body.appendChild(line);
+        self.wait(step.after, gen, function(){
+          line.innerHTML = step.done;
+        });
+        self.playFrom(idx + 1, gen);
+
+      } else { // out
+        line.innerHTML = step.html;
+        self.body.appendChild(line);
+        self.playFrom(idx + 1, gen);
+      }
+    });
+  };
+
+  document.querySelectorAll(".term[data-demo]").forEach(function(term){
+    var body = term.querySelector(".term-body");
+    var script = DEMOS[term.getAttribute("data-demo")];
+    if (!script) return;
+
+    // reserve final height to avoid layout jumps while animating
+    renderStatic(body, script);
+    body.style.minHeight = body.scrollHeight + "px";
+
+    if (reduced || !("IntersectionObserver" in window)) return; // keep static render
+
+    body.textContent = "";
+    var player = new Player(body, script);
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) player.start();
+        else player.stop();
+      });
+    }, { threshold: 0.25 });
+    io.observe(term);
+  });
+})();
+</script>
+</body>
+</html>
