@@ -49,7 +49,7 @@ Fold `REQUIREMENTS` into every option, `RISKS` into trade-offs, `SCENARIOS` into
 
 Never a single option. Each, in plain language: **Concept** (one paragraph) · **Flow** (user does → sees) · **Reuses** (from the inventory; what is new) · **Fits because** (product facts, incl. the density and tone of `style.md`) · **Trade-offs** (learning, screen space, dev effort S/M/L, expert risks). Options differ in *interaction model* (inline vs side panel vs page; wizard vs form; modal vs undo), not cosmetics.
 
-Present them with `AskUserQuestion`: one question, the recommended option first labeled `(Recommended)`, each description carrying its "fits because" and main trade-off. If the user picks "Other" with a variant, integrate it and confirm in one line.
+This is a mandatory `AskUserQuestion` tool call, not a narrative to describe and resolve yourself — however obvious the recommended option seems, never write out the options in prose and pick one on the user's behalf, and never let confidence in the recommendation substitute for the call. One question, the recommended option first labeled `(Recommended)`, each description carrying its "fits because" and main trade-off. Step 6 starts only once the tool call has actually returned the user's answer. If the user picks "Other" with a variant, integrate it and confirm in one line.
 
 ## Step 6 — Write the specs
 

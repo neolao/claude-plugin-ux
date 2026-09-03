@@ -56,7 +56,7 @@ Publish like `/ux:prototype` Step 3 (Artifact tool → browser tools → file pa
 
 ## Step 7 — Choose — propose / redesign
 
-`AskUserQuestion`: one question, one option per direction, the recommended one first labeled `(Recommended)`, each description carrying its "fits because", main trade-off and where its preview is. If the user picks "Other" with a blend, integrate it, rebuild that preview, confirm in one line.
+This is a mandatory `AskUserQuestion` tool call, not a narrative to describe and resolve yourself — however obvious the recommended direction seems, never write out the directions in prose and pick one on the user's behalf, and never let confidence in the recommendation substitute for the call. One question, one option per direction, the recommended one first labeled `(Recommended)`, each description carrying its "fits because", main trade-off and where its preview is. Step 8 starts only once the tool call has actually returned the user's answer. If the user picks "Other" with a blend, integrate it, rebuild that preview, confirm in one line.
 
 ## Step 8 — Write `.ux/style.md`
 
