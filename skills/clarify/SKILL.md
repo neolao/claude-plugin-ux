@@ -2,6 +2,8 @@
 name: clarify
 description: Grill the user in rounds until nothing is silently assumed — facts looked up, decisions asked with a recommendation. Triggers: "grill me", "stress-test", "clarify", "cuisine-moi".
 argument-hint: "<topic to clarify> | kind=<need|product|brand|plan> topic=\"…\" context=<notes> (when invoked by another ux skill)"
+version: 1.0.0
+model: claude-sonnet-5-5
 ---
 
 # /ux:clarify — Reach a shared understanding before acting

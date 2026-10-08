@@ -1,6 +1,8 @@
 ---
 name: expert-visual
 description: Consulting visual expert — hierarchy, layout, density, responsive behavior, tokens. Consult when a need changes what is rendered on screen.
+model: sonnet
+version: 1.0.0
 ---
 
 # Agent: expert-visual

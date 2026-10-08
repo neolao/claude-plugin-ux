@@ -1,2 +1,4 @@
 .DS_Store
 @eaDir
+evals/results/*
+!evals/results/history.md

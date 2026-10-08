@@ -2,6 +2,8 @@
 name: prototype
 description: Build a clickable single-file HTML prototype of a designed flow with the project's tokens, publish it, iterate on feedback, mark the flow validated.
 argument-hint: "<NNN flow id> | <screen slug>"
+version: 1.0.0
+model: claude-sonnet-5-5
 ---
 
 # /ux:prototype — Validate the UX before writing code

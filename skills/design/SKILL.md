@@ -2,6 +2,8 @@
 name: design
 description: Design the UX for a need: clarify it, consult the expert agents, propose 2–3 options, write flow and screen specs and the decision to .ux/.
 argument-hint: "<need in natural language> | F<n> (finding from the latest audit) | NNN (existing flow to redesign)"
+version: 1.0.0
+model: claude-sonnet-5-5
 ---
 
 # /ux:design — Propose a UX adapted to the need

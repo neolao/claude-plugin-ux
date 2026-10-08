@@ -1,6 +1,8 @@
 ---
 name: review-conformance
 description: Reviews one dimension — the code matches the .ux/ flow and screen specs: nothing missing, extra or different. Read-only.
+model: sonnet
+version: 1.0.0
 ---
 
 # Agent: review-conformance

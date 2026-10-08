@@ -95,6 +95,10 @@ Two families with disjoint roles, one agent per axis:
 
 Experts answer in a fixed shape (`REQUIREMENTS` / `RISKS` / `SCENARIOS`) so their output folds directly into specs and acceptance criteria. Reviewers are read-only and report only findings with a `file:line` or a capture as evidence.
 
+## Maintenance
+
+Skills and agents are scored with `claude plugin eval` (cases in `evals/`, scores in `evals/results/history.md`). The scheduled routine `scheduled-tasks/improve-skills-and-agents/SKILL.md` improves one target per run.
+
 ## Requirements
 
 [Claude Code](https://claude.com/claude-code) with plugin support. Capturing the running application is best effort: it uses the `run` skill or browser tools when available and degrades to a code-only inventory otherwise.

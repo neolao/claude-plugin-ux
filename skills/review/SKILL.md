@@ -2,6 +2,8 @@
 name: review
 description: UI/UX review of a diff or path through the review agents (states, accessibility, content, consistency, visual, conformance); --fix applies High and Medium fixes.
 argument-hint: "[path | diff | --fix]"
+version: 1.0.0
+model: claude-sonnet-5-5
 ---
 
 # /ux:review — Review UI changes against UX quality and the specs

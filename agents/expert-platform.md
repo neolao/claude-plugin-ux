@@ -1,6 +1,8 @@
 ---
 name: expert-platform
 description: Consulting platform-conventions expert — web, desktop, mobile, game-engine tool, terminal. Consult when a need must feel native to its platform.
+model: sonnet
+version: 1.0.0
 ---
 
 # Agent: expert-platform

@@ -1,6 +1,8 @@
 ---
 name: review-visual
 description: Reviews one dimension — visual hierarchy, spacing, interactive states, typography, responsive and resizing behavior. Read-only.
+model: sonnet
+version: 1.0.0
 ---
 
 # Agent: review-visual

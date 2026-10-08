@@ -2,6 +2,8 @@
 name: style
 description: Define the look and feel once — document the existing design system, or propose 2–3 previewed visual directions — written to .ux/style.md.
 argument-hint: "[--redesign] [optional: brand hints — reference products, adjectives, imposed colors]"
+version: 1.0.0
+model: claude-sonnet-5-5
 ---
 
 # /ux:style — Define the look and feel

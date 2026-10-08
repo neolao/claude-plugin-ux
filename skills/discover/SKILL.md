@@ -2,6 +2,8 @@
 name: discover
 description: Understand the application before designing — detect the UI stack, inventory screens, components and tokens, clarify users and goals, write .ux/product.md and .ux/inventory.md.
 argument-hint: "[optional: what the application is, in one sentence]"
+version: 1.0.0
+model: claude-sonnet-5-5
 ---
 
 # /ux:discover — Understand the application

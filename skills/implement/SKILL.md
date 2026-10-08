@@ -2,6 +2,8 @@
 name: implement
 description: Implement a designed flow or screen with the project's components and tokens, every state covered, verified in the running app, then reviewed.
 argument-hint: "<NNN flow id> | <screen slug>"
+version: 1.0.0
+model: claude-sonnet-5-5
 ---
 
 # /ux:implement — Build the designed UX in the codebase

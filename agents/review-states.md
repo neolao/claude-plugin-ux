@@ -1,6 +1,8 @@
 ---
 name: review-states
 description: Reviews one dimension — every view handles empty, loading, partial, error and success, and every action gives feedback. Read-only.
+model: sonnet
+version: 1.0.0
 ---
 
 # Agent: review-states

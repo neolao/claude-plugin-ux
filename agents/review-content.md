@@ -1,6 +1,8 @@
 ---
 name: review-content
 description: Reviews one dimension — user-facing text: hardcoded strings, vague labels and errors, terminology drift from the product vocabulary. Read-only.
+model: sonnet
+version: 1.0.0
 ---
 
 # Agent: review-content

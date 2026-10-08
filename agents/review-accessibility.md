@@ -1,6 +1,8 @@
 ---
 name: review-accessibility
 description: Reviews one dimension — keyboard operability, focus, names and roles, contrast, motion, target sizes. Read-only.
+model: sonnet
+version: 1.0.0
 ---
 
 # Agent: review-accessibility

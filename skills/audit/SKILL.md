@@ -2,6 +2,8 @@
 name: audit
 description: Heuristic UX audit of the existing interface — captures, Nielsen pass, review agents — written as prioritized findings to .ux/audit/.
 argument-hint: "[optional: path, screen name, or area to audit — defaults to the whole UI]"
+version: 1.0.0
+model: claude-sonnet-5-5
 ---
 
 # /ux:audit — Audit the existing interface
