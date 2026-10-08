@@ -2,7 +2,7 @@
 name: clarify
 description: Grill the user in rounds until nothing is silently assumed — facts looked up, decisions asked with a recommendation. Triggers: "grill me", "stress-test", "clarify", "cuisine-moi".
 argument-hint: "<topic to clarify> | kind=<need|product|brand|plan> topic=\"…\" context=<notes> (when invoked by another ux skill)"
-version: 1.0.0
+version: 1.1.0
 model: claude-sonnet-5-5
 ---
 
@@ -16,21 +16,15 @@ Interview the user relentlessly until you reach a shared understanding. You writ
 
 Map the topic as a **design tree**: every decision branches into the decisions that hang off it.
 
-Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled — the questions you can ask *now* without guessing at answers you have not heard yet. Ask the whole frontier in one round, numbered, each with your recommended answer, then wait:
+Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled — the questions you can ask *now* without guessing at answers you have not heard yet. Ask the frontier with **`AskUserQuestion`**, never as plain text in the reply — a question the user is not prompted for is not asked:
 
-```
-❓ **Q1** - **<question title>**: <question body — may span paragraphs and offer choices>
+- One call per round, up to 4 questions; a larger frontier is split across consecutive calls in the same round, most upstream decisions first.
+- Each question: `header` ≤ 12 characters, a self-contained `question` ending in `?`, and 2-4 `options` — your recommended answer **first**, labeled `(Recommended)`, its description naming the fact it rests on; the alternatives follow, each with its trade-off. Free-text answers go through the automatic "Other".
+- Several answers that can all hold at once → `multiSelect: true`.
 
-➡️ <your recommended answer, and the fact it rests on>
+Then wait for the answers.
 
----
-
-❓ **Q2** - **<question title>**: <question body>
-
-➡️ <your recommended answer>
-```
-
-Each round reshapes the tree: settled decisions push the frontier outward — recompute it and ask the next round. A question that depends on one still open belongs to a *later* round. The user may answer "all recommended".
+Each round reshapes the tree: settled decisions push the frontier outward — recompute it and ask the next round. A question that depends on one still open belongs to a *later* round. Recompute the frontier from the answers; an "Other" answer that opens new branches adds them to the tree.
 
 **Finding facts is your job, never the user's.** Before the first round, read `.ux/*` (`product.md`, `inventory.md`, `style.md`, `flows/`, `decisions/`) and the `context` you were given: every fact there is settled — cite it in the recommendation, never ask it; reopening a recorded decision is itself a question. When a frontier question needs a fact from the environment, look it up — directly, or via a read-only sub-agent (Agent tool, `subagent_type: "Explore"`) — and do not block: only the questions downstream of a running lookup wait. **The decisions are the user's**: put each to them.
 
@@ -54,7 +48,7 @@ A trivial topic yields one round with one or two questions — that is fine.
 
 ## Closing
 
-Present the settled tree, get a one-line confirmation, then end with exactly this block — the contract the calling skills consume:
+Present the settled tree, get a one-line confirmation (`AskUserQuestion`: confirm / correct), then end with exactly this block — the contract the calling skills consume:
 
 ```
 ## Shared understanding — <topic>

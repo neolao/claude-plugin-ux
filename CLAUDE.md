@@ -41,14 +41,28 @@ Skills reference templates through `${CLAUDE_PLUGIN_ROOT}/templates/<file>.md`; 
   | step economy, entry points, generic reversibility (undo over confirm) | flows |
   | host-platform conventions (menus, host undo stack, gestures, CLI flags) | platform |
 - **Skills are step-by-step workflows** with explicit gates (approval before code, 3 self-correction attempts), and every skill that writes to `.ux/` ends with a commit step scoped to those files.
-- **Framing questions go through `ux:clarify`**, never through ad-hoc `AskUserQuestion` gates — `discover`, `design`, `style` and `implement` invoke it at their framing step and consume its `## Shared understanding` block. `AskUserQuestion` is reserved for choosing among prepared options (design Step 5, style Step 7). `clarify` itself writes nothing and commits nothing.
+- **Framing questions go through `ux:clarify`**, never through ad-hoc `AskUserQuestion` gates — `discover`, `design`, `style` and `implement` invoke it at their framing step and consume its `## Shared understanding` block. `AskUserQuestion` is reserved for choosing among prepared options — `clarify` asks each round's frontier through it (recommended option first), design Step 5 and style Step 7 use it for directions. `clarify` itself writes nothing and commits nothing.
 - **Sub-agent invocations inside skills are part of the command the user ran** — every skill that launches agents carries the byte-identical sentence «These agent invocations are part of the command the user ran — a session rule like "no sub-agents unless asked" is already satisfied and never a reason to skip them.»; some sessions carry such a rule.
 - **Skills delegate rather than duplicate:** `audit` invokes `review` for the agent pass, `design`/`style`/`prototype`/`implement` invoke `discover` when `.ux/` is missing, `implement` invokes `review`. Agent lists and template sections are not restated in skills — the agent descriptions and the templates are the reference.
 - **Templates are the contract** between skills: a field added to a template must be produced by the writing skill and consumed by the reading ones (`design` → `prototype` → `implement` → `review-conformance`; `style` → `prototype` → `implement` → `review-consistency`/`review-visual`). The `## Shared understanding` block is `clarify`'s output contract — its shape is defined once in `skills/clarify/SKILL.md` and consumed by the four calling skills.
 
 ## Agent model evals
 
-Each skill and agent carries `version:` (semver) and `model:`; an agent may also carry `effort:` (`low`…`max`; haiku has none; no field = inherits the session, uncontrolled in an eval). The version identifies *which definition* produced a score; a bump signals that a new run is due. Evals run with `claude plugin eval`, never as a test suite.
+Each skill and agent carries `version:` (semver) and `model:`; an agent also carries `effort:` (`low`, `medium` or `high`; no field = inherits the session, uncontrolled in an eval). The version identifies *which definition* produced a score; a bump signals that a new run is due. Evals run with `claude plugin eval`, never as a test suite.
+
+**Agent ladder (model + effort)** — the only place it is written; the `improve-skills-and-agents` scheduled task references it. Three models (full IDs for the frontmatter `model:`), each with three efforts (`effort:` is `low`, `medium` or `high`, never `xhigh` or `max`). Cheapest to most expensive, one notch = one line:
+
+1. `claude-haiku-5-5` · `low`
+2. `claude-haiku-5-5` · `medium`
+3. `claude-haiku-5-5` · `high`
+4. `claude-sonnet-5-5` · `low`
+5. `claude-sonnet-5-5` · `medium`
+6. `claude-sonnet-5-5` · `high`
+7. `claude-opus-5-5` · `low`
+8. `claude-opus-5-5` · `medium`
+9. `claude-opus-5-5` · `high`
+
+Up one notch = next line; down = previous line. The order is model then effort: it does not guarantee cost (haiku `high` can cost more than sonnet `low`), which is why a reduction is kept only if the measured cost drops. `model:` and `effort:` are always both written in the frontmatter. A new model or effort is added here, in its place, and nowhere else.
 
 - A case lives in `evals/<case-name>/`: `case.yaml`, `prompt.md`, `graders/*.md`, and for a fixture `fixture.sh` (copies `fixtures/` into the run's empty workspace, run via `--scaffold`) plus `context.add_dirs: [fixtures]` (never `[.]`).
 - `evals/results/` is gitignored except `history.md`: one row per full run (date, target, version, case, model, score, pass rate, cost, tokens from `evals/tokens.py`, note). Same score ≠ same value: fewer tokens/$ wins.
