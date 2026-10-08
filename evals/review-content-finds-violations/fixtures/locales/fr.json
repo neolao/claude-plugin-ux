@@ -1,0 +1,10 @@
+{
+  "board.title": "Tableaux",
+  "board.create": "Créer un tableau",
+  "board.empty": "Aucun tableau pour l'instant. Créez votre premier tableau pour organiser vos cartes.",
+  "card.add": "Ajouter une carte",
+  "workspace.delete": "Supprimer le projet",
+  "workspace.rename": "Renommer l'espace de travail",
+  "settings.save": "Enregistrer",
+  "settings.saved": "Paramètres enregistrés."
+}

@@ -1,0 +1,8 @@
+{
+  "invoice.title": "Invoices",
+  "invoice.count": "{count, plural, one {# invoice} other {# invoices}} this month",
+  "invoice.send": "Send invoice to client",
+  "invoice.delete": "Delete",
+  "invoice.error": "Invalid input",
+  "invoice.loading": "Loading invoices"
+}

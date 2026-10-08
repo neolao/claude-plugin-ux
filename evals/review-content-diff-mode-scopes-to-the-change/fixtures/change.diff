@@ -1,0 +1,35 @@
+diff --git a/locales/en.json b/locales/en.json
+index 41b8dbb..c9e9170 100644
+--- a/locales/en.json
++++ b/locales/en.json
+@@ -2,5 +2,7 @@
+   "invoice.title": "Invoices",
+   "invoice.count": "{count, plural, one {# invoice} other {# invoices}} this month",
+   "invoice.send": "Send invoice to client",
++  "invoice.delete": "Delete",
++  "invoice.error": "Invalid input",
+   "invoice.loading": "Loading invoices"
+ }
+diff --git a/src/InvoiceRow.tsx b/src/InvoiceRow.tsx
+index eca0d0f..201e4ce 100644
+--- a/src/InvoiceRow.tsx
++++ b/src/InvoiceRow.tsx
+@@ -4,13 +4,16 @@ import { deleteInvoice, sendInvoice } from "./api";
+ 
+ export function InvoiceRow({ invoice }: { invoice: Invoice }) {
+   if (!invoice) return <p>Loading…</p>;
++  if (!invoice.number) throw new Error("invoice.number missing");
++  const summary = t("invoice.count", { count: invoice.monthCount });
+   return (
+     <tr>
+-      <td>{invoice.number}</td>
+-      <td>{formatDate(invoice.issuedAt)}</td>
++      <td title={summary}>{invoice.number}</td>
++      <td>{`${invoice.issuedAt.getDate()}/${invoice.issuedAt.getMonth() + 1}/${invoice.issuedAt.getFullYear()}`}</td>
+       <td>{formatMoney(invoice.cents, invoice.currency)}</td>
+       <td>
+         <button onClick={() => sendInvoice(invoice.id)}>{t("invoice.send")}</button>
++        <button onClick={() => deleteInvoice(invoice.id)}>{t("invoice.delete")}</button>
+       </td>
+     </tr>
+   );

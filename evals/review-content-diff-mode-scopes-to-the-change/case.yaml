@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: review-content-diff-mode-scopes-to-the-change
+description: >
+  review-content in diff mode on a change that hand-formats a date, adds a
+  destructive button labelled "Delete" and a vague error string, next to
+  correct additions (an ICU-plural message used through t(), a developer-only
+  exception) and a pre-existing hardcoded string on an unchanged line that
+  the change does not touch.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

@@ -1,0 +1,10 @@
+{
+  "board.title": "Boards",
+  "board.create": "Create board",
+  "board.empty": "No boards yet. Create your first board to start organizing cards.",
+  "card.add": "Add card",
+  "workspace.delete": "Delete project",
+  "workspace.rename": "Rename workspace",
+  "settings.save": "Save changes",
+  "settings.saved": "Settings saved."
+}

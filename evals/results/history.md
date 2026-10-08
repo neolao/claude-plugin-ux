@@ -46,3 +46,11 @@ same flags and runs `tokens.py` in the same container (see
 
 | Date | Agent | Agent version | Case | Model | Score | Pass rate | Cost (N runs) | Tokens in/out (N runs) | Notes |
 |---|---|---|---|---|---|---|---|---|---|
+| 2026-10-08 | review-content | 1.0.0 | review-content-finds-violations | claude-sonnet-5-5 | 1.00 | 100% | $0.48 | 178 339 / 12 254 | First evaluation of the new case (no `effort:` in the frontmatter, `model: sonnet` alias, effort inherited from the session). |
+| 2026-10-08 | review-content | 1.0.0 | review-content-finds-violations | claude-sonnet-5-5 | 1.00 | 100% | $0.49 | 178 064 / 12 657 | Repeat of the same definition (an `effort:` edit failed to apply); shows run-to-run cost variance of about $0.01. |
+| 2026-10-08 | review-content | 1.0.0 | review-content-finds-violations | claude-sonnet-5-5 | 1.00 | 100% | $0.47 | 178 246 / 11 958 | `effort: medium` written explicitly (model id `claude-sonnet-5-5`). Baseline for the cost cut. |
+| 2026-10-08 | review-content | 1.0.0 | review-content-finds-violations | claude-sonnet-5-5 | 1.00 | 100% | $0.48 | 178 894 / 12 449 | Cost cut tried: `effort: low`. Cost not lower than medium ($0.47): reverted to medium. |
+| 2026-10-08 | review-content | 1.0.1 | review-content-diff-mode-scopes-to-the-change | claude-sonnet-5-5 | 0.89 | 67% | $0.32 | 137 770 / 6 704 | `effort: medium`. New hardening case (diff mode). Case first fixed (hardcoded `count: 12` made a legitimate finding; validation run, not logged). Prompt fix 1: no pseudo-finding blocks, tighter What NOT to do. 1 run in 3 emitted then retracted a block on an unchanged line. |
+| 2026-10-08 | review-content | 1.0.1 | review-content-finds-violations | claude-sonnet-5-5 | 1.00 | 100% | $0.44 | 178 664 / 11 517 | `effort: medium`. Regression check after prompt fix 1. |
+| 2026-10-08 | review-content | 1.1.0 | review-content-diff-mode-scopes-to-the-change | claude-sonnet-5-5 | 1.00 | 100% | $0.28 | 177 704 / 5 552 | `effort: medium`. Prompt fix 2: in diff mode decide scope from the `+` lines before writing a block. Hardening case reaches 1.00. |
+| 2026-10-08 | review-content | 1.1.0 | review-content-finds-violations | claude-sonnet-5-5 | 1.00 | 100% | $0.42 | 179 323 / 10 951 | `effort: medium`. Regression check after prompt fix 2. Run ends after hardening. Next: another target has no case yet. |
