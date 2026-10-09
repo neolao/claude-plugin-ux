@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: review-states-finds-violations
+description: >
+  review-states on a small React app. The scope holds a list rendered without
+  an empty case, a form whose submission is neither guarded nor caught, and a
+  long async action with no feedback, next to a view that handles every state
+  and must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
