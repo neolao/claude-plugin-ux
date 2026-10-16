@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: review-accessibility-finds-violations
+description: >
+  review-accessibility on a small React app. The scope holds a click-only div,
+  icon-only buttons without a name, a status carried by color only, a dialog
+  that never takes focus, and low-contrast link text, next to a labeled form
+  that must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

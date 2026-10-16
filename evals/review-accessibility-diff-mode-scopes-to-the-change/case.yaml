@@ -1,0 +1,9 @@
+schema_version: "1.1"
+name: review-accessibility-diff-mode-scopes-to-the-change
+description: >
+  review-accessibility in diff mode on a change that adds a click-only chip and
+  a placeholder-only search input to a filter bar, next to a correctly named
+  sort button and a pre-existing unnamed close button on unchanged lines.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
