@@ -61,7 +61,7 @@ Green tests are not proof. Launch the app from `product.md` Runs with (the `run`
 
 ## Step 6 — Review
 
-**Invoke `ux:review`** (Skill tool, `skill: "ux:review"`) on the current diff — outside a git repository, on the files created or changed, as paths — with the captures folder of Step 5 when there is one (`review-visual` reads it). Fix every High finding and the Medium ones touching the screens just built; re-run tests and lint; report the rest as is.
+**Invoke `ux:review`** (Skill tool, `skill: "ux:review"`) on the current diff — outside a git repository, on the files created or changed, as paths — with the captures folder of Step 5 when there is one (`review-visual` reads it). Fix every High finding and the Medium ones touching the screens just built, one at a time as `/ux:review` Step 5 does (tests and lint after each; 3 attempts, then leave it open with a diagnosis); the Low findings and the rest stay open in the report. A conformance finding whose FIX says `spec may need update` is a UX question, not a code fix: put it to the user (spec updated, or code made to match) — never change the spec on your own to close a finding. The review report has no place for the agents' closing lines (a screen no spec covers, no scale to judge against): take them from the agents' replies into the Step 10 report.
 
 ## Step 7 — Update `.ux/`
 
