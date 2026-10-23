@@ -41,7 +41,7 @@ Record each finding as: screen, axis and criterion, evidence (capture or `file:l
 
 ## Step 6 — Merge and prioritize
 
-Merge the heuristic findings with the review findings (same defect from several angles → one finding, best evidence kept). Map review priorities to impact rows — High → blocks/corrupts, Medium → slows/confuses, Low → cosmetic — then cross **impact** and **reach**:
+Merge the heuristic findings with the review findings (same defect from several angles → one finding, best evidence kept). A screen no `.ux/screens/` spec covers is not a finding — there is nothing to conform to; when `review-conformance` names such screens, carry them to the report's Summary as what `/ux:design` has not specified yet. Map review priorities to impact rows — High → blocks/corrupts, Medium → slows/confuses, Low → cosmetic — then cross **impact** and **reach**:
 
 | | Reach: daily / every user | Reach: weekly / some roles | Reach: rare / one role |
 |---|---|---|---|
