@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-content-localization-against-product-constraints
+description: >
+  review-content in audit mode on the booking panel of a web app localized
+  in English and Arabic (RTL), with i18next keys of the form
+  screen.element.purpose and ICU plurals. The scope holds a key named
+  btnOk, a helper that points the user at a slot "on the right" and an
+  arrow, and a zero case handled by a literal outside the plural message —
+  next to a correctly interpolated toast and a stylesheet with physical
+  left margins, which must stay unflagged (mirroring is the layout's job).
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

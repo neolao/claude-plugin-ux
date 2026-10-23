@@ -1,0 +1,9 @@
+{
+  "booking.panel.title": "حجز {room}",
+  "booking.slots.helper": "اختر فترة على اليمين، ثم أكّد بالسهم → أدناه",
+  "booking.slots.empty": "لا توجد فترة متاحة اليوم",
+  "booking.duration.label": "المدة",
+  "booking.duration.count": "{count, plural, one {ساعة واحدة} other {# ساعات}}",
+  "btnOk": "احجز الغرفة",
+  "booking.toast.success": "تم حجز {room} ابتداءً من {start}"
+}

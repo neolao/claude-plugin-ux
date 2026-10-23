@@ -1,0 +1,9 @@
+{
+  "booking.panel.title": "Book {room}",
+  "booking.slots.helper": "Pick a slot on the right, then confirm with the arrow → below",
+  "booking.slots.empty": "No free slot today",
+  "booking.duration.label": "Duration",
+  "booking.duration.count": "{count, plural, one {# hour} other {# hours}}",
+  "btnOk": "Book room",
+  "booking.toast.success": "{room} booked from {start}"
+}
