@@ -2,7 +2,7 @@
 name: prototype
 description: Build a clickable single-file HTML prototype of a designed flow with the project's tokens, publish it, iterate on feedback, mark the flow validated.
 argument-hint: "<NNN flow id> | <screen slug>"
-version: 1.0.0
+version: 1.1.0
 model: claude-sonnet-5-5
 ---
 
@@ -14,7 +14,7 @@ Reply in the user's language.
 
 ## Step 1 — Context and target
 
-Read `.ux/product.md`, `.ux/inventory.md`, and `.ux/style.md` if present. `$ARGUMENTS` matching `^\d+(-[\w-]+)?$` → the flow `.ux/flows/NNN-*.md` and every screen in its `screens:` list; otherwise → the screen `.ux/screens/<slug>.md` and its parent flow; missing file → say which path was looked for, suggest `/ux:design`, stop. Flow already `validated` or `implemented` → ask in one line whether to rebuild anyway.
+Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke `ux:discover`** (Skill tool) first — then `.ux/style.md` if present. `$ARGUMENTS` matching `^\d+(-[\w-]+)?$` → the flow `.ux/flows/NNN-*.md` and every screen in its `screens:` list; otherwise → the screen `.ux/screens/<slug>.md` and its parent flow; missing file → say which path was looked for, suggest `/ux:design`, stop. Flow already `validated` or `implemented` → ask in one line whether to rebuild anyway.
 
 ## Step 2 — Build the prototype
 
