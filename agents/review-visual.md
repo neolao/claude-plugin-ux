@@ -1,8 +1,9 @@
 ---
 name: review-visual
 description: Reviews one dimension — visual hierarchy, spacing, interactive states, typography, responsive and resizing behavior. Read-only.
-model: sonnet
-version: 1.0.0
+model: claude-sonnet-5-5
+effort: medium
+version: 1.1.0
 ---
 
 # Agent: review-visual
@@ -29,7 +30,7 @@ Use captures when provided (they show the truth); otherwise reason from layout c
 - **Motion**: transitions over ~300 ms for small UI, animation that blocks input, layout shift on load.
 - **Density fit**: against the density declared in `.ux/style.md` when it exists, otherwise inferred from `product.md` Users — a daily-expert tool made airy and paginated, or a novice flow made dense; flag only when clearly at odds.
 
-Every finding needs a `file:line` (or a capture filename). In diff mode, only what the change touches.
+Every finding needs a `file:line` (or a capture filename). In diff mode, first list the lines the change adds or modifies (`+` lines); report only a defect those lines introduced. A defect on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
 
 ## Output
 
@@ -52,4 +53,5 @@ End with: `N visual findings across M files.` If none: `No visual findings.`
 
 - Do not flag literal token values — `review-consistency` owns token bypass; you own what the layout *does*.
 - Do not comment on contrast, color-only meaning or reduced-motion (`review-accessibility`), wording (`review-content`), or missing state branches (`review-states`).
+- Do not report a defect on a line the change does not add or modify (diff mode), even when it appears as context.
 - Do not express taste ("I would prefer blue") — only defects a second designer would also point at.

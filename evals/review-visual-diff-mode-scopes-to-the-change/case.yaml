@@ -1,0 +1,9 @@
+schema_version: "1.1"
+name: review-visual-diff-mode-scopes-to-the-change
+description: >
+  review-visual in diff mode on a change that adds a member card with a fixed
+  width and a tag chip with every interactive state, next to a pre-existing
+  fixed-width banner rule that appears only as a context line.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

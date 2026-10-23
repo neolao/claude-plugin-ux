@@ -1,0 +1,20 @@
+.btn { padding: 8px 16px; border: 1px solid #888; border-radius: 4px; background: #fff; cursor: pointer; }
+.btn-primary { background: #1a5fd0; border-color: #1a5fd0; color: #fff; }
+.btn-primary:hover { background: #144aa3; }
+.btn-primary:focus-visible { outline: 2px solid #144aa3; outline-offset: 2px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.dialog { padding: 24px; max-width: 480px; }
+.dialog-actions { display: flex; gap: 12px; justify-content: flex-end; }
+
+.side-panel { width: 520px; height: 640px; padding: 16px; overflow: hidden; }
+.side-panel-row { display: flex; gap: 8px; white-space: nowrap; }
+
+.row-action { padding: 4px 10px; border: 1px solid #888; background: #fff; }
+
+.summary { max-width: 640px; margin: 0 auto; display: grid; gap: 16px; }
+.summary-title { font-size: 24px; margin: 0; overflow-wrap: anywhere; }
+.summary-meta { font-size: 14px; color: #555; margin: 0; }
+.summary-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.summary-actions .btn { min-width: 96px; }
+.summary-numbers { font-size: 14px; color: #555; margin: 0; font-variant-numeric: tabular-nums; }
