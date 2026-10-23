@@ -39,7 +39,7 @@ Do not invent features beyond the spec — a prototype showing more than what wi
 
 ## Step 3 — Publish
 
-In order: **Artifact tool** (follow its own instructions, including any design skill it asks to load; favicon and one-line description; record the URL in the flow's `prototype:`) → **browser tools** (open the file, screenshot to confirm it renders, give the path) → the file path and the command to open it. Tell the user in one line how to use the prototype bar.
+Publish with the first that works: **Artifact tool** (follow its own instructions, including any design skill it asks to load; icon and one-line description) → **browser tools** (open the file, screenshot to confirm it renders) → the file path alone. Whichever worked: write the file path — and the artifact URL when there is one — in the flow's `prototype:` (`/ux:implement` finds the prototype through it), give the user the path with the command to open it, and tell them in one line how to use the prototype bar.
 
 ## Step 4 — Iterate
 
