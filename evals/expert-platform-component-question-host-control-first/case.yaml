@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: expert-platform-component-question-host-control-first
+description: >
+  expert-platform consulted by /ux:implement in implementation
+  consultation mode with a question that only names a component: which
+  date picker for the due-date field of an iOS inspection form, where the
+  team leans towards a custom calendar grid styled to match the Android
+  build. The expert must answer with one recommendation — the system
+  date picker — and the custom grid as the rejected alternative, name
+  what the custom grid loses, say that each OS keeps its own picker, and
+  must prescribe neither the picker's styling nor the field's label
+  wording.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
