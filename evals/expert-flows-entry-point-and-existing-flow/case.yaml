@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: expert-flows-entry-point-and-existing-flow
+description: >
+  expert-flows consulted by /ux:design on a web need: attaching a batch of
+  receipts to their expenses. The rough option starts on a new page under
+  Settings although the accountant is on the Expenses list, removes the drop
+  target that the implemented flow 001 relies on, and sends the accountant
+  back to Settings when done. The expert must start the flow on the Expenses
+  list, name flow 001 and the step it loses, land the user where the receipts
+  show, and must prescribe neither the route shape nor an upload progress
+  indicator.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
