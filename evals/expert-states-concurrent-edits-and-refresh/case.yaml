@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: expert-states-concurrent-edits-and-refresh
+description: >
+  expert-states consulted by /ux:design on a desktop need: fixing a
+  fixture's address in place in the patch table while a second console
+  edits the same show. The rough option polls every 10 s and empties the
+  table until the rows arrive, lets the poll replace the row being typed
+  in, saves over a colleague's change silently (last write wins), and
+  keeps showing an optimistically applied address the server refused.
+  The expert must keep the content on screen during a refresh, keep the
+  row under edit, detect the colleague's change before overwriting it
+  with the input kept, roll back the refused address visibly, and must
+  prescribe neither the conflict message's wording nor the host undo
+  stack and menus.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
