@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: expert-platform-style-direction-keeps-host-chrome
+description: >
+  expert-platform consulted by /ux:style on a proposed visual direction for
+  a Unity editor tool. The direction forces a light panel whatever the
+  editor's theme, re-skins the property fields and the tool's menus with a
+  custom font and custom dropdowns, restyles the panel's tab bar and
+  scrollbars, and replaces the editor's save panel with an in-tool dialog.
+  The expert must require the panel to follow the editor's theme and use
+  the editor's built-in controls, name the parts the editor renders itself
+  and cannot be restyled, flag the custom save dialog, and must neither
+  compute contrast ratios nor prescribe a type or spacing scale.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
