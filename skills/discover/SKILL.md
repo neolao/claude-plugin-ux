@@ -55,6 +55,7 @@ From `${CLAUDE_PLUGIN_ROOT}/templates/product.md` and `${CLAUDE_PLUGIN_ROOT}/tem
 
 `inventory.md`:
 - **Screens / views** — one row per route or page on the web, per window and dockable panel on desktop, per editor window or custom panel in a game-engine tool, per screen on mobile, per subcommand or full-screen view in a terminal; a dialog, menu or toast is a component or a state of its screen, not a row. *Entry point* is the way there as the user sees it: the route and the control that leads to it (`/boards/:id` — a row of the Boards list), the menu path (`Window › Fixtures`), the subcommand — `expert-flows` starts flows there. *Source* is the file(s) that render the screen, paths from the repository root — `/ux:audit` resolves a screen name to them. *Capture* is the path under `.ux/captures/`.
+- **Reusable components** — a row per component used from at least two screens or living in a shared place (`components/`, `ui/`, a design-system package, a prefab library); a component local to one screen is not a row. *States / variants supported* are the ones the code implements — read its props, variants, sub-classes or style states — not the ones it should have; what it lacks goes to `Known gaps`.
 
 Create `.ux/README.md` from `${CLAUDE_PLUGIN_ROOT}/templates/ux-readme.md` if absent.
 
