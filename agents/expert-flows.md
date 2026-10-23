@@ -1,8 +1,9 @@
 ---
 name: expert-flows
 description: Consulting UX expert on flows — steps, entry points, navigation, dead ends, undo. Consult when a need changes how a user moves through a task.
-model: sonnet
-version: 1.0.0
+model: claude-sonnet-5-5
+effort: medium
+version: 1.1.0
 ---
 
 # Agent: expert-flows
