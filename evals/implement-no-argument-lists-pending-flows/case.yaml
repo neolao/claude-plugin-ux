@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: implement-no-argument-lists-pending-flows
+description: >
+  /ux:implement with no argument on the Taskboard React app whose .ux/
+  holds three flows: 001 validated, 002 designed, 003 implemented. The
+  skill must list the flows left to build (001 and 002, each with its
+  status), ask which one to implement and stop there: no clarify session,
+  no file written or edited, and 003 not offered as a choice. The product
+  owner is not available, so the run ends on the question. The run takes
+  `--allow-tools Write Edit` only so that writing would be possible and
+  therefore gradable; the workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
