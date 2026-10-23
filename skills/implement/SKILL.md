@@ -57,7 +57,7 @@ One screen at a time, one state at a time: **Success → Empty → Loading → P
 
 ## Step 5 — Verify in the running application
 
-Green tests are not proof. Launch the app (`run` skill, else the dev command with browser tools or the platform's launcher) and, per screen: walk the flow table; **trigger each state** the spec lists for real (empty data, failed request, partial permissions); exercise the host bindings the rows name (undo, leaving or closing with unsaved input); operate it **keyboard only** once; resize / dock / rotate and check the Layout section holds. Capture to `.ux/captures/NNN-slug/after-<screen>-<state>.png` and reference the captures in the screen spec. Any mismatch is a bug: fix (3 attempts, then report). If the app cannot be launched, say so — never present unverified work as verified.
+Green tests are not proof. Launch the app from `product.md` Runs with (the `run` skill, else that command with browser tools or the platform's launcher — 3 attempts maximum) and, per screen: walk the flow table; **trigger each state** the spec lists for real (empty data, failed request, partial permissions); exercise the host bindings the rows name (undo, leaving or closing with unsaved input); operate it **keyboard only** once; resize / dock / rotate and check the Layout section holds. Capture to `.ux/captures/NNN-slug/after-<screen>-<state>.png` and reference the captures in the screen spec. Any mismatch is a bug: fix (3 attempts, then report). If the app cannot be launched, say so — never present unverified work as verified.
 
 ## Step 6 — Review
 
