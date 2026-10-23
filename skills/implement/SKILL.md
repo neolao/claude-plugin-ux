@@ -44,6 +44,7 @@ A short, scannable plan for a developer (file and component names welcome): scre
 One screen at a time, one state at a time: **Success → Empty → Loading → Partial → Error** — the happy path gives the structure, the others are where UX quality lives; never skip them because "the API rarely fails".
 
 - Reuse before extend before create. Tokens only — a missing token is added where the others live and recorded in the inventory later.
+- As soon as a screen's files exist, write them in its spec's `source:` — `/ux:review` finds the specs to check conformance against through that field; a screen left without it is reviewed against no spec.
 - Every user-facing string goes through the project's i18n, keyed per the Content table; no i18n → one place per screen, flagged in the report.
 - Accessibility per the spec: labels, roles, focus order and destination, live announcements, visible focus, target sizes, reduced motion.
 - Feedback under 100 ms; progress indication beyond ~1 s.
@@ -63,7 +64,7 @@ Green tests are not proof. Launch the app (`run` skill, else the dev command wit
 
 ## Step 7 — Update `.ux/`
 
-Screen specs → `status: implemented`, `source:` = implementing files, captures referenced. Flow → `implemented` once all its screens are. `inventory.md` → new/extended components with their states, new tokens with source files, new patterns; close the `Known gaps` this work fixed. `style.md` → if tokens were created or migrated from it, `## Source of truth` = the token files.
+Screen specs → `status: implemented`, `source:` complete, captures referenced. Flow → `implemented` once all its screens are. `inventory.md` → new/extended components with their states, new tokens with source files, new patterns; close the `Known gaps` this work fixed. `style.md` → if tokens were created or migrated from it, `## Source of truth` = the token files.
 
 ## Step 8 — Changelog
 
