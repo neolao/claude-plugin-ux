@@ -25,12 +25,13 @@ If no spec covers the scope, reply in one line: `No spec covers this scope — c
 Locate the code from the spec: a screen's `source:` frontmatter, the flow's `screens:` list, then a real search. A divergence is a difference the user can notice against what the spec *states*; what the spec leaves open — the component or technique unless the spec names one, internal structure, the form of a confirmation it does not specify — is an implementation choice, not a finding. An item the spec marks deferred, `n/a` or out of scope is not `missing`; a partial implementation the spec does not mark is `missing` row by row — an intent you cannot see is for the caller to argue. Then, for each spec:
 
 1. **Flow table** — each step: the user action is possible, the system shows what the row says, on the screen the row names. The three **Exit & failure paths**: abandon keeps (or clearly loses) what the row says, the error at step N shows and recovers as stated, undo / cancel reverts what the row says. A host binding the row names (undo stack, dirty state, leave prompt) is registered as stated.
-2. **Screen → States table** — each row marked as a real state (not `n/a`): is there a code path rendering it as described, with the stated primary action?
-3. **Interactions table** — each element/action/result/feedback row: present, and the feedback within the stated time?
-4. **Content table** — each key: present through the i18n layer with the specified text (meaningful deviations only)?
-5. **Accessibility section** — keyboard order, focus destinations, announcements as specified?
-6. **Acceptance criteria** — for each: is there code (and, if the project tests UI, a test) that makes it true? Name the test when found.
-7. **Undocumented additions** — a user-visible behavior, control, step or state the spec does not mention is `extra`: the spec must be updated or the code trimmed — you do not decide which. Something the flow's **Out of scope** section excludes and the code builds anyway is `extra`, `high`.
+2. **Layout** — the regions exist in the stated order with the stated primary action; the stated behavior at narrow widths or when docked (wrap, stack, scroll, collapse) is implemented. Whether the layout *works* is `review-visual`'s.
+3. **States table** — each real row: a code path triggered as stated, rendering what the row says, with the stated primary action. A row marked `n/a: <reason>` is not missing — but if the code contradicts the reason (a view said to fetch nothing fetches), report it as `different` with "spec may need update".
+4. **Interactions table** — each element/action/result/feedback row: present, and the feedback within the stated time?
+5. **Content table** — each key: present through the i18n layer with the specified text (meaningful deviations only)?
+6. **Accessibility section** — keyboard order, focus destinations, announcements as specified?
+7. **Acceptance criteria** — for each: is there code (and, if the project tests UI, a test) that makes it true? Name the test when found.
+8. **Undocumented additions** — a user-visible behavior, control, step or state the spec does not mention is `extra`: the spec must be updated or the code trimmed — you do not decide which. Something the flow's **Out of scope** section excludes and the code builds anyway is `extra`, `high`.
 
 Every finding names the spec location (`file § section, row`) and the code location (`file:line`, or "not found" after a real search).
 
@@ -47,7 +48,7 @@ ISSUE: [one sentence]
 FIX: [make the code match — or, if the spec looks wrong, say "spec may need update: …"]
 ```
 
-`high` = a state, step or acceptance criterion is missing or contradicts the spec, or an excluded item is built; `medium` = deviation in interaction, content or accessibility detail, or an undocumented addition; `low` = cosmetic drift.
+`high` = a state, step or acceptance criterion is missing or contradicts the spec, or an excluded item is built; `medium` = deviation in layout, interaction, content or accessibility detail, or an undocumented addition; `low` = cosmetic drift.
 
 End with: `N conformance findings against K specs.` — followed by `Not covered by any spec: <screens or files>.` when part of the scope had none. If none: `Implementation conforms to <spec list>.`
 
