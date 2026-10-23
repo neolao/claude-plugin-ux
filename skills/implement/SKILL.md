@@ -61,7 +61,7 @@ Green tests are not proof. Launch the app from `product.md` Runs with (the `run`
 
 ## Step 6 — Review
 
-**Invoke `ux:review`** (Skill tool, `skill: "ux:review"`) on the current diff. Fix every High finding and the Medium ones touching the screens just built; re-run tests and lint; report the rest as is.
+**Invoke `ux:review`** (Skill tool, `skill: "ux:review"`) on the current diff — outside a git repository, on the files created or changed, as paths — with the captures folder of Step 5 when there is one (`review-visual` reads it). Fix every High finding and the Medium ones touching the screens just built; re-run tests and lint; report the rest as is.
 
 ## Step 7 — Update `.ux/`
 
