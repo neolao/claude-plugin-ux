@@ -1,0 +1,10 @@
+---
+type: tool_used
+tool: Agent
+input_match: "review-states"
+min: 1
+max: 999
+weight: 1
+---
+
+The review agents actually run (through `ux:review`).

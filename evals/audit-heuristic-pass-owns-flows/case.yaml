@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: audit-heuristic-pass-owns-flows
+description: >
+  /ux:audit on a small React app whose .ux/ is already written. The
+  heuristic pass must find what no review agent owns: the rename job that
+  product.md places on the board but the code offers only under Settings,
+  and the archived page that renders no navigation, no link and no undo.
+  The empty Boards list is review-states' and must appear once; the
+  permanent delete is confirmed by a dialog naming the consequence and must
+  stay unflagged. The skill writes .ux/audit/, so the run takes
+  `--allow-tools Write Edit`; the workspace is not a git repository, so the
+  commit step has nothing to do.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
