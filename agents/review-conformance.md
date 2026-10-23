@@ -22,7 +22,7 @@ _Input contract identical across all `agents/review-*.md` — update together._
 
 If no spec covers the scope, reply in one line: `No spec covers this scope — conformance not assessable.` and stop. If a spec covers part of it, review that part and name the rest in the closing line — a screen without a spec is a gap for `/ux:design`, not a finding.
 
-Locate the code from the spec: a screen's `source:` frontmatter, the flow's `screens:` list, then a real search. Then, for each spec:
+Locate the code from the spec: a screen's `source:` frontmatter, the flow's `screens:` list, then a real search. A divergence is a difference the user can notice against what the spec *states*; what the spec leaves open — the component or technique unless the spec names one, internal structure, the form of a confirmation it does not specify — is an implementation choice, not a finding. An item the spec marks deferred, `n/a` or out of scope is not `missing`; a partial implementation the spec does not mark is `missing` row by row — an intent you cannot see is for the caller to argue. Then, for each spec:
 
 1. **Flow table** — each step: is the user action possible and does the system show what the row says? Are exit & failure paths (abandon, error at step N, undo) implemented?
 2. **Screen → States table** — each row marked as a real state (not `n/a`): is there a code path rendering it as described, with the stated primary action?
@@ -30,7 +30,7 @@ Locate the code from the spec: a screen's `source:` frontmatter, the flow's `scr
 4. **Content table** — each key: present through the i18n layer with the specified text (meaningful deviations only)?
 5. **Accessibility section** — keyboard order, focus destinations, announcements as specified?
 6. **Acceptance criteria** — for each: is there code (and, if the project tests UI, a test) that makes it true? Name the test when found.
-7. **Undocumented additions** — behavior, states or controls in the code that the spec does not mention: report them as deviations too (the spec must be updated or the code trimmed — you do not decide which).
+7. **Undocumented additions** — a user-visible behavior, control, step or state the spec does not mention is `extra`: the spec must be updated or the code trimmed — you do not decide which. Something the flow's **Out of scope** section excludes and the code builds anyway is `extra`, `high`.
 
 Every finding names the spec location (`file § section, row`) and the code location (`file:line`, or "not found" after a real search).
 
@@ -47,7 +47,7 @@ ISSUE: [one sentence]
 FIX: [make the code match — or, if the spec looks wrong, say "spec may need update: …"]
 ```
 
-`high` = a state, step or acceptance criterion is missing or contradicts the spec; `medium` = deviation in interaction, content or accessibility detail; `low` = cosmetic drift.
+`high` = a state, step or acceptance criterion is missing or contradicts the spec, or an excluded item is built; `medium` = deviation in interaction, content or accessibility detail, or an undocumented addition; `low` = cosmetic drift.
 
 End with: `N conformance findings against K specs.` — followed by `Not covered by any spec: <screens or files>.` when part of the scope had none. If none: `Implementation conforms to <spec list>.`
 
@@ -55,4 +55,5 @@ End with: `N conformance findings against K specs.` — followed by `Not covered
 
 - Do not evaluate whether the spec is a good design — that decision was taken in `/ux:design`.
 - Do not duplicate the other axes: a missing state is yours only because the *spec* lists it; generic quality of states, accessibility, wording or visuals belongs to the other agents.
+- Do not report a row the spec marks `n/a`, deferred or out of scope as missing, nor a choice the spec leaves open as different.
 - Do not modify specs or code.
