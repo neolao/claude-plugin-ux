@@ -18,7 +18,7 @@ Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke 
 
 ## Step 2 — Scope
 
-`$ARGUMENTS` given → that path, screen (resolved via the inventory's Screens table) or area. Empty → the whole UI layer listed in the inventory. Exclude `node_modules/`, `vendor/`, `dist/`, `build/`, `Library/`, generated files, tests.
+`$ARGUMENTS` is a path → that path. A name → the inventory's Screens table: the screen whose name or entry point matches, scoped to its Source files — several screens when the name is an area they share (a route prefix, a panel, a feature folder). A name matching nothing in the inventory → say so, list the screens, and stop: never audit a guess. Empty → the whole UI layer the inventory lists (every Source of its Screens and Reusable components). Exclude `node_modules/`, `vendor/`, `dist/`, `build/`, `Library/`, generated files, tests. From here on the scope is a list of paths; Steps 3 to 5 take it as is.
 
 ## Step 3 — Fresh captures (best effort)
 
