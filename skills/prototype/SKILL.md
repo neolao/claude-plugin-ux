@@ -47,7 +47,7 @@ Stop here and wait: the user needs to open the prototype — never go on to Step
 
 ## Step 5 — Validate
 
-When the user says it is right: `status: validated` in the flow and each screen; make sure every accepted deviation is in the specs — after validation **the specs describe the prototype exactly**; if git, stage `.ux/prototypes/`, `.ux/flows/`, `.ux/screens/` and commit `docs(ux): validate prototype NNN <title>`. If the user stops before validating, commit `wip(ux): prototype NNN` and say the flow is still `designed`.
+When the user says it is right: `status: validated` in each screen prototyped, and in the flow once all its screens are; make sure every accepted deviation is in the specs — after validation **the specs describe the prototype exactly**. If the project is a git repository: stage `.ux/prototypes/`, `.ux/flows/`, `.ux/screens/` and commit `docs(ux): validate prototype NNN <title>`; if the user stops before validating, commit `wip(ux): prototype NNN` instead and say the flow is still `designed`.
 
 ## Step 6 — Report
 
