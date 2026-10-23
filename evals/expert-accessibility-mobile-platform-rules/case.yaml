@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: expert-accessibility-mobile-platform-rules
+description: >
+  expert-accessibility consulted by /ux:design on a mobile need: deleting an
+  inspection from a list. The rough option deletes by swiping the row or by
+  long-pressing a 32 px icon-only trash button, and offers undo in a toast
+  that disappears after 3 s. A phone app, so keyboard shortcuts must not be
+  required.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
