@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: audit-rerun-tracks-previous-findings
+description: >
+  /ux:audit on the same React board app, five weeks after a first audit
+  whose file is in .ux/audit/. Of its three findings, the raw error text
+  has been fixed (Board detail shows a plain message with a retry), the
+  archived dead end persists, and the rename detour persists but a flow
+  already carries it (`finding: F3 (audit 2026-09-14)`, status designed).
+  The new report must say the error finding is gone, keep the rename row
+  pointing at flow 001 without suggesting it as a next design, and be a new
+  dated file. The run takes `--allow-tools Write Edit`; the workspace is
+  not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
