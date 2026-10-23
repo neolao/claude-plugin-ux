@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: discover-token-sources-and-evidenced-gaps
+description: >
+  /ux:discover on a React + Tailwind web app (Fleetboard) whose tokens live in
+  tailwind.config.js (colors, screens, darkMode: "class", a card radius), with
+  a vendored reset stylesheet under src/vendor/, a glossary in docs/glossary.md,
+  a StatusBadge shared by two screens, a VanRow local to one screen, a list
+  with no empty case, a detail with no error path and a hardcoded string in
+  Settings. The inventory must point token Sources at the config file and not
+  at the vendored CSS, fill the Theming row with the class mechanism, carry the
+  smallest breakpoint into product.md Devices & input, keep VanRow out of the
+  components table, cite a file for every Known gap, and name the glossary in
+  Vocabulary. The app cannot be launched and AskUserQuestion is not granted:
+  the prompt supplies the product owner's answers. The skill writes .ux/, so
+  the run takes `--allow-tools Write Edit`; the workspace is not a git
+  repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

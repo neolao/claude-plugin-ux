@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Used by the badge in the settings page. */
+.legacy-badge {
+  color: #e11d48;
+  padding: 3px 7px;
+  border-radius: 10px;
+}
