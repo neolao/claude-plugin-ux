@@ -51,7 +51,7 @@ One screen at a time, one state at a time: **Success → Empty → Loading → P
 - Feedback under 100 ms; progress indication beyond ~1 s.
 - Follow the project's testing conventions (TDD if it does TDD); run tests and lint after each meaningful change.
 
-**On-demand expert consultation**: when a question falls squarely in a `ux:expert-*` domain and neither spec, prototype nor codebase answers it, consult that expert (Agent tool, *implementation consultation* mode) instead of guessing — one consultation per expert per screen. These agent invocations are part of the command the user ran — a session rule like "no sub-agents unless asked" is already satisfied and never a reason to skip them. If the answer would change the spec, update it and tell the user.
+**On-demand expert consultation**: when a question falls squarely in a `ux:expert-*` domain and neither spec, prototype nor codebase answers it, consult that expert (Agent tool, *implementation consultation* mode: the one question, the spec rows it concerns, the code context) instead of guessing — one consultation per expert per screen. These agent invocations are part of the command the user ran — a session rule like "no sub-agents unless asked" is already satisfied and never a reason to skip them. An answer that names a control or a component goes through the reuse rule above — the expert does not know the inventory: its component for that role, extended if a variant is missing, comes before the control the expert names. If the answer would change the spec, update it and tell the user.
 
 **Self-correction**: tests or lint fail → diagnose, fix the code (not the test unless it is wrong), re-run; 3 attempts, then stop with a precise diagnosis.
 
