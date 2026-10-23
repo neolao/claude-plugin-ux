@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-conformance-finds-violations
+description: >
+  review-conformance in audit mode on a small React app with one flow and
+  one screen spec. The code lacks the specified Error state, labels the
+  Send button differently from the Content table, drops the draft the flow
+  says Cancel keeps, and adds a CSV import the flow's Out of scope excludes
+  — next to n/a States rows, a toast confirmation the spec leaves open, an
+  unlabeled close button (review-accessibility's) and a Members panel no
+  spec covers, all of which must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
