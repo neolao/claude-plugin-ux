@@ -2,7 +2,7 @@
 name: clarify
 description: Grill the user in rounds until nothing is silently assumed — facts looked up, decisions asked with a recommendation. Triggers: "grill me", "stress-test", "clarify", "cuisine-moi".
 argument-hint: "<topic to clarify> | kind=<need|product|brand|plan> topic=\"…\" context=<notes> (when invoked by another ux skill)"
-version: 1.1.0
+version: 1.2.0
 model: claude-sonnet-5-5
 ---
 
@@ -39,7 +39,7 @@ Parse `$ARGUMENTS` (`kind`, `topic`, `context` when invoked by another skill; ot
 | `kind` | Called by | Root decisions |
 |---|---|---|
 | `need` | `/ux:design` | who (role, expertise, frequency) · job served · trigger · success criterion · reversibility and risk · data and states (empty, long, failing, concurrent) · platform and input · content and vocabulary · accessibility · scope boundaries |
-| `product` | `/ux:discover` | users and expertise · main jobs · context of use (frequency, device, environment) · platform and devices · constraints (brand, accessibility, languages, performance/offline) · vocabulary |
+| `product` | `/ux:discover` | what it is (what it does, for whom, in a sentence) · users (role, expertise, frequency, context of use, main goal) · jobs to be done · platform & surface — what the user runs (a web UI in an Electron or Tauri shell is desktop; a fact when the code has a UI, the user's decision when it has none), every input handled, the smallest width · constraints (brand or design system, accessibility target, localization, performance/offline) · vocabulary (the glossary path when one exists, else the terms the UI strings use) |
 | `brand` | `/ux:style` | imposed constraints (colors, logo, typefaces, parent system) · references and anti-references · three adjectives · default density · theming · motion tolerance · iconography · tone of content |
 | `plan` | `/ux:implement` | each spec ↔ codebase contradiction · where tokens live · extend vs create per component · testing approach · runtime verification path · migration order |
 | free topic | the user | derive the roots yourself, starting from "what outcome, for whom" |
