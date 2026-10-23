@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: expert-flows-interrupted-wizard-exit-paths
+description: >
+  expert-flows consulted by /ux:design on a desktop need: importing a
+  venue's fixture list through a four-step wizard. The rough option asks
+  "Are you sure?" on every Next, has no Cancel past step 2, restarts at
+  step 1 after a failure at step 4, and makes the import irreversible. A
+  colleague may edit the same patch meanwhile. The expert must settle the
+  exit and failure paths and must not prescribe how concurrent edits are
+  detected or merged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
