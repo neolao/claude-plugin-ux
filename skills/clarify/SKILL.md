@@ -48,7 +48,7 @@ A trivial topic yields one round with one or two questions — that is fine.
 
 ## Closing
 
-Present the settled tree, get a one-line confirmation (`AskUserQuestion`: confirm / correct), then end with exactly this block — the contract the calling skills consume:
+Present the settled tree, get a one-line confirmation (`AskUserQuestion`: confirm / correct — a correction reopens that branch: one more round, then present again), then end with exactly this block — the contract the calling skills consume. Each `<Q title>` opens with the root the question hangs off (`Users — expertise`, `Entry point`, `Constraints — accessibility`), lines in the order of the roots table, so the caller maps every line to the template section it fills:
 
 ```
 ## Shared understanding — <topic>
