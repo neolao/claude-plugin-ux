@@ -2,7 +2,7 @@
 name: implement
 description: Implement a designed flow or screen with the project's components and tokens, every state covered, verified in the running app, then reviewed.
 argument-hint: "<NNN flow id> | <screen slug>"
-version: 1.0.0
+version: 1.1.0
 model: claude-sonnet-5-5
 ---
 
@@ -14,9 +14,9 @@ Reply in the user's language; code, comments and commits follow the project's `C
 
 ## Step 1 — Context and target
 
-Read `.ux/product.md`, `.ux/inventory.md`, `.ux/style.md` if present, `CLAUDE.md` (conventions, definition of done, test/lint commands, how to run). Resolve `$ARGUMENTS` as `/ux:prototype` Step 1 does (flow → all its screens; slug → one screen); missing spec → say which file was looked for, suggest `/ux:design`, stop.
+Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke `ux:discover`** (Skill tool) first — then `.ux/style.md` if present and `CLAUDE.md` (conventions, definition of done, test/lint commands, how to run). Resolve `$ARGUMENTS` as `/ux:prototype` Step 1 does (flow → all its screens; slug → one screen and its parent flow); missing spec → say which file was looked for, suggest `/ux:design`, stop; empty → list the flows not yet `implemented` with their status, ask in one line which one, stop until answered.
 
-Gate on `status`: `validated` → proceed · `designed` → warn in one line that no prototype validated it, ask whether to proceed · `implemented` → ask whether this is a rework.
+Gate on the flow's `status`: `validated` → proceed · `designed` → warn in one line that no prototype validated it, ask whether to proceed · `implemented` → ask whether this is a rework. A screen already `implemented` in a flow that is not: leave it as it is and build the others, unless the user asks for a rework.
 
 Read the flow, every screen spec, the linked decision, and the prototype if one exists (visual reference).
 
