@@ -37,13 +37,14 @@ List every **contradiction between spec and codebase** (a state the framework ca
 
 ## Step 3 — Plan (wait for approval)
 
-A short, scannable plan for a developer (file and component names welcome): screens and states grouped by reuse / extend / create; files to touch and create; strings and tokens; how it is tested (the project's conventions — no new test stack); how it is verified for real (launch command, what to click, which states to trigger); the decisions from Step 2b. Approval stays an explicit gate: wait for it; if the user changes the plan, update and present again.
+A short, scannable plan for a developer (file and component names welcome): screens and states grouped by reuse / extend / create; files to touch and create; strings and tokens; how it is tested (the project's conventions — no new test stack); how it is verified for real (launch command, what to click, which states to trigger); the decisions from Step 2b; what is deferred, if anything, and why. Approval stays an explicit gate: wait for it; if the user changes the plan, update and present again.
 
 ## Step 4 — Implement, state by state
 
 One screen at a time, one state at a time: **Success → Empty → Loading → Partial → Error** — the happy path gives the structure, the others are where UX quality lives; never skip them because "the API rarely fails".
 
 - Reuse before extend before create. Tokens only — a missing token is added where the others live and recorded in the inventory later.
+- A row the approved plan defers (a state, an interaction, an acceptance criterion) is marked `deferred: <reason>` in its spec row before the review — `review-conformance` counts an unmarked gap as `missing`, a marked one never.
 - As soon as a screen's files exist, write them in its spec's `source:` — `/ux:review` finds the specs to check conformance against through that field; a screen left without it is reviewed against no spec.
 - Every user-facing string goes through the i18n layer the inventory names, keyed per the Content table, in that layer's source language; no i18n layer → one place for the screen's strings (a constants module beside it), never an i18n library adopted on the way — flagged in the report.
 - Accessibility per the spec: labels, roles, focus order and destination, live announcements, visible focus, target sizes, reduced motion.
@@ -65,7 +66,7 @@ Green tests are not proof. Launch the app from `product.md` Runs with (the `run`
 
 ## Step 7 — Update `.ux/`
 
-Screen specs → `status: implemented`, `source:` complete, captures referenced. Flow → `implemented` once all its screens are. `inventory.md` → new/extended components with their states, new tokens with source files, new patterns; close the `Known gaps` this work fixed. `style.md` → if tokens were created or migrated from it, `## Source of truth` = the token files.
+Screen specs → `status: implemented`, `source:` complete, captures referenced. Flow → `implemented` once all its screens are. `inventory.md` → new/extended components with their states, new tokens with source files, new patterns; close the `Known gaps` this work fixed; each deferred row becomes a `Known gaps` line with the spec row as its evidence. `style.md` → if tokens were created or migrated from it, `## Source of truth` = the token files.
 
 ## Step 8 — Changelog
 
@@ -77,4 +78,4 @@ Stage code, tests, i18n files and `.ux/` (never `.env` or secrets); commit per t
 
 ## Step 10 — Report
 
-Short and plain: what was built (screens × states), reused vs created; test/lint status and runtime verification (states actually triggered, captures); review findings fixed / remaining; spec deviations and why; anything left unverified and why.
+Short and plain: what was built (screens × states), reused vs created; test/lint status and runtime verification (states actually triggered, captures); review findings fixed / remaining; spec deviations and deferred rows, and why; anything left unverified and why.
