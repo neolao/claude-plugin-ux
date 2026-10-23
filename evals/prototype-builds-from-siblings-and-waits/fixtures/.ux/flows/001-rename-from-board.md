@@ -1,12 +1,12 @@
 ---
 id: 001
 title: Rename a board from the board
-status: validated
+status: designed
 date: 2026-09-20
 job: 1 — when looking at a board, the operator wants to rename it
 screens: [board-detail]
 decision: none
-prototype: .ux/prototypes/001-rename-from-board.html
+prototype: none
 finding: F3 (audit 2026-09-14)
 ---
 

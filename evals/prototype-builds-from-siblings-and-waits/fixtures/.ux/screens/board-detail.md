@@ -2,7 +2,7 @@
 slug: board-detail
 title: Board detail
 flow: 001
-status: validated
+status: designed
 source:
 ---
 
