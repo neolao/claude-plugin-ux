@@ -27,7 +27,7 @@ Read the platform and the input from `product.md` Platform & surface and apply *
 **Web**
 - URLs reflect state (deep-linkable, shareable); browser Back works and never loses data silently; refresh restores the view; leaving the page mid-flow with unsaved input goes through the browser's own leave prompt, never a custom dialog
 - Native form controls and semantics; standard scroll; no hijacked shortcuts (Cmd/Ctrl+F, +T…)
-- Responsive down to the smallest supported width; touch and mouse both work
+- The smallest width and the inputs `product.md` Devices & input lists are the constraint; touch and mouse both work when both are listed — what wraps or stacks there is `expert-visual`'s
 
 **Desktop (Electron, Tauri, native)**
 - Menu bar with the standard menus and accelerators (Undo/Redo, Cut/Copy/Paste, Find, Preferences); OS-specific placement (macOS vs Windows/Linux); every new action has a menu home, and a context-menu entry when it acts on a selection
@@ -44,7 +44,7 @@ Read the platform and the input from `product.md` Platform & surface and apply *
 - Dockable, resizable panels; inspector-style property editing with multi-object editing; consistent selection model (click, Shift-add, marquee) shared between viewport and hierarchy
 - Custom panels register their mutations with the host editor's undo stack (Ctrl/Cmd+Z) — a separate or missing undo path is a platform defect
 - Viewport interactions: gizmos and handles with keyboard modifiers (snap, constrain axis), camera controls untouched, hover/selection highlights
-- Keep the UI responsive while the scene works (async loading, progress in the status area); keyboard shortcuts consistent with the host editor, and documented
+- Keep the UI responsive while the scene works (async loading, progress where the host shows it — its progress API or status bar); keyboard shortcuts consistent with the host editor, and documented
 - Units, coordinate systems and precision shown consistently; numeric fields draggable and typeable
 
 **Terminal / CLI**
@@ -57,4 +57,4 @@ Read the platform and the input from `product.md` Platform & surface and apply *
 - **When consulted by `/ux:style`** (a visual direction, not a need): say what looks native here — the system font and control shapes wherever the UI sits next to host-rendered parts, dark mode following the OS or editor setting, the density and chrome the host's users see all day (macOS vs Windows controls, the phone's system components, the editor's panels, a monochrome terminal) — and name each part of the direction the host will render itself and so cannot carry the palette or type.
 - **Deliver the host bindings**: in plan consultation, the REQUIREMENTS name the entry's platform form, the host mechanism each mutation registers with (undo stack, document dirty state) and the host protections the flow relies on (leave prompt, close protection, state kept across backgrounding), so `/ux:design` can write them into the Flow table and the screen's Interactions table.
 
-Out of scope: generic reversibility and flow logic → `expert-flows`; keyboard operability, shortcuts and target sizes → `expert-accessibility`.
+Out of scope: generic reversibility, step economy and where the entry sits in the flow → `expert-flows`; keyboard operability, whether a repeated action needs a shortcut, and target sizes → `expert-accessibility` (the host's standard accelerators and reserved keys are yours); what wraps or stacks at narrow widths and which action is primary → `expert-visual`; whether a loading or progress state exists and its timing → `expert-states` (where the host shows it is yours); the wording of menu items, dialogs and messages → `expert-content`.
