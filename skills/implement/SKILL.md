@@ -45,7 +45,7 @@ One screen at a time, one state at a time: **Success → Empty → Loading → P
 
 - Reuse before extend before create. Tokens only — a missing token is added where the others live and recorded in the inventory later.
 - As soon as a screen's files exist, write them in its spec's `source:` — `/ux:review` finds the specs to check conformance against through that field; a screen left without it is reviewed against no spec.
-- Every user-facing string goes through the project's i18n, keyed per the Content table; no i18n → one place per screen, flagged in the report.
+- Every user-facing string goes through the i18n layer the inventory names, keyed per the Content table, in that layer's source language; no i18n layer → one place for the screen's strings (a constants module beside it), never an i18n library adopted on the way — flagged in the report.
 - Accessibility per the spec: labels, roles, focus order and destination, live announcements, visible focus, target sizes, reduced motion.
 - Wire the host bindings the Flow and Interactions rows name (menu item and accelerator, the host undo stack, dirty state, leave or close protection) — `review-conformance` checks each binding a row names, and a mutation outside the host's undo stack is a platform defect.
 - Feedback under 100 ms; progress indication beyond ~1 s.
