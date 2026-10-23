@@ -25,19 +25,20 @@ Read the platform and the input from `product.md` Platform & surface and apply *
 - **A web UI inside a desktop shell** (Electron, Tauri — `inventory.md` UI stack says so) is desktop: the browser bullets (URL, Back, refresh, browser shortcuts) do not apply; the menu bar, window state, native dialogs and close protection do, and in-app navigation must give what Back and the URL gave.
 
 **Web**
-- URLs reflect state (deep-linkable, shareable); browser Back works and never loses data silently; refresh restores the view
+- URLs reflect state (deep-linkable, shareable); browser Back works and never loses data silently; refresh restores the view; leaving the page mid-flow with unsaved input goes through the browser's own leave prompt, never a custom dialog
 - Native form controls and semantics; standard scroll; no hijacked shortcuts (Cmd/Ctrl+F, +T…)
 - Responsive down to the smallest supported width; touch and mouse both work
 
 **Desktop (Electron, Tauri, native)**
-- Menu bar with the standard menus and accelerators (Undo/Redo, Cut/Copy/Paste, Find, Preferences); OS-specific placement (macOS vs Windows/Linux)
-- Multi-window, window state remembered, drag-and-drop from the OS, file dialogs native, unsaved-changes protection on close
+- Menu bar with the standard menus and accelerators (Undo/Redo, Cut/Copy/Paste, Find, Preferences); OS-specific placement (macOS vs Windows/Linux); every new action has a menu home, and a context-menu entry when it acts on a selection
+- Every document mutation is on the Edit > Undo stack — a separate "revert" path or an undo limited to text fields is a platform defect
+- Multi-window, window state remembered, drag-and-drop from the OS, the OS's own dialogs for files, printing and permissions (never re-implemented), unsaved-changes protection on close and quit
 - Context menus on right-click; multi-selection with Shift/Cmd
 
 **Mobile**
 - Thumb-reachable primary actions; safe areas and notches; system Back/gestures respected; one-hand use
 - No hover-only affordances; interruptions (calls, backgrounding) preserve state
-- Platform patterns (bottom sheet vs modal, pull-to-refresh, swipe actions) used where the OS's users expect them
+- Platform patterns (bottom sheet vs modal, pull-to-refresh, swipe actions) used where the OS's users expect them; the system share sheet, pickers and permission prompts are the OS's; a deep link or app link reaches any screen worth sharing
 
 **Game-engine editor tools (Unity, Godot, Unreal) and 3D/2D authoring UIs**
 - Dockable, resizable panels; inspector-style property editing with multi-object editing; consistent selection model (click, Shift-add, marquee) shared between viewport and hierarchy
@@ -48,5 +49,9 @@ Read the platform and the input from `product.md` Platform & surface and apply *
 
 **Terminal / CLI**
 - Flags follow conventions (`--help`, `--json`, `--dry-run`), sensible defaults, non-interactive mode for scripts; progress on stderr, data on stdout; exit codes meaningful; colors optional and honoring `NO_COLOR`
+
+**Whatever the platform**
+- **Entry point form**: for the entry `expert-flows` names, prescribe its platform form, consistent with the `inventory.md` Screens Entry point column and Routing line: a route on the web, a menu item (which menu, which accelerator) plus a context-menu entry on desktop, a gesture or system intent on mobile, a menu item or panel action in the editor, a subcommand or flag in a terminal.
+- **Deliver the host bindings**: in plan consultation, the REQUIREMENTS name the entry's platform form, the host mechanism each mutation registers with (undo stack, document dirty state) and the host protections the flow relies on (leave prompt, close protection, state kept across backgrounding), so `/ux:design` can write them into the Flow table and the screen's Interactions table.
 
 Out of scope: generic reversibility and flow logic → `expert-flows`; keyboard operability, shortcuts and target sizes → `expert-accessibility`.
