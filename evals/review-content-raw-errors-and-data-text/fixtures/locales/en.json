@@ -1,0 +1,10 @@
+{
+  "import.title": "Import contacts",
+  "import.action": "Choose a CSV file…",
+  "import.dialog.filter": "CSV files",
+  "import.success": "{added, plural, one {# contact} other {# contacts}} imported, {skipped} duplicates skipped",
+  "import.error.offline": "You are offline. Connect to the network and import the file again.",
+  "contacts.title": "Contacts",
+  "about.title": "About Rolodex",
+  "about.licenses": "Open-source licenses"
+}

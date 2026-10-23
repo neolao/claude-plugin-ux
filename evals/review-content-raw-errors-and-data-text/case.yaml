@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-content-raw-errors-and-data-text
+description: >
+  review-content in audit mode on the import panel of an Electron contact
+  manager with an i18n layer. The scope shows the API's error text raw in a
+  toast when an import fails — next to a mapped offline error with a next
+  step, the native open dialog called with only its file filter, a list
+  rendering the names and notes volunteers typed (some sloppy) and an About
+  panel rendering each dependency's license text in capitals, all of which
+  must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
