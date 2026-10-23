@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: expert-platform-entry-point-and-host-undo
+description: >
+  expert-platform consulted by /ux:design on a native desktop need
+  (duplicate a preset with its effect chain, Qt app on macOS and Windows)
+  whose rough option puts the action only behind a toolbar icon with no
+  menu item, no accelerator and no context-menu entry, keeps the
+  duplicate off Edit > Undo behind a 5-second "Remove duplicate" banner,
+  places Preferences in the Edit menu on macOS and exports through a
+  custom in-app file browser. The expert must prescribe the entry's
+  platform form (menu, accelerator, context menu), the undo stack, the
+  OS-specific placement of Preferences and the OS file dialog, and must
+  prescribe neither the menu item's wording nor where focus lands.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
