@@ -2,7 +2,7 @@
 name: discover
 description: Understand the application before designing — detect the UI stack, inventory screens, components and tokens, clarify users and goals, write .ux/product.md and .ux/inventory.md.
 argument-hint: "[optional: what the application is, in one sentence]"
-version: 1.0.0
+version: 1.1.0
 model: claude-sonnet-5-5
 ---
 
@@ -47,7 +47,7 @@ Save captures under `.ux/captures/baseline/<screen-slug>.png` and reference them
 
 ## Step 4 — Clarify with the user
 
-**Invoke `ux:clarify`** (Skill tool, `skill: "ux:clarify"`) with `kind=product`, `topic="<application name>"`, `context=` your notes from Steps 1–3 plus `$ARGUMENTS`. Its `## Shared understanding` block fills `product.md`'s Users, Jobs, Context and Constraints. Do not write `product.md` before the user has confirmed it.
+**Invoke `ux:clarify`** (Skill tool, `skill: "ux:clarify"`) with `kind=product`, `topic="<application name>"`, `context=` your notes from Steps 1–3 plus `$ARGUMENTS`. Its `## Shared understanding` block fills `product.md`'s What it is, Platform & surface, Users (their context of use is a column there), Jobs to be done, Constraints and Vocabulary; its `Facts looked up` line says which of them the code settled. Do not write `product.md` before the user has confirmed it.
 
 ## Step 5 — Write `.ux/`
 
