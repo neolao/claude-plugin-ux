@@ -2,7 +2,7 @@
 name: audit
 description: Heuristic UX audit of the existing interface — captures, Nielsen pass, review agents — written as prioritized findings to .ux/audit/.
 argument-hint: "[optional: path, screen name, or area to audit — defaults to the whole UI]"
-version: 1.0.0
+version: 1.1.0
 model: claude-sonnet-5-5
 ---
 
@@ -26,9 +26,14 @@ As `/ux:discover` Step 3 (3 launch attempts maximum), saved under `.ux/captures/
 
 ## Step 4 — Heuristic pass (you)
 
-For each screen in scope, evaluate against Nielsen's ten heuristics — status visibility · real-world match · control & freedom · consistency & standards · error prevention · recognition over recall · flexibility & efficiency · minimalism · error recovery · help — **grounded in a capture or a code location**; no finding without evidence. Two anchors come from `product.md`: wording is judged against its Vocabulary; density and shortcuts against its Users table (daily experts vs novices).
+Two axes have no review agent; this pass is their reviewer, under the same rule — **no finding without a capture or a `file:line`**:
 
-Record each finding as: screen, heuristic, evidence (capture or `file:line`), who it hurts (role), how often (frequency) — both from `product.md`.
+- **Flows & navigation** — entry point: each job of `product.md` Jobs to be done starts where the need arises (the inventory's Screens table, Entry point column), not after a detour through another screen; step economy: steps that always follow each other, data re-entered, optional input asked up front; dead ends: a screen with no way forward or back, cancel unreachable mid-flow, abandonment that loses input without saying so; reversibility: "Are you sure?" where undo would do (a confirmation is right only for an irreversible, costly action, and names the consequence), no undo after a destructive action, an undo whose extent is unclear; continuity: after completion the user does not land where the result is visible; interruption: an error or reload at step N restarts at step 1.
+- **Platform conventions** — the host's idioms ignored: menus, shortcuts and the host undo stack in a desktop or game-engine tool; Back, gestures and safe areas on mobile; URLs, browser history and the Back button on the web; flags, exit codes and `--help` in a terminal.
+
+Walk each screen in scope with Nielsen's ten heuristics as the lens — status visibility · real-world match · control & freedom · consistency & standards · error prevention · recognition over recall · flexibility & efficiency · minimalism · error recovery · help — and record only what lands on the two axes above, or on no reviewer's axis at all (recognition over recall, help). What a review agent owns — states and feedback, accessibility, wording and localization, token and component reuse, hierarchy and layout, spec conformance — is left to Step 5: it comes back with `file:line` and would only be a duplicate here. Two anchors from `product.md`: who and how often, from Users (daily experts want the fewest steps and shortcuts, novices want guidance); which job, from Jobs to be done.
+
+Record each finding as: screen, axis and criterion, evidence (capture or `file:line`), who it hurts (role), how often (frequency) — both from `product.md`.
 
 ## Step 5 — Review agents
 
