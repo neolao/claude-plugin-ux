@@ -34,7 +34,7 @@ These agent invocations are part of the command the user ran — a session rule 
 
 ## Step 4 — Deduplicate and prioritize
 
-Merge findings pointing at the same defect (strongest evidence kept, axes listed). Severity → priority: `high` → **High** (task impossible, user excluded or misled) · `medium` → **Medium** (slows or confuses; breaks a clear convention or the spec) · `low` → **Low** (polish). Drop findings without a concrete `file:line` or capture. Number `1…n`, High first.
+Two findings are the same defect when they point at the same `file:line` or element **and** say the same thing is wrong (an unhandled fetch error found by states and by conformance as the spec's Error row): keep one, with the strongest evidence, the highest severity and the axes listed. Two reasons at one line (a literal color flagged by consistency, its contrast by accessibility; a hardcoded string by content, its non-focusable element by accessibility) stay two findings. Severity → priority: `high` → **High** (task impossible, user excluded or misled) · `medium` → **Medium** (slows or confuses; breaks a clear convention or the spec) · `low` → **Low** (polish). Drop findings without a concrete `file:line` or capture. Number `1…n`: High, then Medium, then Low; within a priority, in file order, so the reader walks each file once.
 
 ## Step 5 — Fix (fix mode only)
 
