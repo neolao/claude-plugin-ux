@@ -1,0 +1,9 @@
+{
+  "contacts.title": "Contacts",
+  "contacts.import.action": "Importer des contacts",
+  "contacts.import.done": "Terminé",
+  "contacts.form.email.label": "E-mail",
+  "contacts.form.email.invalid": "Saisissez une adresse e-mail comme nom@exemple.fr",
+  "contacts.form.save": "Enregistrer le contact",
+  "contacts.activity.title": "Activité"
+}

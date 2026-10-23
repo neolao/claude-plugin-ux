@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-content-text-nobody-sees-and-the-placement-border
+description: >
+  review-content in audit mode on a small React contact manager with an
+  i18n layer. The scope holds an icon-only delete button whose accessible
+  name says the icon, a live region that announces "Done" after an import
+  of N contacts, and a canvas that paints a literal message — next to a
+  well-worded validation message rendered far from its field (placement,
+  review-states') and a logo image with no alt (existence,
+  review-accessibility's), both of which must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

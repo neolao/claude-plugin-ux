@@ -1,0 +1,9 @@
+{
+  "contacts.title": "Contacts",
+  "contacts.import.action": "Import contacts",
+  "contacts.import.done": "Done",
+  "contacts.form.email.label": "Email",
+  "contacts.form.email.invalid": "Enter an email address like name@example.com",
+  "contacts.form.save": "Save contact",
+  "contacts.activity.title": "Activity"
+}
