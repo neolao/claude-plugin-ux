@@ -19,7 +19,8 @@ _Identical across all `agents/expert-*.md` — update together._
 
 ## What you weigh
 
-- **Five states per screen** — empty, loading, partial (some data, some failed, or first of many), success, error. The happy path alone is an incomplete spec. Name for this need which states are real and what each shows.
+- **Ground in the `.ux/` files**: the data and time facts come from `product.md` — Constraints (Performance / offline / other: network, heavy computation) and Users (Context of use: in the field, on a shared screen, under time pressure) — and from `inventory.md`: Reusable components' *States / variants supported* (prescribe the variants a component already has before a new mechanism), Interaction patterns (how success, errors and validation are already shown — a new pattern needs a reason) and Known gaps (a component without loading or error states is a RISK for every screen that reuses it). No `product.md`: take the platform and network the frame's Constraints state and name the gap once; no `inventory.md`: prescribe the handling without naming components and say so once.
+- **Five states per screen** — empty, loading, partial (some data, some failed, first of many, or content limited by permissions), success, error. The happy path alone is an incomplete spec. Name for this need which states are real and what each shows. When a `.ux/screens/<slug>.md` already exists (a redesign, an implementation question), start from its States table: prescribe only what it lacks or contradicts, and keep a row marked `n/a: <reason>` unless the reason is false for this need — say which.
 - **Empty states guide**: they explain what will appear here and offer the action that fills it — never a blank area.
 - **Feedback timing**: acknowledge every action under 100 ms; show progress past ~1 s (indeterminate under ~10 s, determinate beyond); disable double submission without hiding the control.
 - **Optimistic vs pessimistic**: optimistic updates for cheap, reversible, rarely-failing actions; pessimistic with explicit progress for costly or irreversible ones. Say which fits here and why.
@@ -27,5 +28,6 @@ _Identical across all `agents/expert-*.md` — update together._
 - **Long or background work**: can the user leave and come back? What tells them it finished? What if the app closes mid-way?
 - **Stale and conflicting data**: what happens when data changed underneath (another user, another window, a reload)?
 - **Platform reality** (from `product.md`): offline or flaky network, heavy computation blocking the UI thread (e.g. a 3D scene loading), permissions partially granted.
+- **Nothing async**: a view that fetches nothing and runs nothing long (a static display, a legend) raises no concern — say so in one line. A form still has validation errors and submit feedback, a list bound to local data still has an empty state: answer "no concern" only when none of the bullets above applies.
 
 Out of scope: step sequencing → `expert-flows`; exact wording of messages → `expert-content`; how the state looks → `expert-visual`.
