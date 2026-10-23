@@ -2,13 +2,13 @@
 name: review
 description: UI/UX review of a diff or path through the review agents (states, accessibility, content, consistency, visual, conformance); --fix applies High and Medium fixes.
 argument-hint: "[path | diff | --fix]"
-version: 1.0.0
+version: 1.1.0
 model: claude-sonnet-5-5
 ---
 
 # /ux:review — Review UI changes against UX quality and the specs
 
-Critique the **user-facing result** of a change, not its architecture: are all states handled, is it accessible, is the copy right, does it reuse the design system, does it match the `.ux/` spec. Code-architecture concerns belong to other reviewers. Without `--fix`, this skill changes nothing — the report is the deliverable.
+Critique the **user-facing result** of a change, not its architecture: are all states handled, is it accessible, is the copy right, does it reuse the design system, does it match the `.ux/` spec. Code-architecture concerns belong to other reviewers. Without `--fix`, this skill changes nothing and writes no file — the report of Step 6 is the deliverable, returned as the reply whether the user ran `/ux:review` or a skill invoked it (`/ux:audit` Step 5, `/ux:implement` Step 6 read it as is).
 
 Reply in the user's language.
 
