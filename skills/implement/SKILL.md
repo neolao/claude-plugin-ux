@@ -27,7 +27,7 @@ For each screen and each row of its States and Interactions tables, decide in wo
 Tokens:
 - inventory has none and `style.md` is `adopted` → first sub-task: create them from `style.md` where the stack expects them (CSS custom properties, theme file, Tailwind config, USS variables, XAML ResourceDictionary…); components consume tokens, never `style.md` values;
 - `style.md` has a `## Migration` section → first sub-task: run it in its stated order;
-- neither tokens nor an adopted `style.md` → stop and recommend `/ux:style`.
+- neither tokens nor an adopted `style.md` → there is no scale: say so, take every value from the sibling components in scope (what `review-consistency` judges against) and add none; recommend `/ux:style` in the report.
 
 List every **contradiction between spec and codebase** (a state the framework cannot represent, a pattern the project avoids…) and every technical choice with more than one defensible answer.
 
