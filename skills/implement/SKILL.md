@@ -66,7 +66,7 @@ Green tests are not proof. Launch the app from `product.md` Runs with (the `run`
 
 ## Step 7 — Update `.ux/`
 
-Screen specs → `status: implemented`, `source:` complete, captures referenced. Flow → `implemented` once all its screens are. `inventory.md` → new/extended components with their states, new tokens with source files, new patterns; close the `Known gaps` this work fixed; each deferred row becomes a `Known gaps` line with the spec row as its evidence. `style.md` → if tokens were created or migrated from it, `## Source of truth` = the token files.
+Screen specs → `status: implemented`, `source:` complete, captures referenced. Flow → `implemented` once all its screens are. `inventory.md` → a row per new shared component with the table's columns (Source, Used for, States / variants supported), the variant added to the existing row it extends, new tokens with their Source file, new patterns under Interaction patterns in use — `/ux:discover` keeps on a refresh what is recorded here; close the `Known gaps` this work fixed (the `no design tokens yet` line once tokens exist); each deferred row becomes a `Known gaps` line with the spec row as its evidence. `style.md` → if tokens were created or migrated from it, `## Source of truth` = the token files.
 
 ## Step 8 — Changelog
 
