@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: discover-rerun-preserves-hand-edits
+description: >
+  /ux:discover re-run on the Taskboard React app that already has a .ux/
+  folder: product.md carries a Vocabulary section marked <!-- keep --> with
+  a hand-written term, the inventory's Known gaps hold two lines a previous
+  audit added (an empty Boards list, still true in the code; a hardcoded
+  placeholder in Settings › Boards, since removed from the code), and a flow
+  plus an audit report reference the screen "Board detail" by name. The
+  refreshed files must keep the marked section verbatim, carry the open gap
+  over, drop the closed one, and keep the screen names in use.
+  AskUserQuestion is not granted: the prompt supplies the product owner's
+  answers. The skill writes .ux/, so the run takes `--allow-tools Write
+  Edit`; the workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
