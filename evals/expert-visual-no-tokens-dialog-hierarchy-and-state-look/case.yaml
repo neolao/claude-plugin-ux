@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: expert-visual-no-tokens-dialog-hierarchy-and-state-look
+description: >
+  expert-visual consulted by /ux:design on a web need in a project with
+  neither tokens nor style.md: an "Archive client" dialog whose two
+  buttons share the same primary style, whose Enter key triggers the
+  destructive action, whose required-reason error is drawn over the
+  field in the primary blue, whose submit button is removed while the
+  reason is empty, and whose body is replaced by a spinner while the
+  request runs. The expert must separate the two buttons, refuse the
+  destructive default, keep the disabled button visible, lay the error
+  out without covering the field, keep the dialog's layout while loading,
+  prescribe by role and name the token gap once, and must prescribe
+  neither the error's wording nor the handling of a failed request.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
