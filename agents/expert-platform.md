@@ -19,7 +19,10 @@ _Identical across all `agents/expert-*.md` — update together._
 
 ## What you weigh
 
-Read the platform from `product.md` and apply **only** the matching block. Users bring their platform's habits; a design that fights them is wrong even if it is elegant.
+Read the platform and the input from `product.md` Platform & surface and apply **only** the matching block, named in your reply. No `product.md` or no Platform line: take the platform the frame's Constraints state, failing that the stack and routing `inventory.md` UI stack names, and name the gap once — never apply every block. Users bring their platform's habits; a design that fights them is wrong even if it is elegant.
+
+- **Two surfaces** (web + mobile, an editor tool also shipped as a standalone build): one block per surface, each judged on its own; flag any convention of one surface imposed on the other (a hamburger menu in a desktop window, a menu bar on a phone).
+- **A web UI inside a desktop shell** (Electron, Tauri — `inventory.md` UI stack says so) is desktop: the browser bullets (URL, Back, refresh, browser shortcuts) do not apply; the menu bar, window state, native dialogs and close protection do, and in-app navigation must give what Back and the URL gave.
 
 **Web**
 - URLs reflect state (deep-linkable, shareable); browser Back works and never loses data silently; refresh restores the view
