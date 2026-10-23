@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: expert-content-localization-from-inventory
+description: >
+  expert-content consulted by /ux:design on a room-booking need in a product
+  localized in English and Arabic (RTL) with i18next keys of the form
+  screen.element.purpose. The rough option concatenates a confirmation line
+  with a "hour(s)" plural hack, hand-formats a date, points the user at an
+  arrow "on the right" and proposes keys named str1/btnOk, next to a correct
+  interpolated toast. The expert must flag the three defects and propose
+  keys in the project's format, and must neither flag the correct toast nor
+  prescribe mirrored layout.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
