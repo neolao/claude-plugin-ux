@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: expert-content-raw-errors-and-data-text
+description: >
+  expert-content consulted by /ux:design on importing a CSV of contacts
+  into a desktop app. The rough option shows the API's error text and a
+  Node error code raw in a toast, keeps the OS file dialog, and lists the
+  imported rows with the names and notes typed by the user, some of them
+  sloppy. The expert must require UI-owned strings per error cause, and
+  must neither reword the users' own data nor prescribe wording for the
+  OS file dialog.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
