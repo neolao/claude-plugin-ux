@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: expert-platform-web-ui-in-desktop-shell
+description: >
+  expert-platform consulted by /ux:design on a desktop need whose UI is a
+  React app inside an Electron shell: renaming and reordering the cues of
+  a show. The rough option relies on the browser Back button and a
+  shareable URL, hides the show list behind a hamburger icon at every
+  window width, offers a custom "Revert changes" button instead of
+  Edit > Undo, and lets the window close mid-edit without a word. The
+  expert must judge it as desktop — menu bar with Undo on the app's
+  actions, close protection, no mobile idiom in a desktop window, no
+  browser Back or URL requirement — and must prescribe neither a saving
+  indicator nor what the list does at narrow widths.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
