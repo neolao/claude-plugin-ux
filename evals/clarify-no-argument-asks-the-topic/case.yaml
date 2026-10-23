@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: clarify-no-argument-asks-the-topic
+description: >
+  /ux:clarify run with no argument on the Taskboard React app, which has
+  a .ux/ folder with a product, an inventory, a designed flow and an
+  audit. With nothing to clarify, the skill must ask in one line what to
+  clarify and stop: no design tree derived from the .ux/ files, no
+  lookup launched, no `## Shared understanding` block. AskUserQuestion is
+  not granted and the prompt supplies no answer, so the question is the
+  run's last message. The skill writes nothing; the workspace is not a
+  git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
