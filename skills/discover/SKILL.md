@@ -33,6 +33,8 @@ For each layer, note: component library / design system; styling approach and **
 
 Ignore `node_modules/`, `vendor/`, `dist/`, `build/`, `Library/` (Unity), generated files.
 
+No UI layer found (a service, a library, a project not started): say so and skip Step 3. `product.md` is still written from Step 4 — the platform the user names is a decision, not a finding. The inventory's UI stack says `none yet`, its tokens are `none`, its Screens and Reusable components tables have no rows, and `Known gaps` opens with `no UI yet`. The report sends to `/ux:style`, then `/ux:design`.
+
 ## Step 2 — Existing knowledge
 
 Read, if present: `README.md`, `CLAUDE.md` (and `.claude/rules/`), `docs/`, `.vibe/`, design references (Figma links, `DESIGN.md`, style guides), PRDs. A glossary, if one exists, is the source of truth for terms.
