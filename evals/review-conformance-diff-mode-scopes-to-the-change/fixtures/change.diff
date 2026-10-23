@@ -1,0 +1,80 @@
+diff --git a/src/InviteMemberDialog.tsx b/src/InviteMemberDialog.tsx
+index 43d2098..9125cb0 100644
+--- a/src/InviteMemberDialog.tsx
++++ b/src/InviteMemberDialog.tsx
+@@ -7,16 +7,25 @@ import { showToast } from "./toast";
+ // Opened from the Members panel (MemberList.tsx); stays mounted while closed.
+ export function InviteMemberDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
+   const [email, setEmail] = useState("");
++  const [copy, setCopy] = useState(false);
+   const [sending, setSending] = useState(false);
++  const [failed, setFailed] = useState(false);
+ 
+   async function handleSubmit(e: React.FormEvent) {
+     e.preventDefault();
+     setSending(true);
+-    await invite(email);
+-    showToast(t("invite.success", { email }));
+-    setEmail("");
+-    setSending(false);
+-    onClose();
++    setFailed(false);
++    try {
++      await invite(email, copy);
++      showToast(t("invite.success", { email }));
++      setEmail("");
++      onClose();
++    } catch {
++      setFailed(true);
++      setEmail("");
++    } finally {
++      setSending(false);
++    }
+   }
+ 
+   return (
+@@ -30,6 +39,11 @@ export function InviteMemberDialog({ open, onClose }: { open: boolean; onClose:
+           value={email}
+           onChange={(e) => setEmail(e.target.value)}
+         />
++        {failed && <p role="alert">{t("invite.error.generic")}</p>}
++        <label>
++          <input type="checkbox" checked={copy} onChange={(e) => setCopy(e.target.checked)} />
++          {t("invite.copy")}
++        </label>
+         <div className="actions">
+           <button type="submit" disabled={sending}>
+             {sending ? t("invite.sending") : t("invite.send")}
+diff --git a/src/api.ts b/src/api.ts
+index 47775e9..928ecd2 100644
+--- a/src/api.ts
++++ b/src/api.ts
+@@ -6,8 +6,8 @@ export async function fetchMembers(boardId: string): Promise<Member[]> {
+   return res.json();
+ }
+ 
+-export async function invite(email: string): Promise<void> {
+-  const res = await fetch("/api/invitations", { method: "POST", body: JSON.stringify({ email }) });
++export async function invite(email: string, copyToSender = false): Promise<void> {
++  const res = await fetch("/api/invitations", { method: "POST", body: JSON.stringify({ email, copyToSender }) });
+   if (!res.ok) throw new Error("invite");
+ }
+ 
+diff --git a/src/i18n.ts b/src/i18n.ts
+index f854686..6b05d72 100644
+--- a/src/i18n.ts
++++ b/src/i18n.ts
+@@ -3,11 +3,12 @@ const strings: Record<string, string> = {
+   "members.invite": "Invite",
+   "invite.title": "Invite people",
+   "invite.email.label": "Email address",
+-  "invite.send": "Send invitation",
++  "invite.send": "Invite",
+   "invite.sending": "Sending…",
+   "invite.cancel": "Cancel",
+   "invite.success": "Invitation sent to {email}",
+   "invite.error.generic": "The invitation could not be sent. Check the address and try again.",
++  "invite.copy": "Send me a copy",
+   "board.rename": "Rename",
+   "board.rename.prompt": "New board name",
+   "board.rename.failed": "The board could not be renamed.",

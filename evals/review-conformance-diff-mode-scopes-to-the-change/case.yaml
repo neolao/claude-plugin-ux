@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-conformance-diff-mode-scopes-to-the-change
+description: >
+  review-conformance in diff mode on a change to an invite dialog that adds
+  an error branch clearing the address the spec keeps, renames the Send
+  action away from the Content table, and adds a checkbox no spec mentions
+  — next to a correct error message and retry, a pre-existing title
+  divergence on unchanged lines, and a board header whose spec is provided
+  but whose code the change does not touch, all of which must stay
+  unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
