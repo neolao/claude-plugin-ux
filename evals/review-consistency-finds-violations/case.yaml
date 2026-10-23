@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: review-consistency-finds-violations
+description: >
+  review-consistency in audit mode on a small React app with tokens in
+  src/tokens.css, a documented style.md and an inventory. The export panel
+  pads with values off the spacing scale, paints its background with the
+  surface token's literal value in a dark-mode project, borders with the
+  muted-text token, re-implements the small secondary Button locally and
+  confirms a destructive action with window.confirm where the project
+  undoes from a toast — next to a keyboard-hint component no inventory row
+  covers, values computed from tokens or structural (calc, 0, 100%), a
+  local empty state the inventory lists under Known gaps, the token file
+  itself, and hover, contrast and wording gaps other reviewers own, all of
+  which must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
