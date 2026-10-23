@@ -27,9 +27,9 @@ Locate the code from the spec: a screen's `source:` frontmatter, the flow's `scr
 1. **Flow table** — each step: the user action is possible, the system shows what the row says, on the screen the row names. The three **Exit & failure paths**: abandon keeps (or clearly loses) what the row says, the error at step N shows and recovers as stated, undo / cancel reverts what the row says. A host binding the row names (undo stack, dirty state, leave prompt) is registered as stated.
 2. **Layout** — the regions exist in the stated order with the stated primary action; the stated behavior at narrow widths or when docked (wrap, stack, scroll, collapse) is implemented. Whether the layout *works* is `review-visual`'s.
 3. **States table** — each real row: a code path triggered as stated, rendering what the row says, with the stated primary action. A row marked `n/a: <reason>` is not missing — but if the code contradicts the reason (a view said to fetch nothing fetches), report it as `different` with "spec may need update".
-4. **Interactions table** — each element/action/result/feedback row: present, and the feedback within the stated time?
-5. **Content table** — each key: present through the i18n layer with the specified text (meaningful deviations only)?
-6. **Accessibility section** — keyboard order, focus destinations, announcements as specified?
+4. **Interactions table** — each row: the element, the action and the result are present, and the stated feedback happens on the code path before any wait (timing is not measurable statically — judge the mechanism, not the milliseconds).
+5. **Content table** — each key: the text the user sees matches the Text column (a different meaning, a missing message, another action label — not punctuation or a synonym). Whether a string is hardcoded or well worded is `review-content`'s.
+6. **Accessibility section** — keyboard order, focus destinations and announcements as stated. A gap the spec does not state is `review-accessibility`'s.
 7. **Acceptance criteria** — for each: is there code (and, if the project tests UI, a test) that makes it true? Name the test when found.
 8. **Undocumented additions** — a user-visible behavior, control, step or state the spec does not mention is `extra`: the spec must be updated or the code trimmed — you do not decide which. Something the flow's **Out of scope** section excludes and the code builds anyway is `extra`, `high`.
 
