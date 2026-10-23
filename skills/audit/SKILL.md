@@ -14,7 +14,7 @@ Reply in the user's language; write the report in the project's documentation la
 
 ## Step 1 — Context
 
-Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke `ux:discover`** (Skill tool) first: an audit without knowing the users is opinion, not evaluation. Keep in mind the user roles, jobs, platform, accessibility target and `Known gaps`. Read the latest `.ux/audit/*.md` when one exists: its findings are leads to re-check, not rows to copy.
+Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke `ux:discover`** (Skill tool) first: an audit without knowing the users is opinion, not evaluation. Keep in mind the user roles, jobs, platform and accessibility target. `Known gaps` are leads: one confirmed in scope with evidence becomes a finding, none is a finding on its own. Read the latest `.ux/audit/*.md` when one exists: its findings are leads to re-check, not rows to copy.
 
 ## Step 2 — Scope
 
