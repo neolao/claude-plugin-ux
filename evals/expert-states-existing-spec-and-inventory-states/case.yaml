@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: expert-states-existing-spec-and-inventory-states
+description: >
+  expert-states consulted by /ux:design on the redesign of a web invoice
+  list whose screen spec already exists: a filter bar is added. The rough
+  option reloads the list under a new full-page overlay although the
+  inventory's DataTable already has a skeleton loading variant, drops the
+  spec's `Partial | n/a` row for a "Load more" partial state, validates
+  the date range only on Apply where the inventory validates inline on
+  blur, and lets the filters act while a reload is in flight (a Known
+  gap). The expert must reuse the DataTable variant, keep the n/a row,
+  follow the inventory's validation pattern, flag the FilterBar gap, and
+  must not rewrite the empty-state wording.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
