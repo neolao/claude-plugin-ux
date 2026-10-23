@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: expert-content-platform-wording-and-accessible-text
+description: >
+  expert-content consulted by /ux:design on exporting the selection of a
+  desktop (Electron, macOS and Windows) scene editor. The rough option has
+  a lowercase menu item with no ellipsis that opens a save dialog, buttons
+  mixing title and sentence case, an "Are you sure?" dialog with OK/Cancel,
+  an icon-only button named "trash-icon" and a screen-reader announcement
+  "Done.". The expert must prescribe the label conventions and the wording
+  of the accessible name and the announcement, and must neither place the
+  menu item or its accelerator nor say where focus lands.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
