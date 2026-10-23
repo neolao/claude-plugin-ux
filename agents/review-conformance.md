@@ -33,6 +33,8 @@ Locate the code from the spec: a screen's `source:` frontmatter, the flow's `scr
 7. **Acceptance criteria** — for each: is there code (and, if the project tests UI, a test) that makes it true? Name the test when found.
 8. **Undocumented additions** — a user-visible behavior, control, step or state the spec does not mention is `extra`: the spec must be updated or the code trimmed — you do not decide which. Something the flow's **Out of scope** section excludes and the code builds anyway is `extra`, `high`.
 
+When the code and the spec disagree and the spec looks wrong or stale (an `n/a` reason that no longer holds, a row contradicting `product.md` or another row), still report the divergence against the spec location, with the severity of its effect on the user; the FIX says "spec may need update: …". Never side with the code silently.
+
 Every finding names the spec location (`file § section, row`) and the code location (`file:line`, or "not found" after a real search).
 
 ## Output
