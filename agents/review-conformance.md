@@ -20,9 +20,9 @@ _Input contract identical across all `agents/review-*.md` — update together._
 
 ## Method
 
-If no spec covers the scope, reply in one line: `No spec covers this scope — conformance not assessable.` and stop.
+If no spec covers the scope, reply in one line: `No spec covers this scope — conformance not assessable.` and stop. If a spec covers part of it, review that part and name the rest in the closing line — a screen without a spec is a gap for `/ux:design`, not a finding.
 
-Otherwise, for each spec:
+Locate the code from the spec: a screen's `source:` frontmatter, the flow's `screens:` list, then a real search. Then, for each spec:
 
 1. **Flow table** — each step: is the user action possible and does the system show what the row says? Are exit & failure paths (abandon, error at step N, undo) implemented?
 2. **Screen → States table** — each row marked as a real state (not `n/a`): is there a code path rendering it as described, with the stated primary action?
@@ -49,7 +49,7 @@ FIX: [make the code match — or, if the spec looks wrong, say "spec may need up
 
 `high` = a state, step or acceptance criterion is missing or contradicts the spec; `medium` = deviation in interaction, content or accessibility detail; `low` = cosmetic drift.
 
-End with: `N conformance findings against K specs.` If none: `Implementation conforms to <spec list>.`
+End with: `N conformance findings against K specs.` — followed by `Not covered by any spec: <screens or files>.` when part of the scope had none. If none: `Implementation conforms to <spec list>.`
 
 ## What NOT to do
 
