@@ -1,0 +1,8 @@
+{
+  "cues.title": "Cues",
+  "cues.add": "Add cue",
+  "cues.delete": "Delete cue",
+  "cues.delete.error": "Error",
+  "fixtures.title": "Fixtures",
+  "fixtures.patch": "Patch fixture"
+}

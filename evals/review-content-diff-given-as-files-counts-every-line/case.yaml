@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-content-diff-given-as-files-counts-every-line
+description: >
+  review-content in diff mode on a change handed over as a file list, with
+  no diff (the way /ux:review passes a change outside a git repository and
+  /ux:implement its touched files): every line of the listed files counts
+  as added. The listed component renders a literal outside the i18n layer
+  and the listed strings file holds a vague error; a component the list
+  does not name holds a literal too and must stay unflagged. The agent must
+  review instead of asking for a diff.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

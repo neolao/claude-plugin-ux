@@ -1,0 +1,8 @@
+{
+  "cues.title": "Cues",
+  "cues.add": "Cue hinzufügen",
+  "cues.delete": "Cue löschen",
+  "cues.delete.error": "Fehler",
+  "fixtures.title": "Fixtures",
+  "fixtures.patch": "Fixture patchen"
+}
