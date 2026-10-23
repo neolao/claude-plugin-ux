@@ -2,7 +2,7 @@
 name: design
 description: Design the UX for a need: clarify it, consult the expert agents, propose 2–3 options, write flow and screen specs and the decision to .ux/.
 argument-hint: "<need in natural language> | F<n> (finding from the latest audit) | NNN (existing flow to redesign)"
-version: 1.0.0
+version: 1.1.0
 model: claude-sonnet-5-5
 ---
 
@@ -31,9 +31,9 @@ If a reference does not exist, say which file was looked for and stop.
 
 ## Step 3 — Frame the need (clarify)
 
-Check overlap with existing flows: if one already covers this job, say so and ask whether to redesign it (`/ux:design NNN`) instead.
+Check overlap with existing flows: if one already covers this job, or already carries the finding (`finding: F<n>` in its frontmatter), say so and ask whether to redesign it (`/ux:design NNN`) instead.
 
-Draft the frame in working notes from what `product.md`, the inventory and the need already establish — **Who** (role, expertise, frequency) · **Job** (quote it; a new job is worth saying) · **Trigger** · **Success** · **Constraints** (platform, input, accessibility target, brand, patterns) · **Existing material** (screens and components touched or reusable).
+Draft the frame in working notes from what `product.md`, the inventory and the need already establish — **Who** (role, expertise, frequency) · **Job** (quote it; a new job is worth saying) · **Trigger** · **Entry point** (the screen, selection, panel or command the user is in when the need arises — a row of the inventory's Screens table, or the entry to add and the screen that hosts it; leave it open when nothing establishes it) · **Success** · **Constraints** (platform, input, accessibility target, brand, patterns) · **Existing material** (screens and components touched or reusable). `expert-flows` and `expert-platform` shape the flow from the entry point: it is the one line the frame cannot do without.
 
 **Invoke `ux:clarify`** (Skill tool, `skill: "ux:clarify"`) with `kind=need`, `topic="<the need>"`, `context=` that draft. Its `## Shared understanding` block **is** the frame everything below is judged against.
 
