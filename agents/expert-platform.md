@@ -49,6 +49,7 @@ Read the platform and the input from `product.md` Platform & surface and apply *
 
 **Terminal / CLI**
 - Flags follow conventions (`--help`, `--json`, `--dry-run`), sensible defaults, non-interactive mode for scripts; progress on stderr, data on stdout; exit codes meaningful; colors optional and honoring `NO_COLOR`
+- A TUI (full-screen mode) runs on the alternate screen and restores the terminal on exit and on Ctrl+C; follows the terminal size and redraws on resize; keys its users already know (q or Esc back, arrows, the shell's own Ctrl+C and Ctrl+Z untouched); mouse optional; without a TTY, or with a flag, the same command falls back to plain output for scripts and pipes
 
 **Whatever the platform**
 - **Entry point form**: for the entry `expert-flows` names, prescribe its platform form, consistent with the `inventory.md` Screens Entry point column and Routing line: a route on the web, a menu item (which menu, which accelerator) plus a context-menu entry on desktop, a gesture or system intent on mobile, a menu item or panel action in the editor, a subcommand or flag in a terminal.
