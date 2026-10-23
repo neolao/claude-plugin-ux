@@ -26,12 +26,12 @@ Known gaps removes a reference, it never adds one: a gap saying the system has n
 
 - **Token bypass**: literal colors (`#hex`, `rgb()`, named), spacing/size values, font families/sizes/weights, radii/shadows/durations written as values where the system carries them. A literal equal to a token's value is still a bypass — it will not follow the token (FIX: the token); a literal matching no step is a bypass and a new value (FIX: the nearest step, or the value added to the system if the step is really missing). A value computed from tokens (`calc(var(--space-2) * 2)`, a theme function, a scale multiplier) is on the scale; a token plus a literal correction (`calc(var(--space-4) + 1px)`) is not. `0`, `100%`, `auto`, `1fr`, `inherit`, a ratio or a count are not design values — never a finding. A token used for a role its Usage says it is not for (a text color as a border, the primary as a success color, a card radius on a control) is a bypass with the token of the right role as EXISTING.
 - **Component duplication**: a button, input, dialog, dropdown, toast, table, empty-state… re-implemented locally while the inventory lists one for that role (its Used for column); a near-copy — the same role, differing by what a prop or variant carries (a size, a tone, a density, an icon, one extra slot) — whether or not the variant is in States / variants supported: when it is, the fix is to use it; when it is not, the fix is to add it to the component, never a local copy. A component whose role no inventory row covers is new, not a finding — only its values and patterns are checked. A copy of the inventory's component itself into the feature's folder is duplication even when unmodified.
-- **Pattern divergence**: confirmation via modal where the project uses undo (or vice versa), success via inline text where the project uses toasts, validation on submit where the project validates inline, a new navigation pattern, icon set mixed.
+- **Pattern divergence** (against Interaction patterns in use, and `style.md` Iconography and Component intent): confirmation via modal where the project uses undo (or vice versa), success via inline text where the project uses toasts, validation on submit where the project validates inline, a new navigation pattern, icon set mixed.
 - **Styling approach mixed**: inline styles in a CSS-modules project, a utility framework introduced locally, a second theming mechanism, `!important` escapes.
 - **Naming and placement**: a new token, variant or component named unlike its siblings (`size="lg"` beside `size="large"`, `--colour-` beside `--color-`), or not placed where the inventory's Source column says the others live — the next developer will not find it to reuse it. General file and folder conventions are code review, not yours.
 - **Theming**: when the inventory's Theming row or `style.md` Palette carries a second theme, every color must come from a token that has both values — a literal is set for one theme only, and so is a token picked for its light value rather than its role (a `grey-100` surface that stays light in dark mode where `color.surface` flips). A local dark override with its own values (`@media (prefers-color-scheme: dark) { … }` beside the system's mechanism) is a second theming mechanism — `styling`, not `theming`. A project with one theme has no theming finding.
 
-Every finding needs a `file:line` and, when claiming a reusable component exists, the path of that component. In diff mode, only what the change introduces; in audit mode, group repeated literals into one finding with a count.
+Every finding needs a `file:line` and its reference: the inventory row or `style.md` section it departs from, plus the path of the component or token file when claiming one exists — a reference you cannot cite is a finding you cannot make. In diff mode, only what the change introduces; in audit mode, group repeated literals into one finding with a count.
 
 ## Output
 
@@ -42,7 +42,7 @@ FILE: path (line N)
 SEVERITY: high | medium | low
 KIND: token | component | pattern | styling | naming | theming
 ISSUE: [one sentence]
-EXISTING: [the token/component/pattern that should have been used — path or name]
+EXISTING: [the reference row and the thing itself — `inventory.md § Reusable components — Dialog` + `src/Dialog.tsx`; `--space-4` (16px) in `tokens.css`; `style.md § Spacing & shape` step; `inventory.md § Interaction patterns in use` line — or `none (no scale)` when there is no reference]
 FIX: [concrete]
 ```
 
