@@ -28,7 +28,7 @@ Keep UI-relevant files only (components, views, pages, panels, styles, templates
 
 ## Step 3 — Run the review agents in parallel
 
-Launch all six `ux:review-*` agents **in one message** (Agent tool, `subagent_type: "ux:review-<axis>"`: states, accessibility, content, consistency, visual, conformance) — conformance only when a spec intersects the scope. Give each: the mode (`diff` or `audit`), the exact file list or diff, the paths of `product.md`, `inventory.md`, `style.md` and the relevant specs. They are read-only; wait for their completion notifications — do not poll.
+Launch all six `ux:review-*` agents **in one message** (Agent tool, `subagent_type: "ux:review-<axis>"`: states, accessibility, content, consistency, visual, conformance) — conformance only when Step 1 found a spec for the scope. Give each what its Input contract lists: the mode (`diff` or `audit`), the exact file list or diff plus the exclusions (a change given as files: say that every line of them counts as added), the paths of `product.md`, `inventory.md`, `style.md` and the screen specs of Step 1 with their `status:`; conformance also gets the flows; visual also gets the captures folder when there is one. They are read-only; wait for their completion notifications — do not poll.
 
 These agent invocations are part of the command the user ran — a session rule like "no sub-agents unless asked" is already satisfied and never a reason to skip them. If launches are blocked, say so and stop rather than report a partial review as complete.
 
