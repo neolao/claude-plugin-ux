@@ -1,0 +1,108 @@
+diff --git a/src/export/ExportPanel.css b/src/export/ExportPanel.css
+index d31d225..98fb621 100644
+--- a/src/export/ExportPanel.css
++++ b/src/export/ExportPanel.css
+@@ -25,3 +25,31 @@
+   margin: 18px 0;
+ }
+ 
++.share-row {
++  display: flex;
++  align-items: center;
++  gap: 10px;
++  margin-top: var(--space-4);
++}
++
++.share-btn {
++  font: inherit;
++  font-size: var(--font-size-sm);
++  padding: var(--space-1) var(--space-2);
++  border: 1px solid var(--color-border);
++  border-radius: var(--radius-control);
++  background: var(--color-surface);
++  color: var(--color-text);
++  cursor: pointer;
++}
++
++.share-copied {
++  color: var(--color-success);
++  font-size: var(--font-size-sm);
++}
++
++.share-hint {
++  margin: var(--space-2) 0 0;
++  color: var(--color-text-muted);
++  font-size: var(--font-size-sm);
++}
+diff --git a/src/export/ExportPanel.tsx b/src/export/ExportPanel.tsx
+index 6f9c77f..2148d48 100644
+--- a/src/export/ExportPanel.tsx
++++ b/src/export/ExportPanel.tsx
+@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
+ import { SmallButton } from "./SmallButton";
+ import { KeyboardHint } from "./KeyboardHint";
+ import { ExportHistory } from "./ExportHistory";
+-import { clearHistory, exportBoard, restoreHistory } from "./api";
++import { clearHistory, exportBoard, restoreHistory, shareUrl } from "./api";
+ import { showToast } from "../toast";
+ import { t } from "../i18n";
+ import "./ExportPanel.css";
+@@ -11,6 +11,7 @@ import "./ExportPanel.css";
+ // Opened from the board toolbar (BoardToolbar.tsx) as a side panel.
+ export function ExportPanel({ boardId }: { boardId: string }) {
+   const [format, setFormat] = useState<"csv" | "json">("csv");
++  const [copied, setCopied] = useState(false);
+ 
+   async function handleExport() {
+     await exportBoard(boardId, format);
+@@ -22,6 +23,11 @@ export function ExportPanel({ boardId }: { boardId: string }) {
+     showToast(t("export.cleared"), () => restoreHistory(boardId));
+   }
+ 
++  async function handleCopyLink() {
++    await navigator.clipboard.writeText(shareUrl(boardId));
++    setCopied(true);
++  }
++
+   return (
+     <section className="export-panel">
+       <h2>{t("export.title")}</h2>
+@@ -38,6 +44,13 @@ export function ExportPanel({ boardId }: { boardId: string }) {
+       </div>
+       <ExportHistory boardId={boardId} />
+       <SmallButton onClick={handleClear}>{t("export.clear")}</SmallButton>
++      <div className="share-row">
++        <button type="button" className="share-btn" onClick={handleCopyLink}>
++          {t("share.copy")}
++        </button>
++        {copied && <span className="share-copied">{t("share.copied")}</span>}
++      </div>
++      <p className="share-hint">{t("share.hint")}</p>
+     </section>
+   );
+ }
+diff --git a/src/export/api.ts b/src/export/api.ts
+index f114305..24d1f81 100644
+--- a/src/export/api.ts
++++ b/src/export/api.ts
+@@ -17,3 +17,6 @@ export async function restoreHistory(boardId: string): Promise<void> {
+   await fetch(`/api/boards/${boardId}/exports/restore`, { method: "POST" });
+ }
+ 
++export function shareUrl(boardId: string): string {
++  return `${location.origin}/boards/${boardId}`;
++}
+diff --git a/src/i18n.ts b/src/i18n.ts
+index 52f56fb..7501a5b 100644
+--- a/src/i18n.ts
++++ b/src/i18n.ts
+@@ -5,6 +5,9 @@ const strings: Record<string, string> = {
+   "export.done": "Export ready — check your downloads.",
+   "export.clear": "Clear history",
+   "export.cleared": "Export history cleared",
++  "share.copy": "Copy link",
++  "share.copied": "Link copied",
++  "share.hint": "Anyone with the link can view the board.",
+ };
+ 
+ export function t(key: string): string {

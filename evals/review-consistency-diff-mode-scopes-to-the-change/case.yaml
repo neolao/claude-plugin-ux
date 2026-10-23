@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-consistency-diff-mode-scopes-to-the-change
+description: >
+  review-consistency in diff mode on a change that adds a share row to an
+  export panel: a gap off the spacing scale, a local .share-btn that
+  re-implements the small secondary Button, and an inline "Link copied"
+  text where the project shows success as a toast — next to added lines
+  that use the tokens correctly, a pre-existing off-scale margin that
+  appears only as context, and an untouched SmallButton near-copy the
+  change merely imports, all of which must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
