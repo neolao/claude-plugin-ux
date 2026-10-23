@@ -51,7 +51,10 @@ Save captures under `.ux/captures/baseline/<screen-slug>.png` and reference them
 
 ## Step 5 — Write `.ux/`
 
-From `${CLAUDE_PLUGIN_ROOT}/templates/product.md` and `templates/inventory.md`: fill **every** placeholder from what you found — no template text left, no invented facts; unknowns go under `Known gaps`. Tokens with their **source file**; components with the **states they support**; `Known gaps` is the honest list `/ux:audit` starts from.
+From `${CLAUDE_PLUGIN_ROOT}/templates/product.md` and `${CLAUDE_PLUGIN_ROOT}/templates/inventory.md`: fill **every** placeholder from what you found — no template text left, no invented facts; unknowns go under `Known gaps`. Tokens with their **source file**; components with the **states they support**; `Known gaps` is the honest list `/ux:audit` starts from.
+
+`inventory.md`:
+- **Screens / views** — one row per route or page on the web, per window and dockable panel on desktop, per editor window or custom panel in a game-engine tool, per screen on mobile, per subcommand or full-screen view in a terminal; a dialog, menu or toast is a component or a state of its screen, not a row. *Entry point* is the way there as the user sees it: the route and the control that leads to it (`/boards/:id` — a row of the Boards list), the menu path (`Window › Fixtures`), the subcommand — `expert-flows` starts flows there. *Source* is the file(s) that render the screen, paths from the repository root — `/ux:audit` resolves a screen name to them. *Capture* is the path under `.ux/captures/`.
 
 Create `.ux/README.md` from `${CLAUDE_PLUGIN_ROOT}/templates/ux-readme.md` if absent.
 
