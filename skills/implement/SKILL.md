@@ -47,6 +47,7 @@ One screen at a time, one state at a time: **Success → Empty → Loading → P
 - As soon as a screen's files exist, write them in its spec's `source:` — `/ux:review` finds the specs to check conformance against through that field; a screen left without it is reviewed against no spec.
 - Every user-facing string goes through the project's i18n, keyed per the Content table; no i18n → one place per screen, flagged in the report.
 - Accessibility per the spec: labels, roles, focus order and destination, live announcements, visible focus, target sizes, reduced motion.
+- Wire the host bindings the Flow and Interactions rows name (menu item and accelerator, the host undo stack, dirty state, leave or close protection) — `review-conformance` checks each binding a row names, and a mutation outside the host's undo stack is a platform defect.
 - Feedback under 100 ms; progress indication beyond ~1 s.
 - Follow the project's testing conventions (TDD if it does TDD); run tests and lint after each meaningful change.
 
@@ -56,7 +57,7 @@ One screen at a time, one state at a time: **Success → Empty → Loading → P
 
 ## Step 5 — Verify in the running application
 
-Green tests are not proof. Launch the app (`run` skill, else the dev command with browser tools or the platform's launcher) and, per screen: walk the flow table; **trigger each state** the spec lists for real (empty data, failed request, partial permissions); operate it **keyboard only** once; resize / dock / rotate and check the Layout section holds. Capture to `.ux/captures/NNN-slug/after-<screen>-<state>.png` and reference the captures in the screen spec. Any mismatch is a bug: fix (3 attempts, then report). If the app cannot be launched, say so — never present unverified work as verified.
+Green tests are not proof. Launch the app (`run` skill, else the dev command with browser tools or the platform's launcher) and, per screen: walk the flow table; **trigger each state** the spec lists for real (empty data, failed request, partial permissions); exercise the host bindings the rows name (undo, leaving or closing with unsaved input); operate it **keyboard only** once; resize / dock / rotate and check the Layout section holds. Capture to `.ux/captures/NNN-slug/after-<screen>-<state>.png` and reference the captures in the screen spec. Any mismatch is a bug: fix (3 attempts, then report). If the app cannot be launched, say so — never present unverified work as verified.
 
 ## Step 6 — Review
 
