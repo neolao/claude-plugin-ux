@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: expert-content-tone-from-style-and-vocabulary
+description: >
+  expert-content consulted by /ux:design on a need whose rough option carries
+  warm, exclamatory copy while .ux/style.md states a terse tone, names the
+  product's "Delivery" as "shipment" and "order", and labels the primary
+  button "Yes!". The expert must prescribe the tone the style file states
+  (not the one the Users table would suggest), flag the synonyms and the
+  button, and must neither reword the vocabulary term "titles" nor require
+  a loading state.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
