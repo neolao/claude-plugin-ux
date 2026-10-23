@@ -12,7 +12,7 @@ Turn a need into a validated UX design: a flow, its screens with every state, an
 
 The value of this command is **adaptation**: the same need gets a different answer for a daily expert on three monitors and for an occasional user on a phone. Every proposal cites the product facts it rests on. This command is about interaction; appearance is `/ux:style`'s.
 
-Reply in the user's language; write specs in the project's documentation language. If the skill stops early with files created under `.ux/`, commit them `wip(ux): …` and say so.
+Reply in the user's language; write specs in the language `.ux/product.md` is written in (the project's documentation language, as `/ux:discover` resolved it) — the Content table's Text column excepted (Step 6). If the skill stops early with files created under `.ux/`, commit them `wip(ux): …` and say so.
 
 ## Step 1 — Context
 
@@ -47,7 +47,7 @@ Fold `REQUIREMENTS` into every option, `RISKS` into trade-offs, `SCENARIOS` into
 
 ## Step 5 — Propose 2–3 options
 
-Never a single option. Each, in plain language: **Concept** (one paragraph) · **Flow** (user does → sees) · **Reuses** (from the inventory; what is new) · **Fits because** (product facts, incl. the density and tone of `style.md`) · **Trade-offs** (learning, screen space, dev effort S/M/L, expert risks). Options differ in *interaction model* (inline vs side panel vs page; wizard vs form; modal vs undo), not cosmetics.
+Never a single option. Each, in plain language: **Concept** (one paragraph) · **Flow** (user does → sees) · **Reuses** (from the inventory; what is new — everything, when the inventory has no rows yet: say so once) · **Fits because** (product facts, incl. the density and tone of `style.md`) · **Trade-offs** (learning, screen space, dev effort S/M/L, expert risks). Options differ in *interaction model* (inline vs side panel vs page; wizard vs form; modal vs undo), not cosmetics.
 
 This is a mandatory `AskUserQuestion` tool call, not a narrative to describe and resolve yourself — however obvious the recommended option seems, never write out the options in prose and pick one on the user's behalf, and never let confidence in the recommendation substitute for the call. One question, the recommended option first labeled `(Recommended)`, each description carrying its "fits because" and main trade-off. Step 6 starts only once the tool call has actually returned the user's answer. If the user picks "Other" with a variant, integrate it and confirm in one line.
 
@@ -67,4 +67,4 @@ If the project is a git repository: stage `.ux/flows/`, `.ux/screens/`, `.ux/dec
 
 ## Step 8 — Report
 
-Short and plain: the chosen option in two sentences and the two product facts that decided it; files written; decisions settled during clarification (count) and any expert requirement overruled, with the reason. Next: `/ux:prototype NNN` or `/ux:implement NNN` — preceded by `/ux:style` if the project has neither tokens nor `.ux/style.md`.
+Short and plain: the chosen option in two sentences and the two product facts that decided it; files written; decisions settled during clarification (count), with the lines tagged `recommended — user deferred` listed so the owner can revisit them on the prototype; any expert requirement overruled, with the reason. Next: `/ux:prototype NNN` or `/ux:implement NNN` — preceded by `/ux:style` if the project has neither tokens nor `.ux/style.md`.
