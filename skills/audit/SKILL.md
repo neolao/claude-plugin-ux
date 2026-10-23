@@ -37,7 +37,7 @@ Record each finding as: screen, axis and criterion, evidence (capture or `file:l
 
 ## Step 5 — Review agents
 
-**Invoke `ux:review`** (Skill tool, `skill: "ux:review"`) on the scope path with the same exclusions — it runs the six review agents in audit mode and returns numbered, deduplicated findings with `file:line` evidence.
+**Invoke `ux:review`** (Skill tool, `skill: "ux:review"`) with the scope paths, the same exclusions and, when Step 3 captured anything, the captures folder (`review-visual` reads it: a capture shows what the code only suggests) — it runs the six review agents in audit mode and returns numbered, deduplicated findings with `file:line` evidence.
 
 ## Step 6 — Merge and prioritize
 
