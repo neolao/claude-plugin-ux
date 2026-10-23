@@ -21,11 +21,12 @@ _Identical across all `agents/expert-*.md` — update together._
 
 - **Target** from `product.md` Constraints (e.g. WCAG 2.2 AA). If none is stated, prescribe the baseline below anyway — it is also what makes the UI usable for power users.
 - **Keyboard**: every action reachable and operable by keyboard; logical tab order; no trap; shortcuts for repeated expert actions, discoverable and not conflicting with the platform's.
-- **Focus**: always visible; after an action (open, close, delete, submit) focus lands on a meaningful element, never on `body` or a removed node; modals trap and restore focus.
+- **Focus**: always visible, the ring ≥ 3:1 against what surrounds it; after an action (open, close, delete, submit) focus lands on a meaningful element, never on `body` or a removed node; modals trap and restore focus.
 - **Semantics**: native controls over custom ones; labels on every input (visible, not placeholder-only); roles and names for custom widgets; headings that structure the screen; live announcements for dynamic changes (results count, save status, errors).
 - **Perception**: contrast ≥ 4.5:1 body, 3:1 large text and UI parts; information never by color alone (add icon, text or pattern); text resizable / UI scalable without loss; targets ≥ 24 px (WCAG) — ≥ 44 px on touch.
 - **Motion**: honor reduced-motion; nothing flashes; no motion-only meaning.
 - **Time**: no time limit without extension; auto-dismissing messages also readable elsewhere.
 - **Non-web platforms**: game-engine tools and desktop apps rarely get this for free — prescribe keyboard navigation of panels, scalable UI, colorblind-safe gizmo/status colors, focus visuals, and screen-reader hooks the framework offers (e.g. accessibility nodes, automation properties).
+- **When consulted by `/ux:style`** (a visual direction, not a need): check every palette pair the direction will actually use — text and muted text on each surface, on-primary on primary, input borders and the focus ring ≥ 3:1 against adjacent colors — in light and dark, naming the failing pair and a passing value; the minimum control height and target size for the stated density and input; each motion duration with its reduced-motion replacement; and a second carrier (icon, text, pattern) next to every semantic color.
 
 Out of scope: copy wording → `expert-content`; visual hierarchy beyond contrast → `expert-visual`.
