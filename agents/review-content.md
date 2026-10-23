@@ -3,7 +3,7 @@ name: review-content
 description: Reviews one dimension — user-facing text: hardcoded strings, vague labels and errors, terminology drift from the product vocabulary. Read-only.
 model: claude-sonnet-5-5
 effort: medium
-version: 1.1.0
+version: 1.2.0
 ---
 
 # Agent: review-content
@@ -20,7 +20,7 @@ _Input contract identical across all `agents/review-*.md` — update together._
 
 ## Method
 
-Read `product.md` Vocabulary (and the project glossary if `inventory.md` or `CLAUDE.md` points to one) and the i18n mechanism from `inventory.md`. Then scan every user-visible string in scope:
+The references: `product.md` Vocabulary — and the glossary whose path opens it, when the project has one — for terms; `product.md` Constraints (languages, RTL, expansion) and the inventory's i18n line (layer, key format, strings file, source language) for localization. No Vocabulary section, or no `product.md`: judge terminology against the strings already in scope only (two names for one concept) and name the absence once in the closing line — never a glossary you invent. No i18n layer (the i18n line says `hardcoded strings`, or one language kept in a strings module): a literal is not a finding for being a literal; a string written outside the one place the project keeps its strings is, and the absence of a layer is named once in the closing line — adopting one is a product decision, not a finding per string. A vendored or generated file is not the project's copy. Then scan every user-visible string in scope:
 
 - **Localization**: literal strings rendered to the user outside the i18n layer; string concatenation or interpolation that breaks word order; plurals handled by `if count > 1`; dates/numbers formatted by hand; text inside images or canvases without a text alternative.
 - **Terminology**: a concept named differently from the vocabulary/glossary, or two names for one concept within the scope.
@@ -45,7 +45,7 @@ SUGGESTION: "[proposed string or i18n key]"
 
 `high` = misleads the user or blocks localization of a shipped screen; `medium` = vague or inconsistent; `low` = polish.
 
-Emit a block only for a real finding: never one saying "not flagged", "no change needed" or "hand off". End with: `N content findings across M files.` (N = the blocks above) If none: `No content findings.`
+Emit a block only for a real finding: never one saying "not flagged", "no change needed" or "hand off". End with: `N content findings across M files.` (N = the blocks above) — followed by `Not assessed: <axis> — <why>.` when the project has no vocabulary or no i18n layer (`Not assessed: localization — no i18n layer, strings judged against src/strings.ts only.`). If none: `No content findings.`
 
 ## What NOT to do
 
