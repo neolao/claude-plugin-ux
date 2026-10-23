@@ -1,8 +1,9 @@
 ---
 name: review-consistency
 description: Reviews one dimension — reuse of the project's tokens, components and patterns versus ad-hoc parallel styles. Read-only.
-model: sonnet
-version: 1.0.0
+model: claude-sonnet-5-5
+effort: medium
+version: 1.1.0
 ---
 
 # Agent: review-consistency
