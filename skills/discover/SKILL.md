@@ -39,7 +39,7 @@ No UI layer found (a service, a library, a project not started): say so and skip
 
 Read, if present: `README.md`, `CLAUDE.md` (and `.claude/rules/`), `docs/`, `.vibe/`, design references (Figma links, `DESIGN.md`, style guides), PRDs. A glossary, if one exists, is the source of truth for terms.
 
-If `.ux/product.md` already exists, sections whose heading carries `<!-- keep -->` are preserved verbatim in Step 5.
+If `.ux/product.md` or `.ux/inventory.md` already exists, this run is a refresh. In both files, sections whose heading carries `<!-- keep -->` are preserved verbatim in Step 5; the rest is rewritten from what Steps 1–4 find. In the inventory: keep the screen names that `.ux/screens/`, `.ux/flows/` and `.ux/audit/` already use — they reference screens by name; carry over the `Known gaps` that `/ux:audit`, `/ux:style` and `/ux:implement` added, dropping only those the code now shows closed; keep the components and tokens `/ux:implement` recorded when they still exist in the code.
 
 ## Step 3 — See the real application (best effort)
 
