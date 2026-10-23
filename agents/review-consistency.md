@@ -53,5 +53,5 @@ End with: `N consistency findings across M files.` If none: `No consistency find
 ## What NOT to do
 
 - Do not judge whether the design system itself is good — only whether it is reused.
-- Do not comment on states, accessibility semantics, wording or layout quality — other agents own those.
+- Do not comment on states, accessibility semantics, wording or layout quality — other agents own those. On the shared borders: a hover/focus/active/disabled style missing or indistinguishable, density, line length and alignment are `review-visual`'s — whether their values come from the system is yours; contrast, color-only meaning and target sizes are `review-accessibility`'s, even for a literal color; a string's wording is `review-content`'s and its match to the spec `review-conformance`'s.
 - Do not flag a deliberate new token/variant when it is added *to the system* (in the tokens/components source) rather than locally — that is the right way to extend.
