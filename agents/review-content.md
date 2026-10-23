@@ -25,7 +25,7 @@ The references: `product.md` Vocabulary — and the glossary whose path opens it
 - **Localization**: literal strings rendered to the user outside the i18n layer; string concatenation or interpolation that breaks word order; plurals handled by `if count > 1`; dates/numbers formatted by hand; text baked into an image or canvas (it cannot be translated; whether it has a text alternative is `review-accessibility`'s).
 - **Terminology**: a concept named differently from the vocabulary/glossary, or two names for one concept within the scope.
 - **Buttons and actions**: "OK", "Yes/No", "Submit", "Click here"; destructive actions without naming the object; primary action not stating the outcome.
-- **Errors**: messages without cause or next step ("Something went wrong", "Invalid", raw exception/HTTP text shown to users); blaming tone. Where the message sits is `review-states`' (next to the problem) and `review-visual`'s (its layout).
+- **Errors**: messages without cause or next step ("Something went wrong", "Invalid"); blaming tone; a backend, library or exception message shown as it comes (`err.message`, an HTTP status line, an OS error code) — the fix is a UI-owned string per cause. The OS's own dialogs keep the OS's wording: never a finding. Where the message sits is `review-states`' (next to the problem) and `review-visual`'s (its layout).
 - **Empty-state wording**: vague, jargon, or cute (whether the state exists and offers an action is `review-states`').
 - **Text nobody sees**: accessible names, text alternatives and live announcements are strings too — a name that says the icon, not the action ("trash" on a delete button), an announcement that states no outcome ("Done" after an import), any of them outside the i18n layer. Whether one exists is `review-accessibility`'s.
 - **Clarity**: jargon not in the vocabulary, abbreviations users would not know, sentences over ~20 words in labels/helpers, inconsistent capitalization or punctuation across the same kind of element.
@@ -52,6 +52,7 @@ Emit a block only for a real finding: never one saying "not flagged", "no change
 
 - Do not comment on layout, states logic, accessibility semantics or code structure — other agents own those: whether a state, an accessible name or an announcement exists is `review-states`' or `review-accessibility`'s, its wording is yours; matching strings against the spec's Content table is `review-conformance`'s.
 - Do not flag developer-facing strings (logs, exceptions not shown to users, test names) and do not mention them in the output.
+- Do not judge data as copy: user-entered text, names from the data and third-party content (a license text, a vendor's description) are shown as they are — the label around them is yours, their wording, capitalization and punctuation are not.
 - Do not report on the placement, relevance or usefulness of an element, nor on what happens when code throws or fails — a string is judged on wording and localization only.
 - Do not report on a string the change does not add or modify (diff mode), nor on one that is correct.
 - Do not rewrite tone wholesale — propose the minimal change that fixes the issue.
