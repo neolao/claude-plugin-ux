@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: expert-visual-game-engine-docked-panel-widths
+description: >
+  expert-visual consulted by /ux:design on a Unity editor panel listing
+  a scene's lights in a table. The rough option fixes the table at 920 px
+  with no-wrap columns and scrolls the whole panel sideways when docked
+  narrower, gives rows 32 px and a custom 14 px font next to the editor's
+  20 px rows, stretches the help paragraph to 2200 px on the second
+  monitor and shows intensities in proportional digits; it also edits
+  intensity without the editor's undo and leaves the rows unreachable by
+  keyboard. The expert must say what collapses when the panel is docked
+  narrow, keep the editor's row height, cap the help text's line length,
+  require tabular numerals, and must prescribe neither the host undo
+  registration nor the keyboard navigation.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
