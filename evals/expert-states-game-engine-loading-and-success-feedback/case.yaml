@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: expert-states-game-engine-loading-and-success-feedback
+description: >
+  expert-states consulted by /ux:design on a game-engine tool need: a
+  Unity editor panel that lists a studio's prop catalog and applies a
+  prop to the selection. The rough option fetches the catalog
+  synchronously and freezes the editor for seconds, shows a bare empty
+  grid both when no prop matches and when the server is unreachable, and
+  pops a toast after every apply although the prop appears in the
+  viewport. The expert must require a non-blocking load with a loading
+  state, an empty state that offers the filling action, an error state
+  distinct from empty, flag the redundant toast, deliver the States rows
+  in the template's shape, and must prescribe neither where the host
+  shows progress nor the empty hint's wording.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
