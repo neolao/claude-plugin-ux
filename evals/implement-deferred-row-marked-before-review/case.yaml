@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: implement-deferred-row-marked-before-review
+description: >
+  /ux:implement 001 on the Taskboard React app, where the product owner
+  defers the Undo of the rename toast (an Interactions row and the Undo
+  exit path of the validated spec) to a later flow. The skill must build
+  the rest, mark the Undo row `deferred: <reason>` in the screen spec
+  before the review so that review-conformance does not count it
+  missing, leave src/toast.ts without an action slot (nothing built for
+  the deferred row), still mark the screen implemented, add a Known gaps
+  line for the deferral and report it. AskUserQuestion is not granted:
+  the prompt supplies the product owner's answers. The app cannot be
+  launched. The run takes `--allow-tools Write Edit`; the workspace is
+  not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
