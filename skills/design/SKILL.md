@@ -43,7 +43,7 @@ Pick the `ux:expert-*` agents whose description matches the need — **4 maximum
 
 These agent invocations are part of the command the user ran — a session rule like "no sub-agents unless asked" is already satisfied and never a reason to skip them. If launches are genuinely blocked, say so and design alone.
 
-Fold `REQUIREMENTS` into every option, `RISKS` into trade-offs, `SCENARIOS` into acceptance criteria. You remain the designer: when experts conflict, decide and note why.
+Fold `REQUIREMENTS` into every option, `RISKS` into trade-offs, `SCENARIOS` into acceptance criteria. Each expert also delivers the spec section it owns — keep it for Step 6: `expert-flows` the flow skeleton (entry, steps, the three exit & failure paths), `expert-states` the States rows and the Feedback column, `expert-visual` the Layout section, `expert-content` the copy with its keys, `expert-platform` the host bindings. An expert answering "no concern" in one line closes its axis: nothing to fold, nothing overruled, nothing to report. You remain the designer: when experts conflict, decide and note why in the decision's Consequences.
 
 ## Step 5 — Propose 2–3 options
 
@@ -55,8 +55,8 @@ This is a mandatory `AskUserQuestion` tool call, not a narrative to describe and
 
 Numbering: highest `NNN` in `.ux/flows/` + 1, zero-padded (`001` if none). Slug: kebab-case title.
 
-1. **Flow** — `${CLAUDE_PLUGIN_ROOT}/templates/flow.md` → `.ux/flows/NNN-slug.md`, `status: designed`; exit/failure paths and acceptance criteria include the experts' scenarios.
-2. **Screens** — `templates/screen.md` → `.ux/screens/<slug>.md` per screen introduced or changed. **Every States row filled** ("n/a: <reason>" when a state truly cannot occur). Content table holds the actual copy in the product vocabulary. Existing spec (redesign): update in place.
+1. **Flow** — `${CLAUDE_PLUGIN_ROOT}/templates/flow.md` → `.ux/flows/NNN-slug.md`, `status: designed`. The Flow table and the three Exit & failure paths come from `expert-flows`' skeleton, adapted to the chosen option; the acceptance criteria include every expert's scenarios. Host bindings have no column — they go in the rows' text, where `/ux:implement` wires them and `review-conformance` checks them: the entry's platform form in step 1's *User does* cell (the menu item and its accelerator, the context-menu entry, the route, the gesture, the flag), the host protections the flow relies on (leave prompt, close protection, state kept across backgrounding) in the Exit & failure path they serve.
+2. **Screens** — `templates/screen.md` → `.ux/screens/<slug>.md` per screen introduced or changed. **Layout** from `expert-visual`'s regions (reading order, primary action, the component or variant each region reuses, what wraps, stacks, truncates or scrolls at the narrowest width or when docked). **Every States row filled** from `expert-states`' rows ("n/a: <reason>" when a state truly cannot occur), and the Feedback column of every Interactions row; the host mechanism a mutation registers with (`on the host undo stack`, `marks the document dirty`) in that Interactions row's *Result* cell. **Content** holds the actual copy — `expert-content`'s strings in the product vocabulary, keyed in the project's key format, the text in the i18n layer's source language even when the spec is in another. A section whose expert was not consulted is written by you from the template's own guidance. Existing spec (redesign): update in place.
 3. **Decision** — `templates/decision.md` → `.ux/decisions/NNN-slug.md`: rejected options and the product facts behind the choice. Append-only: on a redesign, create a new one and set the old one to `status: superseded by NNN`.
 
 Redesign: update the existing flow file, reset `status: designed`, update `decision:`. Audit finding: add `finding: F<n> (audit YYYY-MM-DD)` to the flow frontmatter.
