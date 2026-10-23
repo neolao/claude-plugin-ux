@@ -33,6 +33,7 @@ Write `.ux/prototypes/NNN-slug.html` (or `<slug>.html` for one screen):
 - **Every screen, every state** reachable: navigation follows the flow table; a compact **prototype bar** (fixed, visibly labeled "prototype") switches states (Empty / Loading / Partial / Success / Error) and steps, and toggles a numbered marker per flow step. Nothing reachable only by editing code. A States row marked `n/a: <reason>` gets no state — the bar shows the reason instead; a row marked `deferred:` is built anyway: the deferral is `/ux:implement`'s, the UX is what is being validated.
 - **Real copy** inlined from each Content table — a prototype has no i18n layer; the keys are for `/ux:implement`; realistic fake data (long names, many items, zero items). **Real constraints**: the platform's viewport (phone frame, docked panel at the width `product.md` Devices & input states, desktop window, terminal), the stated density, dark mode if the product has one.
 - **Keyboard operable** (tab order, visible focus, Enter/Escape per spec); `prefers-reduced-motion` respected.
+- **Host-rendered parts** (menu bar, editor chrome, phone status bar, the terminal itself) drawn plainly as the host shows them, never with the product's tokens — the prototype shows what the app renders inside the host, not a restyled host.
 
 Do not invent features beyond the spec — a prototype showing more than what will be built misleads the reviewer.
 
