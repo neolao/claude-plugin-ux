@@ -14,7 +14,15 @@ Reply in the user's language.
 
 ## Step 1 — Context and target
 
-Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke `ux:discover`** (Skill tool) first — then `.ux/style.md` if present. `$ARGUMENTS` matching `^\d+(-[\w-]+)?$` → the flow `.ux/flows/NNN-*.md` and every screen in its `screens:` list; otherwise → the screen `.ux/screens/<slug>.md` and its parent flow; missing file → say which path was looked for, suggest `/ux:design`, stop. Flow already `validated` or `implemented` → ask in one line whether to rebuild anyway.
+Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke `ux:discover`** (Skill tool) first — then `.ux/style.md` if present. Resolve `$ARGUMENTS`:
+
+| `$ARGUMENTS` | Target |
+|---|---|
+| `^\d+(-[\w-]+)?$` | the flow `.ux/flows/NNN-*.md` and every screen in its `screens:` list |
+| anything else | the screen `.ux/screens/<slug>.md` and its parent flow |
+| empty | list the flows still `designed` (none → say so, suggest `/ux:design`), ask in one line which one, stop until answered |
+
+Missing file → say which path was looked for, suggest `/ux:design`, stop. Flow already `validated` or `implemented` → ask in one line whether to rebuild anyway.
 
 ## Step 2 — Build the prototype
 
