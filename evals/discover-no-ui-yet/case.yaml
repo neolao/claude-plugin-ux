@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: discover-no-ui-yet
+description: >
+  /ux:discover on an Express API (Ledgerline) with no UI layer at all; the
+  README announces a web dashboard that does not exist yet. product.md must
+  still be written from the owner's answers (platform web, as a decision),
+  the inventory must say there is no UI yet with no screen or component row
+  and no screen invented from the routes, and the report must send to
+  /ux:style then /ux:design. AskUserQuestion is not granted: the prompt
+  supplies the product owner's answers. The skill writes .ux/, so the run
+  takes `--allow-tools Write Edit`; the workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
