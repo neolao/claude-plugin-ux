@@ -1,0 +1,18 @@
+schema_version: "1.1"
+name: clarify-undecided-answer-keeps-the-recommendation
+description: >
+  /ux:clarify invoked as /ux:design Step 3 does (kind=need) on the
+  Taskboard React app for archiving a board from the Boards list. The
+  topic itself states a decision — an undo toast, no confirmation
+  dialog — and the product owner answers "I don't know, you decide" to
+  the accessibility target, which product.md records as "none stated".
+  The shared understanding must record the topic's decision as the
+  user's choice (not re-ask it, not re-tag it recommended), settle the
+  accessibility question on the recommended option tagged as deferred by
+  the user rather than leave it open, and cite product.md's "none
+  stated" as the fact behind that recommendation. AskUserQuestion is not
+  granted: the prompt supplies the owner's answers. The skill writes
+  nothing; the workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
