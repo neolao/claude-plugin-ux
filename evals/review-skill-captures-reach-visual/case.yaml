@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: review-skill-captures-reach-visual
+description: >
+  /ux:review src/boards on the Taskboard React app, invoked the way
+  /ux:audit does after its capture step: the arguments carry
+  `exclusions: none` and `captures: .ux/captures/audit-2026-10-23`, a
+  folder holding three screen captures. The skill must hand that folder to
+  review-visual (its Input contract takes "a captures folder when one was
+  provided"), name it on the report's Captures line, and count only the
+  three source files of src/boards as the files in scope. The workspace is
+  not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
