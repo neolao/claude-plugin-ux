@@ -1,0 +1,42 @@
+const strings: Record<string, string> = {
+  "nav.boards": "Boards",
+  "nav.settings": "Settings",
+  "boards.title": "Boards",
+  "boards.loading": "Loading boards…",
+  "boards.error": "The boards could not be loaded. Check your connection and retry.",
+  "boards.retry": "Retry",
+  "board.loading": "Loading the board…",
+  "board.error": "This board could not be loaded. Check your connection and retry.",
+  "board.retry": "Retry",
+  "board.noCards": "No cards yet — cards appear here when the team adds them.",
+  "board.archive": "Archive board",
+  "board.archiving": "Archiving…",
+  "board.archiveFailed": "The board could not be archived. Retry.",
+  "board.rename.label": "Board name",
+  "board.renamed": "Board renamed to {name}",
+  "board.rename.undo": "Undo",
+  "board.rename.failed": "The board could not be renamed. Retry.",
+  "board.archived.title": "Board archived",
+  "board.archived.body": "{name} is no longer listed in Boards.",
+  "settings.boards.title": "Boards",
+  "settings.boards.loading": "Loading boards…",
+  "settings.boards.error": "The boards could not be loaded. Check your connection and retry.",
+  "settings.boards.retry": "Retry",
+  "settings.boards.empty": "No boards yet. Create one from the Boards list.",
+  "settings.boards.rename": "Rename",
+  "settings.boards.renameLabel": "New name for {name}",
+  "settings.boards.renamed": "Board renamed to {name}",
+  "settings.boards.renameFailed": "The board could not be renamed. Retry.",
+  "settings.boards.delete": "Delete permanently",
+  "settings.boards.deleteTitle": "Delete {name} permanently?",
+  "settings.boards.deleteBody": "The board and all its cards are deleted for good. This cannot be undone.",
+  "settings.boards.deleteConfirm": "Delete board",
+  "settings.boards.cancel": "Cancel",
+  "settings.boards.deleted": "{name} deleted",
+  "settings.boards.deleteFailed": "The board could not be deleted. Retry.",
+};
+
+export function t(key: string, params: Record<string, string | number> = {}): string {
+  const text = strings[key] ?? key;
+  return text.replace(/\{(\w+)\}/g, (_, name: string) => String(params[name] ?? ""));
+}

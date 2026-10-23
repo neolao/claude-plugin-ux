@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: review-skill-dedup-by-defect-not-line
+description: >
+  /ux:review src/boards/BoardDetail.tsx on the Taskboard React app, in
+  audit mode, against an implemented board-detail spec. The board fetch
+  (line 22) has no rejection handling and the view has no error branch:
+  review-states reports the unhandled error and review-conformance the
+  spec's Error row as missing — one defect, to be merged into one finding
+  listing both axes. A clickable span "Open settings" (line 102) is a
+  non-focusable element with a click handler and a hardcoded string:
+  review-accessibility and review-content each report it for a different
+  reason — two findings on one line, to be kept apart. The workspace is
+  not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
