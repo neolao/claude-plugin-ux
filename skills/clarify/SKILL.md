@@ -34,7 +34,7 @@ Done when the frontier is empty: every branch visited, nothing silently assumed.
 
 ## Seeding the tree
 
-Parse `$ARGUMENTS` (`kind`, `topic`, `context` when invoked by another skill; otherwise a free topic). The roots below must all be visited — prune what the topic makes irrelevant, add what it calls for:
+Parse `$ARGUMENTS` (`kind`, `topic`, `context` when invoked by another skill; otherwise a free topic; empty → ask in one line what to clarify, stop until answered). The roots below must all be visited — prune what the topic makes irrelevant, add what it calls for:
 
 | `kind` | Called by | Root decisions |
 |---|---|---|
