@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: clarify-brand-root-asks-imagery-and-what-survives
+description: >
+  /ux:clarify invoked as /ux:style Step 3 does (kind=brand, redesign
+  mode) on Cuecard, an Electron app whose tokens live in
+  src/renderer/styles/tokens.css with a green --color-go and an amber
+  --color-standby, and whose theme follows the OS through data-theme.
+  The product owner says there is no imagery, that the GO and standby
+  colors must survive the redesign because stage managers read them in
+  the dark, and gives adjectives, density and motion. The shared
+  understanding must carry an imagery line (none), a line on what of the
+  current system survives naming the GO and standby colors, and settle
+  theming as a fact from the code (follows the OS) rather than ask it.
+  AskUserQuestion is not granted: the prompt supplies the owner's
+  answers. The skill writes nothing; the workspace is not a git
+  repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
