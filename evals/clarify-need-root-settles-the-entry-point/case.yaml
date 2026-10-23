@@ -1,0 +1,18 @@
+schema_version: "1.1"
+name: clarify-need-root-settles-the-entry-point
+description: >
+  /ux:clarify invoked as /ux:design Step 3 does (kind=need) on the
+  Taskboard React app for a need its product.md does not list as a job:
+  duplicating a board with its cards. The draft frame design passes has
+  who, job, trigger, success, constraints and existing material but no
+  entry point; the product owner answers that the action lives on the
+  board itself, next to "Archive board". The shared understanding must
+  carry an entry point line naming the Board detail screen as the
+  owner's choice, say the job is new (not one of the three in
+  product.md), and take who (operator, expert, daily) from product.md
+  Users as a fact rather than ask it. AskUserQuestion is not granted:
+  the prompt supplies the owner's answers. The skill writes nothing; the
+  workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
