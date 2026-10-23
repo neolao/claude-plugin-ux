@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: review-skill-audit-skips-unimplemented-specs
+description: >
+  /ux:review src on the Taskboard React app, in audit mode. Flow 001 and
+  its screen board-detail were redesigned: status designed, source: still
+  naming src/boards/BoardDetail.tsx from the earlier implementation, and
+  the spec now describes an inline rename the code does not have. Flow 003
+  and settings-boards are implemented, and SettingsBoards.tsx's error state
+  lacks the Retry its spec states. The skill must pass only the implemented
+  spec to conformance — reporting the missing Retry, never the rename as
+  missing — and name the designed spec as not implemented under Not
+  assessed. The workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
