@@ -14,7 +14,7 @@ Reply in the user's language; write the report in the project's documentation la
 
 ## Step 1 — Context
 
-Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke `ux:discover`** (Skill tool) first: an audit without knowing the users is opinion, not evaluation. Keep in mind the user roles, jobs, platform, accessibility target and `Known gaps`.
+Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke `ux:discover`** (Skill tool) first: an audit without knowing the users is opinion, not evaluation. Keep in mind the user roles, jobs, platform, accessibility target and `Known gaps`. Read the latest `.ux/audit/*.md` when one exists: its findings are leads to re-check, not rows to copy.
 
 ## Step 2 — Scope
 
@@ -53,7 +53,7 @@ Reach comes from `product.md` Users and Jobs, not intuition. Accessibility findi
 
 ## Step 7 — Write the report
 
-`${CLAUDE_PLUGIN_ROOT}/templates/audit.md` → `.ux/audit/YYYY-MM-DD.md` (`-2`, `-3` suffix if one exists today). Every row has a `Where` a developer can open and a `Recommendation` a designer could act on. `Suggested next designs`: the 3 findings whose fix brings the most value, each as a `/ux:design F<n>` command with the expected gain. Add newly found gaps to `Known gaps` in the inventory.
+`${CLAUDE_PLUGIN_ROOT}/templates/audit.md` → `.ux/audit/YYYY-MM-DD.md` (`-2`, `-3` suffix if one exists today). Every row has a `Where` a developer can open and a `Recommendation` a designer could act on. `Suggested next designs`: the 3 findings whose fix brings the most value, each as a `/ux:design F<n>` command with the expected gain. After a previous audit: the Summary says which of its findings are gone and which remain, with their new numbers; a finding a flow already carries (`finding: F<n> (audit YYYY-MM-DD)` in `.ux/flows/*.md`) keeps its row, names that flow in its Recommendation, and is not suggested as a next design. Add newly found gaps to `Known gaps` in the inventory.
 
 ## Step 8 — Commit
 
