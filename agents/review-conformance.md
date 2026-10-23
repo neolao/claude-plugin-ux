@@ -24,7 +24,7 @@ If no spec covers the scope, reply in one line: `No spec covers this scope — c
 
 Locate the code from the spec: a screen's `source:` frontmatter, the flow's `screens:` list, then a real search. A divergence is a difference the user can notice against what the spec *states*; what the spec leaves open — the component or technique unless the spec names one, internal structure, the form of a confirmation it does not specify — is an implementation choice, not a finding. An item the spec marks deferred, `n/a` or out of scope is not `missing`; a partial implementation the spec does not mark is `missing` row by row — an intent you cannot see is for the caller to argue. Then, for each spec:
 
-1. **Flow table** — each step: is the user action possible and does the system show what the row says? Are exit & failure paths (abandon, error at step N, undo) implemented?
+1. **Flow table** — each step: the user action is possible, the system shows what the row says, on the screen the row names. The three **Exit & failure paths**: abandon keeps (or clearly loses) what the row says, the error at step N shows and recovers as stated, undo / cancel reverts what the row says. A host binding the row names (undo stack, dirty state, leave prompt) is registered as stated.
 2. **Screen → States table** — each row marked as a real state (not `n/a`): is there a code path rendering it as described, with the stated primary action?
 3. **Interactions table** — each element/action/result/feedback row: present, and the feedback within the stated time?
 4. **Content table** — each key: present through the i18n layer with the specified text (meaningful deviations only)?
