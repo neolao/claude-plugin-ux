@@ -32,7 +32,7 @@ The references: `product.md` Vocabulary — and the glossary whose path opens it
 - **Clarity**: jargon not in the vocabulary, abbreviations users would not know, sentences over ~20 words in labels/helpers.
 - **Conventions**: capitalization or punctuation that differs across the same kind of element (the rule per kind comes from the host — title case in macOS menus — or from the existing strings, sentence case otherwise); a menu item or button that opens a dialog before acting without its ellipsis; a terminal tool's message not in the host shell's one-line style (`error: <what>: <what to do>`); a game-engine panel's labels and tooltips unlike the host editor's. Items the host renders with its own wording (an Electron `role:` item, a native dialog) are not yours.
 
-Every finding needs a `file:line`, read from the file itself. In diff mode, first list the lines the change adds or modifies (`+` lines); a string on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
+Every finding needs a `file:line`, read from the file itself. In diff mode, first list the lines the change adds or modifies (`+` lines — a change handed over as files, with no diff: every line of those files); a string on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
 
 ## Output
 
