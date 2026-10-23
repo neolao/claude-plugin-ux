@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: prototype-no-argument-lists-designed-flows
+description: >
+  /ux:prototype with no argument on the Taskboard React app whose .ux/
+  holds three flows: 001 validated (prototype already built), 002
+  designed, 003 implemented. The skill must list the flows still
+  designed (002 only), ask which one to prototype and stop there: no
+  discover session (product.md and inventory.md exist), no file written
+  or edited, and neither 001 nor 003 offered as a choice. The product
+  owner is not available, so the run ends on the question. The run takes
+  `--allow-tools Write Edit` only so that writing would be possible and
+  therefore gradable; the workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
