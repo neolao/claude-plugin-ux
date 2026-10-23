@@ -74,7 +74,7 @@ If `CHANGELOG.md` exists, add a user-facing line under `[Unreleased]` in the pro
 
 ## Step 9 — Commit
 
-Stage code, tests, i18n files and `.ux/` (never `.env` or secrets); commit per the project's convention, default `feat(ui): <flow title>`. Follow the project's branch/MR workflow; do not push unless `CLAUDE.md` or the user says so.
+If the project is a git repository: stage code, tests, i18n files and `.ux/` (never `.env` or secrets); commit per the project's convention, default `feat(ui): <flow title>`. Follow the project's branch/MR workflow; do not push unless `CLAUDE.md` or the user says so.
 
 ## Step 10 — Report
 
