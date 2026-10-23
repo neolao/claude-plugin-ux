@@ -1,8 +1,9 @@
 ---
 name: expert-content
 description: Consulting UX-writing expert — labels, microcopy, errors, terminology, i18n. Consult when a need introduces or changes user-facing text.
-model: sonnet
-version: 1.0.0
+model: claude-sonnet-5-5
+effort: medium
+version: 1.1.0
 ---
 
 # Agent: expert-content
