@@ -1,0 +1,21 @@
+schema_version: "1.1"
+name: design-redesign-keeps-id-and-resets-changed-screen
+description: >
+  /ux:design 001 on the Taskboard React app, where flow 001 (inline
+  rename of the board's title) is implemented: its screen board-detail
+  is `implemented` with `source: src/boards/BoardDetail.tsx`, its
+  decision 001 is accepted and says a click elsewhere cancels, its
+  `prototype:` names the file that validated it, and it carries
+  `finding: F3 (audit 2026-09-14)`. The owner wants the redesign to
+  save on focus leave instead of cancelling. The skill must redesign in
+  place: the flow keeps its id, file name, job and finding, goes back to
+  `designed` with `prototype: none` and `decision:` pointing at a new
+  decision, the old decision becomes `superseded by` the new one, the
+  board-detail spec goes back to `designed` with its `source:` kept,
+  and the untouched settings-boards spec and flow 003 stay
+  `implemented`. AskUserQuestion is not granted: the prompt supplies
+  the product owner's answers. The run takes `--allow-tools Write
+  Edit`; the workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
