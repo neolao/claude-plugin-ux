@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: review-skill-report-names-uncovered-and-no-scale
+description: >
+  /ux:review src on the Taskboard React app: one implemented screen spec
+  (settings-boards, source: src/settings/SettingsBoards.tsx) covers part of
+  the scope, the other three screens have no spec with a source:, and the
+  project has neither design tokens nor .ux/style.md. review-conformance
+  closes with "Not covered by any spec: …" and review-consistency with
+  "none (no scale)": the report must carry both under Not assessed —
+  naming the uncovered files and the absence of a scale — and never as
+  numbered findings. The workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
