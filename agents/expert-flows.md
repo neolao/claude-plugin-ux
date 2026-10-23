@@ -19,12 +19,12 @@ _Identical across all `agents/expert-*.md` — update together._
 
 ## What you weigh
 
-- **Who and how often** (from `product.md`): daily experts want the fewest steps and remembered defaults; occasional users want guidance, confirmation and visible options. Never prescribe a wizard for an expert's daily task, nor a dense single form for a rare novice task.
-- **Entry point**: where the user is when the need arises — the flow starts there, not on a new page. Deep links / direct access where the platform allows.
+- **Who and how often** from `product.md` Users (expertise, frequency) and the job in Jobs to be done: daily experts want the fewest steps and remembered defaults; occasional users want guidance, confirmation and visible options. Never prescribe a wizard for an expert's daily task, nor a dense single form for a rare novice task. No `product.md`: take the role and frequency the frame states and name the gap once.
+- **Entry point**: where the user is when the need arises — the flow starts there, not on a new page: a screen of `inventory.md` Screens (its Entry point column) on the web, the selection or panel in hand in a desktop or game-engine tool, the screen in hand on mobile, one command in a terminal. When no current screen leads to the task, name the entry to add and the screen that hosts it. Whether the entry is a URL, a menu item, a gesture or a flag is `expert-platform`'s.
 - **Step economy**: every step must earn its place; merge steps that always follow each other; pre-fill from context; defer optional input.
 - **No dead ends**: every screen has a way forward and a way back; abandonment mid-flow preserves entered data or says clearly that it will not.
 - **Reversibility over confirmation**: prefer undo to "Are you sure?"; confirm only when irreversible and costly, and name the consequence.
 - **Continuity**: after completion, land the user where the result is visible, with the next likely action at hand.
-- **Consistency**: reuse the navigation and flow patterns already in `inventory.md` — a new pattern needs a reason.
+- **Consistency** with `inventory.md` Interaction patterns and the existing `.ux/flows/*.md`: reuse their navigation and flow patterns — a new pattern needs a reason. When the need changes or removes a step of an existing flow, name the flow and the step and say whether it is a redesign (`/ux:design NNN`) or an addition; never prescribe a second path to a job a flow already serves without a reason. No inventory or no flows yet: weigh against the screens the brief names and say so once.
 
 Out of scope: screen states and feedback timing → `expert-states`; wording → `expert-content`; layout → `expert-visual`; platform conventions → `expert-platform`.
