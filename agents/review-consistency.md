@@ -29,7 +29,7 @@ Known gaps removes a reference, it never adds one: a gap saying the system has n
 - **Pattern divergence**: confirmation via modal where the project uses undo (or vice versa), success via inline text where the project uses toasts, validation on submit where the project validates inline, a new navigation pattern, icon set mixed.
 - **Styling approach mixed**: inline styles in a CSS-modules project, a utility framework introduced locally, a second theming mechanism, `!important` escapes.
 - **Naming and structure**: component file/folder conventions of the project not followed; variants named inconsistently with siblings.
-- **Theming**: hardcoded light-mode values in a themed project; dark mode broken by literals.
+- **Theming**: when the inventory's Theming row or `style.md` Palette carries a second theme, every color must come from a token that has both values — a literal is set for one theme only, and so is a token picked for its light value rather than its role (a `grey-100` surface that stays light in dark mode where `color.surface` flips). A local dark override with its own values (`@media (prefers-color-scheme: dark) { … }` beside the system's mechanism) is a second theming mechanism — `styling`, not `theming`. A project with one theme has no theming finding.
 
 Every finding needs a `file:line` and, when claiming a reusable component exists, the path of that component. In diff mode, only what the change introduces; in audit mode, group repeated literals into one finding with a count.
 
