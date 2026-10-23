@@ -1,0 +1,25 @@
+:root {
+  --color-bg: #ffffff;
+  --color-panel: #f4f4f5;
+  --color-text: #18181b;
+  --color-muted: #71717a;
+  --color-accent: #c2410c;
+  --color-go: #15803d;
+  --color-standby: #b45309;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --radius: 3px;
+  --font-ui: -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "SF Mono", Menlo, monospace;
+  --duration-fast: 120ms;
+}
+
+/* Set from the main process according to the OS theme (see electron/main.ts). */
+:root[data-theme="dark"] {
+  --color-bg: #18181b;
+  --color-panel: #27272a;
+  --color-text: #fafafa;
+  --color-muted: #a1a1aa;
+}

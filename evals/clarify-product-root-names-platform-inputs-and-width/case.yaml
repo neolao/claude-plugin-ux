@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: clarify-product-root-names-platform-inputs-and-width
+description: >
+  /ux:clarify invoked as /ux:discover Step 4 does (kind=product) on
+  Cuecard, an Electron app whose renderer is React: package.json depends
+  on electron, electron/main.ts creates the window with minWidth 900 and
+  the menu bar, strings are an English map, there is no glossary. The
+  product owner's answers cover the users, the jobs, the constraints and
+  the vocabulary but say nothing about the platform or the window width.
+  The shared understanding must open with what the application is, call
+  the platform desktop (Electron) as a fact looked up in the code (not a
+  question put to the owner), give 900 px from main.ts as the smallest
+  width, record mouse + keyboard as the inputs, and name README/strings
+  as the source of the vocabulary. AskUserQuestion is not granted: the
+  prompt supplies the owner's answers. The skill writes nothing, so no
+  gated tool is needed; the workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
