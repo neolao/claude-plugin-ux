@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: expert-platform-terminal-tui-and-scripts
+description: >
+  expert-platform consulted by /ux:design on a terminal need: watch a
+  rollout and abort it from a new full-screen view of a CLI that is also
+  run in CI. The rough option mixes progress lines with the JSON summary
+  on stdout, forces colors on, captures Ctrl+C and ignores it, leaves the
+  full-screen view painted after exit, and has no plain-output fallback
+  so the command hangs without a TTY. The expert must split data from
+  progress, make colors optional with NO_COLOR, require the plain-output
+  fallback and a terminal restored on exit and Ctrl+C, and must prescribe
+  neither the wording of messages nor the refresh timing.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
