@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: expert-states-batch-upload-offline-and-retry
+description: >
+  expert-states consulted by /ux:design on a mobile need: sending a site
+  inspection report of forty photos from a construction site with a
+  flaky network. The rough option uploads under a blocking modal spinner
+  with no count, shows an empty grid and a generic banner without
+  network, marks the whole report failed when three photos fail and
+  re-sends all forty on Retry, and re-uploads everything after the app
+  is killed mid-way. The expert must require determinate progress the
+  inspector can leave, an offline state that keeps the photos visible,
+  per-photo failure with retry of the failed ones only, and a resume
+  that redoes nothing already sent, and must prescribe neither the
+  banner's wording nor the OS background-task mechanism.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
