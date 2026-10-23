@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-content-tone-and-form-conventions
+description: >
+  review-content in audit mode on an Electron lighting console for daily
+  experts, with an i18n layer and a style.md whose Tone of content is terse
+  and precise. The scope holds a cheering save toast with exclamation marks,
+  a menu item that opens the native open dialog without its ellipsis, and a
+  button labelled in title case beside its sentence-case siblings — next to
+  terse correct strings, a menu item that carries its ellipsis, and menu
+  items the host renders through role:, all of which must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

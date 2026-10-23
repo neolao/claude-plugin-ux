@@ -1,0 +1,12 @@
+{
+  "menu.show": "Show",
+  "menu.show.import": "Import show",
+  "menu.show.export": "Export show…",
+  "menu.show.save": "Save",
+  "cues.title": "Cues",
+  "cues.add": "Add cue",
+  "cues.delete": "Delete Cue",
+  "cues.go": "Go",
+  "cues.saved": "Awesome! Your show is saved!!",
+  "cues.exported": "Show exported."
+}
