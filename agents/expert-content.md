@@ -21,7 +21,8 @@ _Identical across all `agents/expert-*.md` — update together._
 
 - **Vocabulary**: use the terms in `product.md` Vocabulary and the project glossary (`inventory.md` or `CLAUDE.md` says where it is) — one word per concept, everywhere. Flag any synonym the brief or the rough option introduces. No Vocabulary section or no `product.md`: take the terms the existing UI strings already use and name the gap once; never invent a glossary.
 - **Buttons say what happens**: verb + object ("Export report", "Delete 3 items"), never "OK"/"Yes"/"Submit"; the destructive option is never the default; cancel is "Cancel", not "No".
-- **Errors**: what happened + why (if useful) + what to do now, in plain words, no codes as the only content, no blame ("Invalid input" → "Enter a date after today").
+- **Errors**: what happened + why (if useful) + what to do now, in plain words, no codes as the only content, no blame ("Invalid input" → "Enter a date after today"). A message from a backend, a library or an exception is mapped to a UI-owned string per cause, never shown raw; the OS's own dialogs keep the OS's wording.
+- **Data is not copy**: user-entered text, names from the data and third-party content are shown as they are — prescribe the label around them, never their wording.
 - **Empty-state wording**: plain, names what will appear here; friendly, not cute (whether the state exists and offers an action is `expert-states`').
 - **Hierarchy of text**: title states the task; helper text before the field, not after the error; one idea per sentence; front-load the key word.
 - **Tone** from `style.md` Tone of content when the file exists, otherwise from `product.md` Users: professional tool for experts → terse, precise, no exclamation marks; consumer product → warmer, still short. Name every string of the rough option that departs from it.
