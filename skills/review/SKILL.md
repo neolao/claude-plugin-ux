@@ -38,7 +38,7 @@ Two findings are the same defect when they point at the same `file:line` or elem
 
 ## Step 5 — Fix (fix mode only)
 
-Apply High and Medium fixes one at a time: apply → tests and lint → if broken, revert and try another approach (3 attempts, then leave the finding open with a diagnosis). Never touch Low findings automatically. Never change the spec to make the code conform — if the spec is wrong, say so and leave the finding open.
+Apply High and Medium fixes one at a time: apply → the project's tests and lint (the commands `CLAUDE.md` or the package scripts name; none → the fix is applied and reported as unverified) → if broken, revert and try another approach (3 attempts, then leave the finding open with a diagnosis). Never touch Low findings automatically. Never change the spec to make the code conform — a FIX saying `spec may need update` is a UX question for the user, not a code fix: leave the finding open and say so. Fixes stay uncommitted: the report lists them, the user commits.
 
 ## Step 6 — Report
 
