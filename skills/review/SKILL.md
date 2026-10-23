@@ -14,7 +14,7 @@ Reply in the user's language.
 
 ## Step 1 — Context
 
-Read `.ux/product.md`, `.ux/inventory.md` and `.ux/style.md` if they exist (if not, review anyway with less grounding — say so and suggest `/ux:discover`). Read the `.ux/screens/*.md` and `.ux/flows/*.md` whose `source:` or `screens:` intersect the scope — the conformance reference.
+Read `.ux/product.md`, `.ux/inventory.md` and `.ux/style.md` if they exist (if not, review anyway with less grounding — say so and suggest `/ux:discover`). The conformance reference: the `.ux/screens/*.md` whose `source:` intersects the scope, and the `.ux/flows/*.md` whose `screens:` list one of them. In diff mode take them whatever their `status:` — the change may be what implements them (`/ux:implement` fills `source:` and runs this review before marking `implemented`). In audit mode only `status: implemented` is a reference: a spec still `designed` or `validated` (a redesign, a flow waiting for `/ux:implement`) describes what is not built yet and every row would come back `missing` — name it under Not assessed instead of passing it to conformance.
 
 ## Step 2 — Scope
 
