@@ -44,14 +44,16 @@ Apply High and Medium fixes one at a time: apply → tests and lint → if broke
 
 ```
 ## UI/UX review
-Scope: <diff | path> · Files: N · Specs: <NNN, slug… | none>
+Scope: <diff | path> · Files: N · Specs: <NNN (status), slug (status)… | none> · Captures: <folder | none>
 Findings: N (High: N, Medium: N, Low: N)
 
 ### High
 1. [axis] file:line — issue. Evidence: … → Fix: …
 ### Medium / ### Low
 …
+### Not assessed   (omitted when empty)
+- what the agents' closing lines name — a gap, never a finding: screens or files no spec covers and specs not yet implemented (for `/ux:design`, `/ux:implement`); no scale to judge values against, a Known gap met in scope (for `/ux:style`, `/ux:design`); an axis not reviewed because its agent returned nothing
 ### Applied fixes / ### Left open   (fix mode only)
 ```
 
-Numbered so findings can be discussed one by one. Defects only — no praise; none found → one line.
+Numbered so findings can be discussed one by one. Defects only — no praise; none found → one line, plus Not assessed when there is one.
