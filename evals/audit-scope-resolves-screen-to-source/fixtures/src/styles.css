@@ -1,0 +1,29 @@
+.nav { display: flex; gap: 16px; padding: 12px 24px; border-bottom: 1px solid #d0d4da; }
+.nav-link { color: #1f2a37; text-decoration: none; padding: 4px 8px; border-radius: 4px; }
+.nav-link:hover, .nav-link:focus-visible { background: #eef1f5; outline: 2px solid #2a62d9; outline-offset: 2px; }
+.nav-link.active { font-weight: 600; }
+.page { max-width: 720px; margin: 0 auto; padding: 24px; }
+.board-list, .card-list, .settings-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.board-row { display: block; padding: 12px 16px; border: 1px solid #d0d4da; border-radius: 4px; color: #1f2a37; text-decoration: none; }
+.board-row:hover, .board-row:focus-visible { background: #eef1f5; outline: 2px solid #2a62d9; outline-offset: 2px; }
+.board-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.card { padding: 12px 16px; border: 1px solid #d0d4da; border-radius: 4px; }
+.settings-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.settings-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rename-input { flex: 1; min-width: 0; padding: 8px; border: 1px solid #d0d4da; border-radius: 4px; }
+.rename-input:focus-visible { outline: 2px solid #2a62d9; outline-offset: 2px; }
+.btn { padding: 8px 16px; border-radius: 4px; border: 1px solid #d0d4da; background: #ffffff; color: #1f2a37; cursor: pointer; min-height: 32px; }
+.btn:hover { background: #eef1f5; }
+.btn:focus-visible { outline: 2px solid #2a62d9; outline-offset: 2px; }
+.btn:active { background: #dfe4ea; }
+.btn:disabled { opacity: 0.5; cursor: default; }
+.btn-primary { background: #2a62d9; border-color: #2a62d9; color: #ffffff; }
+.btn-primary:hover { background: #1f4fb3; }
+.btn-danger { background: #ffffff; border-color: #b3261e; color: #b3261e; }
+.btn-danger:hover { background: #fbeae9; }
+.error, .empty { padding: 16px; border: 1px solid #d0d4da; border-radius: 4px; }
+.dialog { padding: 24px; border: 1px solid #d0d4da; border-radius: 4px; max-width: 480px; }
+.dialog::backdrop { background: rgba(31, 42, 55, 0.5); }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 12px 16px; border-radius: 4px; background: #1f2a37; color: #ffffff; }
+.toast-error { background: #b3261e; }
