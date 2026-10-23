@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: expert-flows-single-action-is-a-flow
+description: >
+  expert-flows consulted by /ux:design on a game-engine tool need that the
+  rough option presents as "a single button, not a flow": exporting the
+  placed prefabs as a CSV from a Unity editor panel. The button ignores the
+  designer's selection, shows nothing when the export ends, and cannot be
+  stopped. The expert must still prescribe the entry on the selection, the
+  landing with the result and a cancel, and must prescribe neither a
+  progress indicator nor an undo for an export that changes nothing.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
