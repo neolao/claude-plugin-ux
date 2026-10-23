@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: clarify-plan-root-lists-deferred-rows-with-reason
+description: >
+  /ux:clarify invoked as /ux:implement Step 2b does (kind=plan) on the
+  Taskboard React app for flow 001 (inline rename on Board detail, spec
+  validated). The Step 2 mapping passed as context reuses Button and the
+  inline-rename pattern of Settings › Boards, adds keys to src/i18n.ts,
+  and notes that src/toast.ts has no action slot while the spec's toast
+  carries an Undo. The product owner defers the Undo to a later flow
+  (toast has no action slot, release next week) and keeps everything
+  else. The shared understanding must list the Undo row under Out of
+  scope with that reason, settle no line that builds it, keep the other
+  rows, and cite src/toast.ts's missing action slot as a fact looked up.
+  AskUserQuestion is not granted: the prompt supplies the owner's
+  answers. The skill writes nothing; the workspace is not a git
+  repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
