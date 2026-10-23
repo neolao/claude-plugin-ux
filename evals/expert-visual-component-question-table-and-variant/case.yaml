@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: expert-visual-component-question-table-and-variant
+description: >
+  expert-visual in implementation consultation on a question that only
+  names a component: cards or a table for a list of 120 lighting
+  fixtures with eight attributes, in a web tool whose adopted style.md
+  sets a compact density, where the inventory's DataTable has default
+  and compact variants but no color-swatch cell and the team leans
+  towards a new CardGrid and a FixtureTable copied from DataTable. The
+  expert must recommend the table from the facts with the card grid as
+  the rejected alternative and its cost, require the swatch cell as a
+  variant added to DataTable rather than a copy, and must prescribe
+  neither the HTML element or keyboard navigation nor the column
+  headers' wording.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
