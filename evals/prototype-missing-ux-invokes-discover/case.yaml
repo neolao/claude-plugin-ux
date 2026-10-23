@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: prototype-missing-ux-invokes-discover
+description: >
+  /ux:prototype 001 on the Taskboard React app with no .ux/ folder at
+  all. The skill must invoke ux:discover first (CLAUDE.md: every skill
+  that writes .ux/ does so when product.md or inventory.md is missing),
+  then, since no flow 001 exists, say which file was looked for, suggest
+  /ux:design and stop — without designing a flow or writing a prototype
+  itself. AskUserQuestion is not granted: the prompt supplies the
+  product owner's answers for discover's clarify session. The app
+  cannot be launched. The run takes `--allow-tools Write Edit`; the
+  workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
