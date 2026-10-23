@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: design-carried-finding-points-at-redesign
+description: >
+  /ux:design F3 on the Taskboard React app, where the latest audit's
+  finding F3 (renaming only reachable through Settings › Boards) is
+  already carried by flow 001 (`finding: F3 (audit 2026-09-14)`, status
+  designed). The skill must notice the flow carrying the finding before
+  framing anything, name it, and ask whether to redesign it with
+  `/ux:design 001` instead of designing a second flow for the same
+  finding. AskUserQuestion is not granted: the prompt supplies the
+  product owner's answer (not now — stop). Nothing may be written and no
+  expert consulted. The run takes `--allow-tools Write Edit`; the
+  workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
