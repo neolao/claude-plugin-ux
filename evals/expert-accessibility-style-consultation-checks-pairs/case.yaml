@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: expert-accessibility-style-consultation-checks-pairs
+description: >
+  expert-accessibility consulted by /ux:style on a proposed visual direction
+  for a desktop web product. The direction's light palette puts muted text at
+  2.6:1 on the surface, drops the focus ring in favour of a hover darkening
+  and slides panels in over 400 ms, next to a primary/on-primary pair at
+  6.7:1 and 32 px controls that must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
