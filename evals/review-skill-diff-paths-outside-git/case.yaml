@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: review-skill-diff-paths-outside-git
+description: >
+  /ux:review diff src/boards/BoardDetail.tsx src/i18n.ts on the Taskboard
+  React app, outside a git repository: the inline rename just built in
+  BoardDetail.tsx (its screen spec is validated, source: filled, as
+  /ux:implement leaves it before its review) reports its failure with a
+  literal "Rename failed" instead of the spec's i18n key, while
+  SettingsBoards.tsx, not in the list, renders the raw exception message in
+  its error state. The skill must take the two files as the change (diff
+  mode, every line counted as added), launch the review agents instead of
+  asking for a path and stopping, report the literal in BoardDetail.tsx and
+  nothing in SettingsBoards.tsx. The workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
