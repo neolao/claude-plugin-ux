@@ -49,7 +49,7 @@ Merge the heuristic findings with the review findings (same defect from several 
 | **Slows or confuses** | High | Medium | Low |
 | **Cosmetic / polish** | Medium | Low | Low |
 
-Reach comes from `product.md` Users and Jobs, not intuition. Accessibility findings that exclude a category of users are High regardless of reach when the project states an accessibility target. Number `F1…Fn` in priority order.
+Reach comes from `product.md` Users and Jobs, not intuition. Accessibility findings that exclude a category of users are High regardless of reach when the project states an accessibility target. Number `F1…Fn`: High, then Medium, then Low; within a priority, the wider reach first.
 
 ## Step 7 — Write the report
 
