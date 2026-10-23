@@ -54,6 +54,7 @@ Save captures under `.ux/captures/baseline/<screen-slug>.png` and reference them
 From `${CLAUDE_PLUGIN_ROOT}/templates/product.md` and `${CLAUDE_PLUGIN_ROOT}/templates/inventory.md`: fill **every** placeholder from what you found — no template text left, no invented facts; unknowns go under `Known gaps`. Tokens with their **source file**; components with the **states they support**; `Known gaps` is the honest list `/ux:audit` starts from.
 
 `product.md`:
+- **Platform** — what the user runs, not what the code is written in: a web UI in Electron or Tauri is `desktop (Electron)` / `desktop (Tauri)`, never `web`; a Unity panel is `game-engine tool (Unity)` even when it is a Unity build; several surfaces (a web app and a mobile app, an editor tool also shipped standalone) are each listed with the folder that holds them. `expert-platform` applies one block per surface named here.
 - **Devices & input** — every input the UI handles (mouse + keyboard, touch, pen, gamepad) and the smallest width it is built for, with where that comes from: the smallest breakpoint found, the narrowest a panel docks, the phone widths targeted. `expert-visual` and `expert-platform` take widths and inputs from this line; the inventory's Breakpoints row only records the token values.
 - **Vocabulary** — when the project has a glossary, the section opens with its path (`expert-content` and `review-content` look for it in `.ux/` and `CLAUDE.md`) and mirrors its terms; without one, the terms the UI strings and the README already use, and no invented definition.
 
