@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: expert-visual-style-consultation-delivers-scales
+description: >
+  expert-visual consulted by /ux:style on a proposed visual direction for
+  a web dispatch tool used all day by experts. The direction sets a
+  comfortable density with 44 px rows for a 300-row board, reuses the
+  primary blue as the error color, has no dark values although theming
+  follows the OS, and pads cells 10 px on a 4 px scale. The expert must
+  prescribe a compact density with its row and control heights, separate
+  semantic roles from the primary, require a dark value per palette role,
+  flag the values off the direction's own spacing scale, keep the imposed
+  brand teal, and must neither compute contrast ratios nor prescribe the
+  system font or native control shapes.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
