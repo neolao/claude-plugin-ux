@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: discover-desktop-shell-around-web-ui
+description: >
+  /ux:discover on an Electron app (Cuecard) whose renderer is a React
+  HashRouter UI with no navigation bar of its own: every screen is reached
+  from the menu bar declared in electron/main.ts, the dark theme follows the
+  OS through nativeTheme and a data-theme attribute on the root, tokens are
+  CSS custom properties in src/renderer/styles/tokens.css, and strings are
+  an English map. product.md must call the platform desktop (Electron), not
+  web; the inventory must name the shell beside React, point Routing at both
+  the router file and the menu, give each screen its menu entry and its
+  rendering file, fill Theming with the data-theme mechanism following the
+  OS, and record the dev command as untested. The app cannot be launched and
+  AskUserQuestion is not granted: the prompt supplies the product owner's
+  answers. The skill writes .ux/, so the run takes `--allow-tools Write
+  Edit`; the workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
