@@ -8,9 +8,9 @@ model: claude-sonnet-5-5
 
 # /ux:prototype — Validate the UX before writing code
 
-A prototype exists to get a **decision** from a human before implementation costs anything. Honest (real copy, real states, real constraints) and cheap (one HTML file, no build).
+A prototype exists to get a **decision** from a human before implementation costs anything. Honest (real copy, real states, real constraints) and cheap (one HTML file, no build). It stays in `.ux/prototypes/` as the visual reference `/ux:implement` reads; it is never ported — implementation builds with the project's own components.
 
-Reply in the user's language.
+Reply in the user's language; spec updates keep the spec's language.
 
 ## Step 1 — Context and target
 
