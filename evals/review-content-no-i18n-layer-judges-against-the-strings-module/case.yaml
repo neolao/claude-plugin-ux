@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: review-content-no-i18n-layer-judges-against-the-strings-module
+description: >
+  review-content in audit mode on a single-language Electron app with no
+  i18n layer: the inventory's i18n line says the UI strings live in
+  src/strings.ts, and product.md has no Vocabulary section. One component
+  writes a message inline instead of in the strings module, the strings
+  module holds a vague error and calls the same concept Fixtures in one
+  string and lights in another — next to strings-module entries that are
+  plain literals, which must not be reported as hardcoded nor turned into a
+  demand for an i18n library, and a closing line that must name the missing
+  references instead of counting them as findings.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
