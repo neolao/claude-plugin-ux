@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: expert-accessibility-rendering-only-need
+description: >
+  expert-accessibility consulted by /ux:design on a need with nothing to
+  operate: service health tiles on a wall-screen dashboard, colored
+  green/amber/red with no other cue, white labels on the amber tile, and a
+  pulse animation while an incident is open. The expert must still prescribe,
+  and must not invent focus or keyboard handling for tiles nobody operates.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
