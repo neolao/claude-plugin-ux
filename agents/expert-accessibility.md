@@ -1,8 +1,9 @@
 ---
 name: expert-accessibility
 description: Consulting accessibility expert — keyboard, focus, screen readers, contrast, motion. Consult when a need adds interactive UI or changes rendering.
-model: sonnet
-version: 1.0.0
+model: claude-sonnet-5-5
+effort: medium
+version: 1.1.0
 ---
 
 # Agent: expert-accessibility
