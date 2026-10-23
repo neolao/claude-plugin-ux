@@ -41,9 +41,9 @@ Do not invent features beyond the spec — a prototype showing more than what wi
 
 Publish with the first that works: **Artifact tool** (follow its own instructions, including any design skill it asks to load; icon and one-line description) → **browser tools** (open the file, screenshot to confirm it renders) → the file path alone. Whichever worked: write the file path — and the artifact URL when there is one — in the flow's `prototype:` (`/ux:implement` finds the prototype through it), give the user the path with the command to open it, and tell them in one line how to use the prototype bar.
 
-## Step 4 — Iterate
+## Step 4 — Iterate (wait for the user)
 
-For each remark: changes the **UX** (step, state, wording, interaction) → update the spec **and** the prototype — the spec stays the source of truth; **cosmetic** → prototype only; contradicts a `.ux/decisions/` record → point it out and ask whether to supersede it (then `/ux:design NNN`, not a patch here). Republish to the same file/URL after each round; keep rounds short.
+Stop here and wait: the user needs to open the prototype — never go on to Step 5 on your own. For each remark: changes the **UX** (step, state, wording, interaction) → update the spec **and** the prototype — the spec stays the source of truth; **cosmetic** → prototype only; contradicts a `.ux/decisions/` record → point it out and ask whether to supersede it (then `/ux:design NNN`, not a patch here). Republish to the same file/URL after each round; keep rounds short.
 
 ## Step 5 — Validate
 
