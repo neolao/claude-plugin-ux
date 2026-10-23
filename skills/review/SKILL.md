@@ -1,7 +1,7 @@
 ---
 name: review
 description: UI/UX review of a diff or path through the review agents (states, accessibility, content, consistency, visual, conformance); --fix applies High and Medium fixes.
-argument-hint: "[path | diff | --fix]"
+argument-hint: "[path… | diff [path…]] [--fix]"
 version: 1.1.0
 model: claude-sonnet-5-5
 ---
@@ -18,9 +18,13 @@ Read `.ux/product.md`, `.ux/inventory.md` and `.ux/style.md` if they exist (if n
 
 ## Step 2 — Scope
 
-`$ARGUMENTS` contains `--fix` → **fix mode**, strip it. Remaining text is a path → review that path (audit mode; when invoked by `/ux:audit`, apply the exclusions it passes). `diff` or empty → the current change: uncommitted changes plus the branch's commits not on the default branch (`git diff $(git merge-base HEAD <default-branch>)` + working tree); outside a git repository, ask for a path and stop.
+`$ARGUMENTS` contains `--fix` → **fix mode**, strip it. A calling skill may add `exclusions: <paths or globs>` and `captures: <folder>` (`/ux:audit` Step 3, `/ux:implement` Step 5) — strip them too, they go to Step 3. What remains:
 
-Keep UI-relevant files only (components, views, pages, panels, styles, templates, `*.uxml`/`*.uss`, `*.xaml`, `*.prefab`/`*.unity` diffs, i18n files, UI tests); exclude generated and vendored files. Nothing left → say so and stop.
+- paths → **audit mode**: those paths, whole;
+- `diff` or empty → **diff mode** on the current change: the working tree, untracked files included, plus the branch's commits not on the default branch (`git diff $(git merge-base HEAD <default-branch>)`);
+- `diff` followed by paths, or a caller naming the files it created or changed → **diff mode** on those files, every line of them counted as added — the only way to hand over a change outside a git repository; `diff` alone outside one → ask for the files touched and stop.
+
+Keep UI-relevant files only (components, views, pages, panels, styles, templates, `*.uxml`/`*.uss`, `*.xaml`, `*.prefab`/`*.unity` diffs, i18n files, UI tests); exclude generated and vendored files and the caller's exclusions. Nothing left → say so and stop.
 
 ## Step 3 — Run the review agents in parallel
 
