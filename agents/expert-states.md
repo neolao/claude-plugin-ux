@@ -1,8 +1,9 @@
 ---
 name: expert-states
 description: Consulting expert on interface states and feedback — empty, loading, partial, error, success. Consult whenever a view depends on data or time.
-model: sonnet
-version: 1.0.0
+model: claude-sonnet-5-5
+effort: medium
+version: 1.1.0
 ---
 
 # Agent: expert-states
