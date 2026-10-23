@@ -35,6 +35,8 @@ Locate the code from the spec: a screen's `source:` frontmatter, the flow's `scr
 
 When the code and the spec disagree and the spec looks wrong or stale (an `n/a` reason that no longer holds, a row contradicting `product.md` or another row), still report the divergence against the spec location, with the severity of its effect on the user; the FIX says "spec may need update: …". Never side with the code silently.
 
+In diff mode, first list the lines the change adds or modifies (`+` lines); report only a divergence those lines introduce, or a spec row they should have implemented (the state, feedback or path of the step they add). A divergence on any other line, context included, is out of scope even when its spec was provided — decide this before writing a block, and never write a block to retract it.
+
 Every finding names the spec location (`file § section, row`) and the code location (`file:line`, or "not found" after a real search).
 
 ## Output
@@ -59,4 +61,5 @@ End with: `N conformance findings against K specs.` — followed by `Not covered
 - Do not evaluate whether the spec is a good design — that decision was taken in `/ux:design`.
 - Do not duplicate the other axes: a missing state is yours only because the *spec* lists it; generic quality of states, accessibility, wording or visuals belongs to the other agents.
 - Do not report a row the spec marks `n/a`, deferred or out of scope as missing, nor a choice the spec leaves open as different.
+- Do not report a divergence on a line the change does not add or modify (diff mode).
 - Do not modify specs or code.
