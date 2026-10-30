@@ -2,7 +2,7 @@
 name: style
 description: Define the look and feel once — document the existing design system, or propose 2–3 previewed visual directions — written to .ux/style.md.
 argument-hint: "[--redesign] [optional: brand hints — reference products, adjectives, imposed colors]"
-version: 1.2.0
+version: 1.2.1
 model: claude-sonnet-5-5
 ---
 
@@ -52,7 +52,7 @@ Do not present yet — build the previews first.
 
 For each direction, a single-file **style tile** `.ux/prototypes/style-<slug>.html` (inline CSS/JS, tokens as CSS custom properties at the top, `prefers-reduced-motion` honored): palette swatches with contrast ratios (light and dark side by side if the product has theming); type specimen; core components in their states (buttons primary/secondary/destructive, input empty/filled/error, card or row, badge, toast); and **one key screen of the product** re-skinned with real copy and realistic data — what makes the choice concrete.
 
-In **document** mode, one tile of the existing system — it often reveals inconsistencies; list them under `Known gaps` in the inventory.
+In **document** mode, one tile of the existing system, `style-current.html` — it often reveals inconsistencies; list them under `Known gaps` in the inventory, each with the `file:line` where it was seen.
 
 Publish like `/ux:prototype` Step 3 (Artifact tool → browser tools → file paths), one artifact per direction.
 
