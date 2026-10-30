@@ -2,7 +2,7 @@
 name: style
 description: Define the look and feel once — document the existing design system, or propose 2–3 previewed visual directions — written to .ux/style.md.
 argument-hint: "[--redesign] [optional: brand hints — reference products, adjectives, imposed colors]"
-version: 1.0.1
+version: 1.1.0
 model: claude-sonnet-5-5
 ---
 
@@ -60,13 +60,13 @@ This is a mandatory `AskUserQuestion` tool call, not a narrative to describe and
 
 ## Step 8 — Write `.ux/style.md`
 
-Fill `${CLAUDE_PLUGIN_ROOT}/templates/style.md` from the chosen direction (or the documented system); follow the template's own guidance for `## Source of truth` and `## Migration`. Every value in the file is the one shown in the preview — no placeholder, no invented value. `status: documented` (document) or `adopted` (propose/redesign).
+Fill `${CLAUDE_PLUGIN_ROOT}/templates/style.md` from the chosen direction (or the documented system); follow the template's own guidance for `## Source of truth` and `## Migration`. Every value in the file is the one shown in the preview — no placeholder, no invented value. `status: documented` (document) or `adopted` (propose/redesign). A redesign that keeps the current system changes nothing and is written as document mode: `status: documented` (with `mode: redesign`), `## Source of truth` the existing token files, no `## Migration`, no decision.
 
 Propose/redesign with a change: `templates/decision.md` → `.ux/decisions/NNN-visual-direction.md` (numbering as `/ux:design` Step 6, `flow: none`) with the rejected directions; a previous visual-direction decision becomes `status: superseded by NNN`. In propose mode, add to the inventory's `Known gaps`: "no design tokens yet — `style.md` is the reference until `/ux:implement` creates them".
 
 ## Step 9 — Commit
 
-If the project is a git repository: stage `.ux/style.md`, `.ux/prototypes/style-*.html`, `.ux/decisions/`, `.ux/inventory.md`; commit `docs(ux): define visual direction` (propose/redesign) or `docs(ux): document existing visual style`.
+If the project is a git repository: stage `.ux/style.md`, `.ux/prototypes/style-*.html`, `.ux/decisions/`, `.ux/inventory.md`; commit `docs(ux): define visual direction` (propose, or redesign with a change) or `docs(ux): document existing visual style` (document, or the current system kept).
 
 ## Step 10 — Report
 
