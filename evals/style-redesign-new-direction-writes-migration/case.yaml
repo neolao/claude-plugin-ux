@@ -1,0 +1,24 @@
+schema_version: "1.1"
+name: style-redesign-new-direction-writes-migration
+description: >
+  /ux:style --redesign on Cuecard, an Electron app whose tokens live in
+  src/renderer/styles/tokens.css (accent #c2410c, a green --color-go and
+  an amber --color-standby that must survive, dark values under
+  data-theme set from the OS). The product owner answers the brand
+  interview, then — when the directions are put to them — takes the
+  first new direction, not "Keep the current system". The skill must
+  consult expert-accessibility, write a style tile per direction, and
+  write .ux/style.md as an adopted direction: `status: adopted` with
+  `mode: redesign`, a Palette keeping #15803d and #b45309 with a Dark
+  value on every row, a `## Migration` table whose rows name tokens.css,
+  and a decision under .ux/decisions/ with `flow: none` that lists the
+  current system among the rejected options and that style.md's
+  `decision:` points at. Precision twin of
+  style-redesign-keep-current-stays-documented: same fixture, the other
+  answer. AskUserQuestion, the Artifact tool and the browser tools are
+  not granted: the prompt supplies the owner's answers and the tiles are
+  published as file paths. The run takes `--allow-tools Write Edit`; the
+  workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

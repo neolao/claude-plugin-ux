@@ -1,0 +1,20 @@
+schema_version: "1.1"
+name: style-redesign-keep-current-stays-documented
+description: >
+  /ux:style --redesign on Cuecard, an Electron app whose tokens live in
+  src/renderer/styles/tokens.css (accent #c2410c, a green --color-go and
+  an amber --color-standby, dark values under data-theme set from the
+  OS). The product owner answers the brand interview, then — when the
+  directions are put to them — keeps the current system. The skill must
+  offer "Keep the current system" as the first direction, consult the
+  experts, write a style tile, and write .ux/style.md as a documented
+  system: `status: documented` with `mode: redesign`, the Palette carrying
+  the tokens.css values, `## Source of truth` naming tokens.css, no
+  `## Migration` section, and no decision under .ux/decisions/ — nothing
+  changed. AskUserQuestion, the Artifact tool and the browser tools are
+  not granted: the prompt supplies the owner's answers and the tiles are
+  published as file paths. The run takes `--allow-tools Write Edit`; the
+  workspace is not a git repository.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
