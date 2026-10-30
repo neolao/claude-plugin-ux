@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: review-states-refresh-optimistic-batch-and-the-feedback-border
+description: >
+  review-states in audit mode on a small React team app whose product.md
+  states several members work on the same board at once. The scope holds a
+  refresh that blanks the list it refreshes, an optimistic toggle never
+  rolled back when the server refuses, and a bulk archive that reports one
+  generic error for many items — next to an activity feed that refreshes
+  correctly and confirms with an auto-dismissing toast, which must stay
+  unflagged: whether a passing message stays readable is
+  review-accessibility's, and a handled view earns no block.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
