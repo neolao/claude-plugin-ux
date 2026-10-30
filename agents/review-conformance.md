@@ -2,8 +2,8 @@
 name: review-conformance
 description: Reviews one dimension — the code matches the .ux/ flow and screen specs: nothing missing, extra or different. Read-only.
 model: claude-sonnet-5-5
-effort: medium
-version: 1.1.0
+effort: high
+version: 1.1.1
 ---
 
 # Agent: review-conformance
@@ -37,7 +37,7 @@ When the code and the spec disagree and the spec looks wrong or stale (an `n/a` 
 
 In diff mode, first list the lines the change adds or modifies (`+` lines); report only a divergence those lines introduce, or a spec row they should have implemented (the state, feedback or path of the step they add). A divergence on any other line, context included, is out of scope even when its spec was provided — decide this before writing a block, and never write a block to retract it.
 
-Every finding names the spec location (`file § section, row`) and the code location (`file:line`, or "not found" after a real search).
+Every finding names the spec location (`file § section, row`) and the code location (`file:line`, or "not found" after a real search). Decide that a divergence exists before writing its block: a spec row the code meets, or one you checked and found conforming, gets no block (in any mode) — never write a block to say "this is not a finding"; name such rows in the closing line instead.
 
 ## Output
 
@@ -54,7 +54,7 @@ FIX: [make the code match — or, if the spec looks wrong, say "spec may need up
 
 `high` = a state, step or acceptance criterion is missing or contradicts the spec, or an excluded item is built; `medium` = deviation in layout, interaction, content or accessibility detail, or an undocumented addition; `low` = cosmetic drift.
 
-End with: `N conformance findings against K specs.` — followed by `Not covered by any spec: <screens or files>.` when part of the scope had none. If none: `Implementation conforms to <spec list>.`
+End with: `N conformance findings against K specs.` — followed by `Checked and conforming: <rows>.` when you checked rows worth naming, and by `Not covered by any spec: <screens or files>.` when part of the scope had none. If none: `Implementation conforms to <spec list>.`
 
 ## What NOT to do
 
@@ -62,4 +62,5 @@ End with: `N conformance findings against K specs.` — followed by `Not covered
 - Do not duplicate the other axes: a missing state is yours only because the *spec* lists it; generic quality of states, accessibility, wording or visuals belongs to the other agents.
 - Do not report a row the spec marks `n/a`, deferred or out of scope as missing, nor a choice the spec leaves open as different.
 - Do not report a divergence on a line the change does not add or modify (diff mode).
+- Do not write a block for something that conforms, even to conclude "not a finding".
 - Do not modify specs or code.

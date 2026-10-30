@@ -6,8 +6,10 @@ criteria: |
   rename on double-click; fixtures/src/BoardHeader.tsx uses a window.prompt
   behind a Rename button instead. The change does not touch
   BoardHeader.tsx: it is absent from fixtures/change.diff.
-  PASS if no finding targets BoardHeader.tsx, board-header.md or flow 002.
-  FAIL if one does.
+  PASS if no finding block (SPEC/CODE/SEVERITY/KIND/ISSUE/FIX) targets
+  BoardHeader.tsx, board-header.md or flow 002 (naming them in the closing
+  line as untouched or not covered is fine).
+  FAIL if a finding block does.
 weight: 1
 ---
 

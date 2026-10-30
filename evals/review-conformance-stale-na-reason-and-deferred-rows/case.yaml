@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-conformance-stale-na-reason-and-deferred-rows
+description: >
+  review-conformance in audit mode on an inline board-rename screen. The
+  States table marks Loading n/a because nothing is fetched, yet the code
+  fetches the title when editing starts, and Esc keeps the typed name where
+  the spec restores the old one — next to a deferred Error row left
+  unimplemented, an accessible name worded differently from the Content
+  table, the double-click, Enter and focus rows that do conform, and a
+  board header no spec covers, all of which must stay unflagged.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

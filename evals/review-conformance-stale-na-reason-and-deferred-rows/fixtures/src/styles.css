@@ -1,0 +1,18 @@
+.invite-dialog {
+  width: 420px;
+}
+
+.invite-dialog .actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+@media (max-width: 480px) {
+  .invite-dialog {
+    width: 100%;
+  }
+
+  .invite-dialog .actions {
+    flex-direction: column;
+  }
+}
