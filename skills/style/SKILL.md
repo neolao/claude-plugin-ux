@@ -2,7 +2,7 @@
 name: style
 description: Define the look and feel once — document the existing design system, or propose 2–3 previewed visual directions — written to .ux/style.md.
 argument-hint: "[--redesign] [optional: brand hints — reference products, adjectives, imposed colors]"
-version: 1.0.0
+version: 1.0.1
 model: claude-sonnet-5-5
 ---
 
@@ -42,7 +42,7 @@ In **document** mode, skip — nothing is being decided.
 
 ## Step 5 — Directions — propose / redesign
 
-Propose **2–3 directions** that differ in **mood and density**, not in hue. A direction is the sections of `${CLAUDE_PLUGIN_ROOT}/templates/style.md` filled (intent, palette with contrast ratios and light/dark values, typography, spacing & shape, density, motion, iconography, tone) plus **Fits because** (the product facts behind it) and **Trade-offs** (readability, brand distance, migration effort). Imposed brand colors stay as given. In **redesign**, the first direction is always **"Keep the current system"**, described in the same shape, so the comparison is fair.
+Propose **2–3 directions** that differ in **mood and density**, not in hue. A direction is every section of `${CLAUDE_PLUGIN_ROOT}/templates/style.md` filled — the palette with its contrast ratios and, when the product has theming, its dark values — plus **Fits because** (the product facts behind it) and **Trade-offs** (readability, brand distance, migration effort). Imposed brand colors stay as given. In **redesign**, the first direction is always **"Keep the current system"**, described in the same shape, so the comparison is fair.
 
 Do not present yet — build the previews first.
 
