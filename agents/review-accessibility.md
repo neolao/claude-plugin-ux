@@ -3,7 +3,7 @@ name: review-accessibility
 description: Reviews one dimension — keyboard operability, focus, names and roles, contrast, motion, target sizes. Read-only.
 model: claude-sonnet-5-5
 effort: low
-version: 1.1.0
+version: 1.1.1
 ---
 
 # Agent: review-accessibility
@@ -30,7 +30,7 @@ Read `product.md` Constraints for the stated target (default: WCAG 2.2 AA princi
 - **Targets and timing**: targets under 24 px (44 px on touch); auto-dismiss without alternative; time limits.
 - **Platform specifics**: mobile — content descriptions / accessibility labels, safe areas; desktop/game-engine — keyboard navigation across panels, UI scale support, colorblind-safe status/gizmo colors, accessibility nodes or automation properties exposed by the framework.
 
-Every finding needs a `file:line`. In diff mode, first list the lines the change adds or modifies (`+` lines); report only an element those lines add or modify. An accessibility gap on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
+Every finding needs a `file:line`. In diff mode, first list the lines the change adds or modifies (`+` lines — a change handed over as files, with no diff: every line of those files); report only an element those lines add or modify. An accessibility gap on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
 
 ## Output
 
