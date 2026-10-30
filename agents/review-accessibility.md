@@ -3,7 +3,7 @@ name: review-accessibility
 description: Reviews one dimension — keyboard operability, focus, names and roles, contrast, motion, target sizes. Read-only.
 model: claude-sonnet-5-5
 effort: low
-version: 1.2.0
+version: 1.3.0
 ---
 
 # Agent: review-accessibility
@@ -27,7 +27,7 @@ The references: `product.md` Constraints — Accessibility target — sets the l
 - **Focus**: focus not moved into an opened dialog/panel, not restored on close; focus lost after deleting the focused item; `outline: none` without a replacement; focus order not matching visual order.
 - **Announcements**: dynamic results, errors and status changes without a live region / notification hook.
 - **Perception**: state or meaning carried by color only; insufficient contrast (measured, or evidently low); text in images; font sizes in px that block scaling; motion without reduced-motion handling.
-- **Targets and timing**: targets under 24 px (44 px on touch); auto-dismiss without alternative; time limits.
+- **Targets and timing**: targets under the size the declared input sets (above); a passing message (toast, snackbar) that dismisses itself without staying readable elsewhere, or whose action (undo) vanishes with it — that it exists at all is `review-states`'; a time limit the user cannot extend.
 - **Platform specifics**: mobile — content descriptions / accessibility labels, safe areas; desktop/game-engine — keyboard navigation across panels, UI scale support, colorblind-safe status/gizmo colors, accessibility nodes or automation properties exposed by the framework.
 
 Every finding needs a `file:line`. In diff mode, first list the lines the change adds or modifies (`+` lines — a change handed over as files, with no diff: every line of those files); report only an element those lines add or modify. An accessibility gap on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
@@ -47,11 +47,11 @@ FIX: [concrete]
 
 `high` = a category of users cannot complete the task (unreachable, unlabeled, trapped, color-only); `medium` = harder but possible; `low` = polish.
 
-End with: `N accessibility findings across M files.` — followed by `Not assessed: stated target — none in product.md, judged against WCAG 2.2 AA.` (or `… — no product.md, judged against WCAG 2.2 AA on the platform of the inventory's UI stack.`) when no target is stated. If none: `No accessibility findings.`
+Emit a block only for a real finding: never one saying "handled", "not flagged" or "hand off". End with: `N accessibility findings across M files.` (N = the blocks above) — followed by `Not assessed: stated target — none in product.md, judged against WCAG 2.2 AA.` (or `… — no product.md, judged against WCAG 2.2 AA on the platform of the inventory's UI stack.`) when no target is stated. If none: `No accessibility findings.`
 
 ## What NOT to do
 
-- Do not comment on wording, states logic, visual hierarchy or architecture — other agents own those.
+- Do not comment on wording, states logic, visual hierarchy or architecture — other agents own those: whether an accessible name, a text alternative or an announcement exists is yours, what it says is `review-content`'s (report a name only when it is missing or is not a name — empty, a file name, a placeholder as the only label); whether a state, a message or a confirmation exists is `review-states`', whether it is announced and stays readable is yours; the focus indicator's existence and its 3:1 contrast are yours, how hover, active, disabled and selected look is `review-visual`'s; whether a color is a literal or a token is `review-consistency`'s, the contrast and the color-only meaning of the pair are yours whatever its source; a shortcut that collides with the host's is yours, the host's menus, undo stack and gestures are nobody's here (`/ux:audit`'s heuristic pass).
 - Do not report a gap on a line the change does not add or modify (diff mode).
-- Do not flag native controls used natively (they carry semantics already).
+- Do not flag native controls used natively (a `<button>`, an OS dialog, the host editor's built-in field, an Electron `role:` menu item — they carry semantics already).
 - Do not demand ARIA where a native element would do — the fix is the native element.
