@@ -3,7 +3,7 @@ name: review-states
 description: Reviews one dimension — every view handles empty, loading, partial, error and success, and every action gives feedback. Read-only.
 model: claude-sonnet-5-5
 effort: low
-version: 1.2.1
+version: 1.3.0
 ---
 
 # Agent: review-states
@@ -25,12 +25,12 @@ The references: `product.md` Users (Context of use: several users, several windo
 For each view/component in scope, find how it obtains data or triggers work, then check the code path for each state:
 
 - **Empty** — zero items, no result, nothing configured yet: is there a dedicated rendering with guidance and the filling action, or just an empty container?
-- **Loading** — initial load, refetch, submit in progress: indicator present? controls disabled against double submit without disappearing? progress determinate when the work can run past ~10 s? (The shape of the indicator — skeleton or spinner — is `review-visual`'s.)
-- **Partial** — some items failed, pagination/first page, permissions limiting content: handled or silently truncated?
-- **Error** — request failure, validation failure, timeout, offline: caught? shown near the problem with a recovery path? user input preserved? retry offered when meaningful?
+- **Loading** — initial load, refetch, submit in progress: indicator present? controls disabled against double submit without disappearing? progress determinate when the work can run past ~10 s? a refetch or periodic refresh that blanks the content already shown instead of keeping it marked as updating? (The shape of the indicator — skeleton or spinner — is `review-visual`'s.)
+- **Partial** — some items failed, pagination/first page, permissions limiting content: handled or silently truncated? An action on many items (batch, import, bulk edit): what succeeded shown as done, what failed named item by item, retry on the failed items only — or one generic result for all of them?
+- **Error** — request failure, validation failure, timeout, offline: caught? shown near the problem with a recovery path? user input preserved? retry offered when meaningful, and never redoing what already succeeded? An optimistic update the server refuses: rolled back where the user is looking, or left showing a result that did not happen?
 - **Success** — explicit confirmation for actions whose result is not immediately visible?
 - **Feedback** — every action is acknowledged immediately; async work beyond ~1 s shows progress. (Hover/focus/active styling is `review-visual`'s; whether a passing message stays readable elsewhere and is announced is `review-accessibility`'s.)
-- **Stale/conflict** — data changed elsewhere (other tab, other user, undo): does the view react or show stale data as current? A save over data changed since it was loaded: detected and told, or overwritten silently?
+- **Stale/conflict** — data changed elsewhere (other tab, other user, undo): does the view react or show stale data as current? A save over data changed since it was loaded: detected and told, or overwritten silently? A response arriving out of order (a slower earlier request) overwriting a newer one?
 
 Ground every finding in a `file:line` (the branch that is missing, the promise whose rejection is not handled, the list rendered without an empty case). In diff mode, first list the lines the change adds or modifies (`+` lines — a change handed over as files, with no diff: every line of those files); report only a state those lines introduced or should have introduced. A missing state on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
 
