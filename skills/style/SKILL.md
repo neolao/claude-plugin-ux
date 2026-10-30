@@ -2,7 +2,7 @@
 name: style
 description: Define the look and feel once — document the existing design system, or propose 2–3 previewed visual directions — written to .ux/style.md.
 argument-hint: "[--redesign] [optional: brand hints — reference products, adjectives, imposed colors]"
-version: 1.1.0
+version: 1.2.0
 model: claude-sonnet-5-5
 ---
 
@@ -25,6 +25,8 @@ Read `.ux/product.md` and `.ux/inventory.md` — if either is missing, **invoke 
 | no | any | **propose** — propose directions; `style.md` is the source of truth until tokens are created |
 
 Strip `--redesign`; the remaining `$ARGUMENTS` are brand hints.
+
+An adopted `.ux/style.md` counts as a design system while the project still has no tokens: without `--redesign` there is nothing to formalize — say the direction is already defined, point at `/ux:style --redesign`, stop; with it, that file is the current system the first direction describes, and `## Migration` is written only for tokens that exist in the project.
 
 ## Step 3 — Brand inputs (clarify) — propose / redesign
 
