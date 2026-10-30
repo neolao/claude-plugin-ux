@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: review-accessibility-composite-widget-shortcut-motion-and-pointer-targets
+description: >
+  review-accessibility in audit mode on a desktop web tool whose product.md
+  lists mouse and keyboard only. The scope holds a toolbar whose every
+  button is a tab stop with no arrow-key path, a single-letter shortcut
+  that fires while typing in a field, and a pulsing live indicator with no
+  reduced-motion path — next to a loading spinner that animates while a
+  request runs and 28 px toolbar buttons, both of which must stay unflagged:
+  a progress indicator is motion that is the content, and the pointer-only
+  input sets the target size at 24 px.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
