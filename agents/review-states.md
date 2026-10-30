@@ -3,7 +3,7 @@ name: review-states
 description: Reviews one dimension — every view handles empty, loading, partial, error and success, and every action gives feedback. Read-only.
 model: claude-sonnet-5-5
 effort: low
-version: 1.1.0
+version: 1.1.1
 ---
 
 # Agent: review-states
@@ -30,7 +30,7 @@ For each view/component in scope, find how it obtains data or triggers work, the
 - **Feedback** — every action is acknowledged immediately; async work beyond ~1 s shows progress; auto-dismissing feedback is also persisted somewhere readable. (Hover/focus/active styling is `review-visual`'s.)
 - **Stale/conflict** — data changed elsewhere (other tab, other user, undo): does the view react or show stale data as current?
 
-Ground every finding in a `file:line` (the branch that is missing, the promise whose rejection is not handled, the list rendered without an empty case). In diff mode, first list the lines the change adds or modifies (`+` lines); report only a state those lines introduced or should have introduced. A missing state on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
+Ground every finding in a `file:line` (the branch that is missing, the promise whose rejection is not handled, the list rendered without an empty case). In diff mode, first list the lines the change adds or modifies (`+` lines — a change handed over as files, with no diff: every line of those files); report only a state those lines introduced or should have introduced. A missing state on any other line, context included, is out of scope — decide this before writing a block, and never write a block to retract it.
 
 ## Output
 
