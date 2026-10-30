@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: review-accessibility-diff-given-as-files-counts-every-line
+description: >
+  review-accessibility in diff mode on a change handed over as a file list,
+  with no diff (the way /ux:review passes a change outside a git repository
+  and /ux:implement its touched files): every line of the listed files
+  counts as added. The listed component holds a click-only chip and an
+  icon-only button without a name, next to a labeled input that must stay
+  unflagged; a component the list does not name opens a menu from a
+  click-only div and must stay unflagged too. The agent must review instead
+  of asking for a diff.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
