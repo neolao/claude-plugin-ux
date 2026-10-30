@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: review-states-stale-and-offline-follow-product-facts
+description: >
+  review-states in audit mode on a bookkeeping app whose product.md states
+  one bookkeeper per company file, in an office on a wired network, online
+  only. The scope holds an invoice editor that saves with no version check
+  and a list whose load failure shows a generic retry message — neither a
+  stale/conflict nor an offline finding where the product facts make them
+  unreal — next to a list rendered without an empty case that must be
+  reported.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]
