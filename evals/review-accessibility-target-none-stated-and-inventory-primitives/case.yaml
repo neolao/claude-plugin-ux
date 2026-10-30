@@ -1,0 +1,16 @@
+schema_version: "1.1"
+name: review-accessibility-target-none-stated-and-inventory-primitives
+description: >
+  review-accessibility in audit mode on a dispatch tool whose product.md
+  states no accessibility target and describes its users as sighted
+  operators at a control desk. The inventory lists a Dialog component that
+  manages focus and a live-region helper; style.md's Palette gives the
+  muted text token a 3.5:1 ratio, for large text and icons only. The scope
+  holds a status carried by color only, a 13 px helper using the muted
+  token, and a results count updated without any announcement — next to a
+  confirmation built on the inventory's Dialog, which must stay unflagged.
+  The audience lowers no bar, the FIX names the inventory's helper, and the
+  closing line names the absent target.
+context:
+  scaffold_script: fixture.sh
+  add_dirs: [fixtures]

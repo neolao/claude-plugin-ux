@@ -1,0 +1,9 @@
+body { color: var(--color-text); background: var(--color-surface); font-size: var(--font-size-14); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.job-status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 5px; }
+.job-status-dot--done { background: var(--color-success); }
+.job-status-dot--blocked { background: var(--color-error); }
+.shift-note-help { font-size: var(--font-size-13); color: var(--color-text-muted); }
+.results-count { font-size: var(--font-size-14); color: var(--color-text); }
+.dialog-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); }
+.dialog { background: var(--color-surface); color: var(--color-text); padding: 16px; }

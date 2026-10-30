@@ -1,0 +1,15 @@
+:root {
+  --color-primary: #005fcc;
+  --color-on-primary: #ffffff;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #8a8a8a;
+  --color-border: #c9c9c9;
+  --color-focus: #005fcc;
+  --color-success: #2e9e4f;
+  --color-error: #d33b3b;
+  --font-size-13: 13px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-20: 20px;
+}
